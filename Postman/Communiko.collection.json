@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2f86e9cd-01a2-48e9-8f7d-8844ec731424",
+		"_postman_id": "d43796e3-0c96-476e-b790-d74635f786e8",
 		"name": "Communiko",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "17367059"
@@ -27,6 +27,53 @@
 							]
 						},
 						"description": "Проверка работоспособности приложения"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ActivenessController",
+			"item": [
+				{
+					"name": "Получение всех записей",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:11222/api/Activeness/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Activeness",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получение записи по id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:11222/api/Activeness/0262c42b-374b-45fd-8250-1b278e4dad9a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Activeness",
+								"0262c42b-374b-45fd-8250-1b278e4dad9a"
+							]
+						}
 					},
 					"response": []
 				}
