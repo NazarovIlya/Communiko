@@ -1,8 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<DataContext>(op =>
+{
+  op.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQLConnection"));
+});
 
 var app = builder.Build();
 
