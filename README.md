@@ -43,8 +43,6 @@ cd ..
 dotnet restore
 ```
 
-
-
 # Проект Persistence
 
 ## Начало работы с базой
@@ -54,12 +52,30 @@ dotnet restore
 Библиотека EF для PostgreSQL:
 - `dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL`
 
-
 ## Проект PresentationAPI
 
 Библиотеки для миграций 
 - `dotnet add package Microsoft.EntityFrameworkCore.Design`
 - `dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL.Design`
+
+
+Обновить файл _Communiko/PresentationAPI/appsettings.json_ 
+добавив строку подключения к бд
+
+```
+{
+  "ConnectionStrings": {
+    "PostgreSQLConnection": "Host=$HOST:PORT$; Username=$Username$; Password=$Password$;Database=$db_name$"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}
+```
 
 Пример строки подключения: 
 ```
