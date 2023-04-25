@@ -124,3 +124,6 @@ _!Будьте внимательны: версия EF должна соотве
 - Проверка npx `which npx` если нет - `npm install -g npx` [подробнее](https://dev-gang.ru/article/npm-protiv-npx-v-czem-raznica-hsvo0oxvqs/)
 - Создание клиентского приложения `npx create-react-app client --use-npm --template typescript` ([подробнее](https://create-react-app.dev/docs/adding-typescript/))
 - Многие верстальщики рекомендуют использовать плагин [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+
+Потребуется библиотека [axios](https://www.npmjs.com/package/axios) `npm i axios`
+Failed to load resource: Origin is not allowed by Access-Control-Allow-Origin. Status code: 200 [Про CORS на Habr](https://habr.com/ru/companies/macloud/articles/553826/)
