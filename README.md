@@ -127,3 +127,15 @@ _!Будьте внимательны: версия EF должна соотве
 
 Потребуется библиотека [axios](https://www.npmjs.com/package/axios) `npm i axios`
 Failed to load resource: Origin is not allowed by Access-Control-Allow-Origin. Status code: 200 [Про CORS на Habr](https://habr.com/ru/companies/macloud/articles/553826/)
+
+# Обновление CORS-политик
+
+Обновить файл _appsettings.json_, добавить строку
+
+```
+...
+},
+"Client-host": "http://localhost:3000",
+"Logging": {
+...
+```
