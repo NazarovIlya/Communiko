@@ -139,3 +139,9 @@ Failed to load resource: Origin is not allowed by Access-Control-Allow-Origin. S
 "Logging": {
 ...
 ```
+
+## Наведение красоты
+
+- Библиотека [Semantic-UI](https://github.com/semantic-org/semantic-ui)
+- Документация [для react](https://react.semantic-ui.com/usage/)
+Установка `npm install semantic-ui-react semantic-ui-css`
