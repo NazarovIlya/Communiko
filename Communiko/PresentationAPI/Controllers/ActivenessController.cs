@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Application.Activities;
 using BusinessDomain.Model;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Persistence;
 
 namespace PresentationAPI.Controllers
 {
@@ -13,24 +9,21 @@ namespace PresentationAPI.Controllers
   [Route("api/[controller]")]
   public class ActivenessController : ControllerBase
   {
-    private readonly DataContext dataContext;
-
-    public ActivenessController(DataContext dataContext)
+    private readonly IMediator mediator;
+    public ActivenessController(IMediator mediator)
     {
-      this.dataContext = dataContext;
+      this.mediator = mediator;
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<Activeness>> Get(Guid id)
     {
-      return await dataContext.Activities
-                              .FindAsync(id);
+      return await mediator.Send(new ItemActivities.Query() { Id = id });
     }
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Activeness>>> Get()
     {
-      return await dataContext.Activities
-                              .ToListAsync();
+      return await mediator.Send(new ItemsActivities.Query());
     }
   }
 }

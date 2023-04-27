@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Persistence.ExperimentalData;
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddMediatR(typeof(ItemsActivities.Handler));
 
 builder.Services.AddDbContext<DataContext>(op =>
 {
