@@ -17,3 +17,12 @@ SELECT
   *
 FROM "Activities"
 WHERE "Activities"."PointTime" > '2023-09-24';
+
+-- Удаление 15 записей таблицы, упорядоченной по полю Id
+DELETE FROM "Activities" 
+WHERE "Activities"."Id" IN 
+( SELECT "Activities"."Id" 
+  FROM "Activities" 
+  ORDER BY "Activities"."Id" 
+  LIMIT 15
+);
