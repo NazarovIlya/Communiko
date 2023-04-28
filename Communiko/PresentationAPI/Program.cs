@@ -1,3 +1,4 @@
+using Application.AppConfig;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -9,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(typeof(ItemsActivities.Handler));
-
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 builder.Services.AddDbContext<DataContext>(op =>
 {
   op.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQLConnection"));
