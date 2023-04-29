@@ -1,3 +1,4 @@
+import { Button, Card } from "semantic-ui-react";
 import { Activeness } from "../../model/Activeness";
 
 interface PropsActiveness {
@@ -6,14 +7,20 @@ interface PropsActiveness {
 
 export function ActivenessItem({ activenessItem }: PropsActiveness) {
   return (
-    <ul>
-      <li>{activenessItem.id}</li>
-      <li>{activenessItem.title}</li>
-      <li>{activenessItem.category}</li>
-      <li>{activenessItem.description}</li>
-      <li>{activenessItem.city}</li>
-      <li>{activenessItem.pointTime}</li>
-      <li>{activenessItem.location}</li>
-    </ul>
+    <Card key={activenessItem.id}>
+      <Card.Content>
+        <Card.Header>{activenessItem.title}</Card.Header>
+        <Card.Meta>{activenessItem.city}</Card.Meta>
+        <Card.Description>
+          {activenessItem.description}
+        </Card.Description>
+      </Card.Content>
+      <Card.Content extra>
+        <div className='ui two buttons'>
+          <Button basic color='green'> Details </Button>
+          <Button basic color='green'> View </Button>
+        </div>
+      </Card.Content>
+    </Card>
   );
 }
