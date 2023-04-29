@@ -1,4 +1,8 @@
-import { PropsActiveness } from "./PropsActiveness";
+import { Activeness } from "../../model/Activeness";
+
+interface PropsActiveness {
+  activenessItem: Activeness;
+}
 
 export function ActivenessItem({ activenessItem }: PropsActiveness) {
   return (

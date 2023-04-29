@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios'
-import { ActivenessItem } from '../components/activeness/ActivenessItem';
+
 import { Activeness } from "../model/Activeness";
-import { Button, Header } from 'semantic-ui-react';
+import { Button, Container, Header } from 'semantic-ui-react';
 import { NavigationBar } from './NavigationBar';
+import { ActivenessItems } from '../components/activeness/ActivenessItems';
 
 function App() {
   const [activeness, setActiveness] = useState<Activeness[]>([]);
@@ -17,14 +18,10 @@ function App() {
   return (
     <div>
       <NavigationBar />
-      {
-        activeness.map(e => (
-          <div key={e.id}>
-            <ActivenessItem activenessItem={e} />
-          </div>
-        ))
-      }
-    </div>
+      <Container style={{ marginTop: '5em' }}>
+        <ActivenessItems items={activeness} />
+      </Container>
+    </div >
   );
 }
 
