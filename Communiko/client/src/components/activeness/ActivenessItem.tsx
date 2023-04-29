@@ -1,18 +1,6 @@
-export interface Activeness {
-  id: string;
-  title: string;
-  category: string;
-  description: string;
-  city: string;
-  pointTime: string;
-  location: string;
-}
+import { PropsActiveness } from "./PropsActiveness";
 
-interface Props {
-  activenessItem: Activeness;
-}
-
-export function ActivenessItem({ activenessItem }: Props) {
+export function ActivenessItem({ activenessItem }: PropsActiveness) {
   return (
     <ul>
       <li>{activenessItem.id}</li>
