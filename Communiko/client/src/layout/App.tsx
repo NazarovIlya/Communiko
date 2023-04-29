@@ -8,6 +8,8 @@ import { ActivenessItems } from '../components/activeness/ActivenessItems';
 
 function App() {
   const [activeness, setActiveness] = useState<Activeness[]>([]);
+  const [selectedActiveness, setViewActiveness] = useState<Activeness | undefined>(undefined);
+
   useEffect(() => {
     axios.get<Activeness[]>('http://localhost:11222/api/Activeness/')
       .then(res => {
@@ -15,11 +17,22 @@ function App() {
       })
   }, []);
 
+  function handleViewActiveness(id: string) {
+    setViewActiveness(activeness.find(e => e.id === id));
+  }
+  function handleCancelViewActiveness() {
+    setViewActiveness(undefined);
+  }
+
   return (
     <div>
       <NavigationBar />
       <Container style={{ marginTop: '5em' }}>
-        <ActivenessItems items={activeness} />
+        <ActivenessItems items={activeness}
+          selectItem={selectedActiveness}
+          viewActiveness={handleViewActiveness}
+          cancelViewActiveness={handleCancelViewActiveness}
+        />
       </Container>
     </div >
   );
