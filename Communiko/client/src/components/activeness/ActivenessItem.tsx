@@ -6,7 +6,11 @@ interface PropsActiveness {
   selected: (id: string) => void;
 }
 
-export function ActivenessItem({ activenessItem, selected }: PropsActiveness) {
+export function ActivenessItem(
+  {
+    activenessItem,
+    selected
+  }: PropsActiveness) {
   return (
     <Card key={activenessItem.id} fluid>
       <Card.Content>

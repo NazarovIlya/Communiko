@@ -9,6 +9,7 @@ import { ActivenessItems } from '../components/activeness/ActivenessItems';
 function App() {
   const [activeness, setActiveness] = useState<Activeness[]>([]);
   const [selectedActiveness, setViewActiveness] = useState<Activeness | undefined>(undefined);
+  const [editMode, setEditMode] = useState<boolean>(false);
 
   useEffect(() => {
     axios.get<Activeness[]>('http://localhost:11222/api/Activeness/')
@@ -22,6 +23,17 @@ function App() {
   }
   function handleCancelViewActiveness() {
     setViewActiveness(undefined);
+    handleCloseForm();
+  }
+
+  function handleOpenForm(id?: string) {
+    if (id) { handleViewActiveness(id); }
+    else { handleCancelViewActiveness(); }
+    setEditMode(true);
+  }
+
+  function handleCloseForm() {
+    setEditMode(false);
   }
 
   return (
@@ -32,6 +44,9 @@ function App() {
           selectItem={selectedActiveness}
           viewActiveness={handleViewActiveness}
           cancelViewActiveness={handleCancelViewActiveness}
+          editMode={editMode}
+          formOpen={handleOpenForm}
+          formClose={handleCloseForm}
         />
       </Container>
     </div >

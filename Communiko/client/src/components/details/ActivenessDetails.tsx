@@ -5,9 +5,15 @@ import { Activeness } from "../../model/Activeness";
 interface PropsActivenessDetails {
   item: Activeness;
   cancelViewActiveness: () => void;
+  formOpen: (id: string) => void;
 }
 
-export function ActivenessDetails({ item, cancelViewActiveness }: PropsActivenessDetails) {
+export function ActivenessDetails(
+  {
+    item,
+    cancelViewActiveness,
+    formOpen
+  }: PropsActivenessDetails) {
   return (
     <Card fluid>
       <Card.Content>
@@ -27,6 +33,7 @@ export function ActivenessDetails({ item, cancelViewActiveness }: PropsActivenes
       <Card.Content extra>
         <div className='ui two buttons'>
           <Button basic color='green' onClick={() => cancelViewActiveness()}>Close</Button>
+          <Button basic color='green' onClick={() => formOpen(item.id)}>Edit</Button>
         </div>
       </Card.Content>
     </Card>
