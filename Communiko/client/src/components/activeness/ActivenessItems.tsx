@@ -2,16 +2,31 @@ import { Grid } from "semantic-ui-react";
 import { Activeness } from "../../model/Activeness";
 import { ActivenessItem } from "./ActivenessItem";
 import { ActivenessDetails } from "../details/ActivenessDetails";
+import { ActivenessEditForm } from "./ActivenessEditForm";
 
 interface PropsActivenessItems {
   items: Activeness[];
   selectItem: Activeness | undefined;
   viewActiveness: (id: string) => void;
   cancelViewActiveness: () => void;
+  editMode: boolean;
+  formOpen: (id: string) => void;
+  formClose: () => void;
+  editOrCreate: (id: Activeness) => void;
+  removeActiveness: (id: string) => void;
 }
 
-export function ActivenessItems({ items, selectItem, viewActiveness, cancelViewActiveness }
-  : PropsActivenessItems) {
+export function ActivenessItems(
+  { items,
+    selectItem,
+    viewActiveness,
+    cancelViewActiveness,
+    editMode,
+    formOpen,
+    formClose,
+    editOrCreate,
+    removeActiveness
+  }: PropsActivenessItems) {
   return (
     <div>
       <Grid style={{ color: 'white' }}>
@@ -19,13 +34,25 @@ export function ActivenessItems({ items, selectItem, viewActiveness, cancelViewA
           {
             items.map(e => (
               <div key={e.id}>
-                <ActivenessItem activenessItem={e} selected={viewActiveness} />
+                <ActivenessItem activenessItem={e}
+                  selected={viewActiveness}
+                  removeActiveness={removeActiveness} />
               </div>
             ))
           }
         </Grid.Column>
         <Grid.Column width='6'>
-          {selectItem && <ActivenessDetails item={selectItem} cancelViewActiveness={cancelViewActiveness} />}
+          {selectItem && !editMode && < ActivenessDetails
+            item={selectItem}
+            cancelViewActiveness={cancelViewActiveness}
+            formOpen={formOpen}
+            removeActiveness={removeActiveness}
+          />}
+          {editMode && <ActivenessEditForm
+            formClose={formClose}
+            selectItem={selectItem}
+            editOrCreate={editOrCreate}
+          />}
         </Grid.Column>
       </Grid>
     </div>

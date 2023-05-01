@@ -4,9 +4,15 @@ import { Activeness } from "../../model/Activeness";
 interface PropsActiveness {
   activenessItem: Activeness;
   selected: (id: string) => void;
+  removeActiveness: (id: string) => void;
 }
 
-export function ActivenessItem({ activenessItem, selected }: PropsActiveness) {
+export function ActivenessItem(
+  {
+    activenessItem,
+    selected,
+    removeActiveness
+  }: PropsActiveness) {
   return (
     <Card key={activenessItem.id} fluid>
       <Card.Content>
@@ -18,6 +24,7 @@ export function ActivenessItem({ activenessItem, selected }: PropsActiveness) {
       </Card.Content>
       <Card.Content extra>
         <div className='ui two buttons'>
+          <Button basic onClick={() => removeActiveness(activenessItem.id)} color='green'>Remove</Button>
           <Button basic onClick={() => selected(activenessItem.id)} color='green'>Details</Button>
         </div>
       </Card.Content>

@@ -145,3 +145,8 @@ Failed to load resource: Origin is not allowed by Access-Control-Allow-Origin. S
 - Библиотека [Semantic-UI](https://github.com/semantic-org/semantic-ui)
 - Документация [для react](https://react.semantic-ui.com/usage/)
 Установка `npm install semantic-ui-react semantic-ui-css`
+
+## Библиотека для генерации UIDD
+
+- `npm install uuid` [url](https://www.npmjs.com/package/uuid)
+- `npm i --save-dev @types/uuid` добавление поддержки ts
