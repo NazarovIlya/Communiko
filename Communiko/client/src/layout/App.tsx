@@ -49,8 +49,11 @@ function App() {
   }
 
   function handleRemoveActiveness(id: string) {
-    setActiveness([...activeness.filter(x => x.id !== id)]);
-    setViewActiveness(undefined);
+    client.Activities.remove(id)
+      .then(() => {
+        setActiveness([...activeness.filter(x => x.id !== id)]);
+        setViewActiveness(undefined);
+      });
   }
 
   return (
