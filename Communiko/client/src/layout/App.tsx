@@ -7,7 +7,7 @@ import { ActivenessItems } from '../components/activeness/ActivenessItems';
 
 import { v4 as uuidv4 } from 'uuid';
 import client from '../api/requestClient';
-import { useStore } from '../Repository/mobxDemoRepository';
+import { useStore } from '../Repository/CurrentRepository';
 import { observer } from 'mobx-react-lite';
 
 function App() {
@@ -69,13 +69,6 @@ function App() {
     <div>
       <NavigationBar openForm={handleOpenForm} />
       <Container style={{ marginTop: '5em' }}>
-        <div>
-          <text style={{ color: 'white' }}>
-            {repo.text}
-          </text>
-          <br />
-          <Button onClick={repo.setText}>Тык</Button>
-        </div>
         <ActivenessItems items={activeness}
           selectItem={selectedActiveness}
           viewActiveness={handleViewActiveness}

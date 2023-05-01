@@ -6,18 +6,8 @@ export interface Repository {
 }
 
 export default class CurrentRepository {
-  text = 'Hello MobX!';
-
   constructor() {
     makeAutoObservable(this);
-    // makeObservable(this, {
-    //   text: observable,
-    //   setText: action
-    // });
-  }
-
-  setText = () => {
-    this.text = `${this.text}!`;
   }
 }
 export const repository: Repository = {

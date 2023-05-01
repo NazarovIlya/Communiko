@@ -3,7 +3,7 @@ import 'semantic-ui-css/semantic.min.css'
 import App from './layout/App';
 import reportWebVitals from './reportWebVitals';
 import './layout/style.css';
-import { RepositoryContext, repository } from './Repository/mobxDemoRepository';
+import { RepositoryContext, repository } from './Repository/CurrentRepository';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
