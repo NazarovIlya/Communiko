@@ -13,6 +13,7 @@ interface PropsActivenessItems {
   formOpen: (id: string) => void;
   formClose: () => void;
   editOrCreate: (id: Activeness) => void;
+  removeActiveness: (id: string) => void;
 }
 
 export function ActivenessItems(
@@ -23,7 +24,8 @@ export function ActivenessItems(
     editMode,
     formOpen,
     formClose,
-    editOrCreate
+    editOrCreate,
+    removeActiveness
   }: PropsActivenessItems) {
   return (
     <div>
@@ -32,7 +34,9 @@ export function ActivenessItems(
           {
             items.map(e => (
               <div key={e.id}>
-                <ActivenessItem activenessItem={e} selected={viewActiveness} />
+                <ActivenessItem activenessItem={e}
+                  selected={viewActiveness}
+                  removeActiveness={removeActiveness} />
               </div>
             ))
           }
@@ -42,6 +46,7 @@ export function ActivenessItems(
             item={selectItem}
             cancelViewActiveness={cancelViewActiveness}
             formOpen={formOpen}
+            removeActiveness={removeActiveness}
           />}
           {editMode && <ActivenessEditForm
             formClose={formClose}

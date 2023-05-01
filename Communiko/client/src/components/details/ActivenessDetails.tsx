@@ -5,13 +5,15 @@ interface PropsActivenessDetails {
   item: Activeness;
   cancelViewActiveness: () => void;
   formOpen: (id: string) => void;
+  removeActiveness: (id: string) => void;
 }
 
 export function ActivenessDetails(
   {
     item,
     cancelViewActiveness,
-    formOpen
+    formOpen,
+    removeActiveness
   }: PropsActivenessDetails) {
   return (
     <Card fluid>
@@ -30,8 +32,9 @@ export function ActivenessDetails(
         <label htmlFor="">{item.id}</label>
       </Card.Content>
       <Card.Content extra>
-        <div className='ui two buttons'>
+        <div className='ui three buttons'>
           <Button basic color='green' onClick={() => formOpen(item.id)}>Edit</Button>
+          <Button basic color='green' onClick={() => removeActiveness(item.id)}>Remove</Button>
           <Button basic color='green' onClick={() => cancelViewActiveness()}>Close</Button>
         </div>
       </Card.Content>

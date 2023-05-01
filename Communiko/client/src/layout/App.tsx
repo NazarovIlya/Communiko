@@ -50,6 +50,10 @@ function App() {
     setViewActiveness(item);
   }
 
+  function handleRemoveActiveness(id: string) {
+    setActiveness([...activeness.filter(x => x.id !== id)]);
+    setViewActiveness(undefined);
+  }
 
   return (
     <div>
@@ -63,6 +67,7 @@ function App() {
           formOpen={handleOpenForm}
           formClose={handleCloseForm}
           editOrCreate={handleEditOrCreateActiveness}
+          removeActiveness={handleRemoveActiveness}
         />
       </Container>
     </div >
