@@ -62,7 +62,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:11222/api/Activeness/0262c42b-374b-45fd-8250-1b278e4dad9a",
+							"raw": "http://localhost:11222/api/Activeness/361eafa9-b860-4bdb-94cc-97b3d09c1e15",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -71,7 +71,7 @@
 							"path": [
 								"api",
 								"Activeness",
-								"0262c42b-374b-45fd-8250-1b278e4dad9a"
+								"361eafa9-b860-4bdb-94cc-97b3d09c1e15"
 							]
 						}
 					},
@@ -83,7 +83,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:11222/api/Activeness/fe7b702e-0930-442d-9808-b5632cdbf06f",
+							"raw": "http://localhost:11222/api/Activeness/361eafa9-b860-4bdb-94cc-97b3d09c1e15",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -92,7 +92,7 @@
 							"path": [
 								"api",
 								"Activeness",
-								"fe7b702e-0930-442d-9808-b5632cdbf06f"
+								"361eafa9-b860-4bdb-94cc-97b3d09c1e15"
 							]
 						}
 					},
@@ -109,9 +109,7 @@
 									"",
 									"pm.environment.set(",
 									"    'activenessDate', ",
-									"    moment().add(10, 'days')",
-									"            .add(3, 'hour')",
-									"            .toISOString()",
+									"    moment().format('YYYY-MM-DD')",
 									"            );"
 								],
 								"type": "text/javascript"
@@ -129,7 +127,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    // \"id\": \"{{$guid}}\",\n\t\"title\": \"Тестовая активность #000\",\n    \"category\": \"Категория #000\",\n    \"description\": \"Описание #000\",\n    \"city\": \"Город #000\",\n    \"pointTime\": \"{{activenessDate}}\",\n    \"location\": \"Место проведения #000\"\n}"
+							"raw": "{\n    \"id\": \"{{$guid}}\",\n\t\"title\": \"Тестовая активность #333\",\n    \"category\": \"Категория #333\",\n    \"description\": \"Описание #000\",\n    \"city\": \"Город #000\",\n    \"pointTime\": \"{{activenessDate}}\",\n    \"location\": \"Место проведения #000\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:11222/api/Activeness/",
@@ -158,9 +156,7 @@
 									"",
 									"pm.environment.set(",
 									"    'activenessDate', ",
-									"    moment().add(15, 'days')",
-									"            .add(3, 'hour')",
-									"            .toISOString()",
+									"    moment().format('YYYY-MM-DD')",
 									"            );"
 								],
 								"type": "text/javascript"
@@ -178,10 +174,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": \"56027aee-f4ae-4609-bf2c-46de83604feb\",\n    \"title\": \"Тестовая активность #777\",\n    \"category\": \"Категория #777\",\n    \"description\": \"Описание #777\",\n    \"city\": \"Город #777\",\n    \"pointTime\": \"{{activenessDate}}\",\n    \"location\": \"Место проведения #777\"\n}"
+							"raw": "{\n    //\"id\": \"361eafa9-b860-4bdb-94cc-97b3d09c1e15\",\n    \"title\": \"Тестовая активность #777\",\n    \"category\": \"Категория #777\",\n    \"description\": \"Описание #777\",\n    \"city\": \"Город #777\",\n    \"pointTime\": \"{{activenessDate}}\",\n    \"location\": \"Место проведения #123\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:11222/api/Activeness/56027aee-f4ae-4609-bf2c-46de83604feb",
+							"raw": "http://localhost:11222/api/Activeness/361eafa9-b860-4bdb-94cc-97b3d09c1e15",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -190,7 +186,7 @@
 							"path": [
 								"api",
 								"Activeness",
-								"56027aee-f4ae-4609-bf2c-46de83604feb"
+								"361eafa9-b860-4bdb-94cc-97b3d09c1e15"
 							]
 						}
 					},
@@ -227,10 +223,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": \"56027aee-f4ae-4609-bf2c-46de83604feb\",\n    \"title\": \"Тестовая активность #0101\",\n    \"location\": \"Место проведения #0101\"\n}"
+							"raw": "{\n    // \"id\": \"56027aee-f4ae-4609-bf2c-46de83604feb\",\n    \"title\": \"Тестовая активность #0101\",\n    \"location\": \"Место проведения #0101\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:11222/api/Activeness/56027aee-f4ae-4609-bf2c-46de83604feb",
+							"raw": "http://localhost:11222/api/Activeness/361eafa9-b860-4bdb-94cc-97b3d09c1e15",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -239,7 +235,7 @@
 							"path": [
 								"api",
 								"Activeness",
-								"56027aee-f4ae-4609-bf2c-46de83604feb"
+								"361eafa9-b860-4bdb-94cc-97b3d09c1e15"
 							]
 						}
 					},

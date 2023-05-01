@@ -12,7 +12,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230423231243_initial-migration")]
+    [Migration("20230501152713_initial-migration")]
     partial class initialmigration
     {
         /// <inheritdoc />
@@ -43,8 +43,8 @@ namespace Persistence.Migrations
                     b.Property<string>("Location")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("PointTime")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateOnly>("PointTime")
+                        .HasColumnType("date");
 
                     b.Property<string>("Title")
                         .HasColumnType("text");
