@@ -38,7 +38,15 @@ function App() {
 
   function handleEditOrCreateActiveness(item: Activeness) {
     if (item.id) {
-      setActiveness([...activeness.filter(x => x.id !== item.id), item]);
+      client.Activities.update(item).then(() => {
+        setActiveness([...activeness.filter(x => x.id !== item.id), item]);
+      });
+    } else {
+
+    }
+
+    if (item.id) {
+
     }
     else {
       const uuid = uuidv4();
