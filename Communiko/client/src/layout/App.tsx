@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios'
 
 import { Activeness } from "../model/Activeness";
 import { Container } from 'semantic-ui-react';
@@ -7,6 +6,7 @@ import { NavigationBar } from './NavigationBar';
 import { ActivenessItems } from '../components/activeness/ActivenessItems';
 
 import { v4 as uuidv4 } from 'uuid';
+import client from '../api/requestClient';
 
 function App() {
   const [activeness, setActiveness] = useState<Activeness[]>([]);
@@ -14,10 +14,8 @@ function App() {
   const [editMode, setEditMode] = useState<boolean>(false);
 
   useEffect(() => {
-    axios.get<Activeness[]>('http://localhost:11222/api/Activeness/')
-      .then(res => {
-        setActiveness(res.data);
-      })
+    client.Activities.items()
+      .then(res => setActiveness(res))
   }, []);
 
   function handleViewActiveness(id: string) {
