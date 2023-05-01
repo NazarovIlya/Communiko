@@ -42,16 +42,12 @@ function App() {
         setActiveness([...activeness.filter(x => x.id !== item.id), item]);
       });
     } else {
-
+      item.id = uuidv4();
+      client.Activities.create(item).then(() => {
+        setActiveness([...activeness, item]);
+      });
     }
 
-    if (item.id) {
-
-    }
-    else {
-      const uuid = uuidv4();
-      setActiveness([...activeness, { ...item, id: uuid }]);
-    }
     setEditMode(false);
     setViewActiveness(item);
   }
