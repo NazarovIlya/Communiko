@@ -32,8 +32,8 @@ export function ActivenessDetails(
       </Card.Content>
       <Card.Content extra>
         <div className='ui two buttons'>
-          <Button basic color='green' onClick={() => cancelViewActiveness()}>Close</Button>
           <Button basic color='green' onClick={() => formOpen(item.id)}>Edit</Button>
+          <Button basic color='green' onClick={() => cancelViewActiveness()}>Close</Button>
         </div>
       </Card.Content>
     </Card>

@@ -1,7 +1,11 @@
 import React from 'react';
 import { Button, Container, Menu } from 'semantic-ui-react';
 
-export function NavigationBar() {
+interface PropsNavigationBar {
+  openForm: () => void;
+}
+
+export function NavigationBar({ openForm }: PropsNavigationBar) {
   return (
     <Menu fixed='top'>
       <Container>
@@ -11,7 +15,7 @@ export function NavigationBar() {
         </Menu.Item>
         <Menu.Item name='Activeness' />
         < Menu.Item >
-          <Button positive content='Append Activeness' />
+          <Button positive content='Append Activeness' onClick={() => openForm()} />
         </ Menu.Item >
       </Container>
     </Menu >

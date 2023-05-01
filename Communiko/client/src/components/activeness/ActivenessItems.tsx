@@ -12,6 +12,7 @@ interface PropsActivenessItems {
   editMode: boolean;
   formOpen: (id: string) => void;
   formClose: () => void;
+  editOrCreate: (id: Activeness) => void;
 }
 
 export function ActivenessItems(
@@ -21,7 +22,8 @@ export function ActivenessItems(
     cancelViewActiveness,
     editMode,
     formOpen,
-    formClose
+    formClose,
+    editOrCreate
   }: PropsActivenessItems) {
   return (
     <div>
@@ -36,12 +38,16 @@ export function ActivenessItems(
           }
         </Grid.Column>
         <Grid.Column width='6'>
-          {selectItem && <ActivenessDetails
+          {selectItem && !editMode && < ActivenessDetails
             item={selectItem}
             cancelViewActiveness={cancelViewActiveness}
             formOpen={formOpen}
           />}
-          {editMode && <ActivenessEditForm formClose={formClose} selectItem={selectItem} />}
+          {editMode && <ActivenessEditForm
+            formClose={formClose}
+            selectItem={selectItem}
+            editOrCreate={editOrCreate}
+          />}
         </Grid.Column>
       </Grid>
     </div>

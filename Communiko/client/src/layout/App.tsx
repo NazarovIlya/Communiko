@@ -36,9 +36,21 @@ function App() {
     setEditMode(false);
   }
 
+  function handleEditOrCreateActiveness(item: Activeness) {
+    if (item.id) {
+      setActiveness([...activeness.filter(x => x.id !== item.id), item]);
+    }
+    else {
+      setActiveness([...activeness, item]);
+    }
+    setEditMode(false);
+    setViewActiveness(item);
+  }
+
+
   return (
     <div>
-      <NavigationBar />
+      <NavigationBar openForm={handleOpenForm} />
       <Container style={{ marginTop: '5em' }}>
         <ActivenessItems items={activeness}
           selectItem={selectedActiveness}
@@ -47,6 +59,7 @@ function App() {
           editMode={editMode}
           formOpen={handleOpenForm}
           formClose={handleCloseForm}
+          editOrCreate={handleEditOrCreateActiveness}
         />
       </Container>
     </div >
