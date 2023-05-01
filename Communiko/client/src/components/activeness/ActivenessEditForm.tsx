@@ -1,6 +1,6 @@
-import { Button, Checkbox, Form, Grid, Icon, Label, Segment } from "semantic-ui-react";
+import { Button, Form, Icon, Label, Segment } from "semantic-ui-react";
 import { Activeness } from "../../model/Activeness";
-import { ChangeEvent, ChangeEventHandler, useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 interface PropsActivenessEditForm {
   selectItem: Activeness | undefined;

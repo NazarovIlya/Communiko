@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Button, Card, Icon } from "semantic-ui-react";
 import { Activeness } from "../../model/Activeness";
 

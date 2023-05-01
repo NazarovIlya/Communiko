@@ -1,8 +1,8 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 
 import { Activeness } from "../model/Activeness";
-import { Button, Container, Header } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 import { NavigationBar } from './NavigationBar';
 import { ActivenessItems } from '../components/activeness/ActivenessItems';
 
