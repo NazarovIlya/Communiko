@@ -3,10 +3,14 @@ import 'semantic-ui-css/semantic.min.css'
 import App from './layout/App';
 import reportWebVitals from './reportWebVitals';
 import './layout/style.css';
+import { RepositoryContext, repository } from './Repository/mobxDemoRepository';
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <App />
+  <RepositoryContext.Provider value={repository}  >
+    <App />
+  </RepositoryContext.Provider>
 );
 reportWebVitals();

@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { Activeness } from "../model/Activeness";
-import { Container } from 'semantic-ui-react';
+import { Button, Container } from 'semantic-ui-react';
 import { NavigationBar } from './NavigationBar';
 import { ActivenessItems } from '../components/activeness/ActivenessItems';
 
 import { v4 as uuidv4 } from 'uuid';
 import client from '../api/requestClient';
+import { useStore } from '../Repository/mobxDemoRepository';
+import { observer } from 'mobx-react-lite';
 
 function App() {
+
+  const { repo } = useStore();
+
   const [activeness, setActiveness] = useState<Activeness[]>([]);
   const [selectedActiveness, setViewActiveness] = useState<Activeness | undefined>(undefined);
   const [editMode, setEditMode] = useState<boolean>(false);
@@ -64,6 +69,13 @@ function App() {
     <div>
       <NavigationBar openForm={handleOpenForm} />
       <Container style={{ marginTop: '5em' }}>
+        <div>
+          <text style={{ color: 'white' }}>
+            {repo.text}
+          </text>
+          <br />
+          <Button onClick={repo.setText}>Тык</Button>
+        </div>
         <ActivenessItems items={activeness}
           selectItem={selectedActiveness}
           viewActiveness={handleViewActiveness}
@@ -74,9 +86,9 @@ function App() {
           editOrCreate={handleEditOrCreateActiveness}
           removeActiveness={handleRemoveActiveness}
         />
-      </Container>
+      </Container >
     </div >
   );
 }
 
-export default App;
+export default observer(App);

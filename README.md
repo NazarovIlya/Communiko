@@ -150,3 +150,8 @@ Failed to load resource: Origin is not allowed by Access-Control-Allow-Origin. S
 
 - `npm install uuid` [url](https://www.npmjs.com/package/uuid)
 - `npm i --save-dev @types/uuid` добавление поддержки ts
+
+## Библиотека для управления состоянием в приложениях на JS/TS
+
+- `npm install mobx`
+- `npm install mobx-react-lite`
