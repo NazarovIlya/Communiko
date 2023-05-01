@@ -6,6 +6,8 @@ import { Container } from 'semantic-ui-react';
 import { NavigationBar } from './NavigationBar';
 import { ActivenessItems } from '../components/activeness/ActivenessItems';
 
+import { v4 as uuidv4 } from 'uuid';
+
 function App() {
   const [activeness, setActiveness] = useState<Activeness[]>([]);
   const [selectedActiveness, setViewActiveness] = useState<Activeness | undefined>(undefined);
@@ -41,7 +43,8 @@ function App() {
       setActiveness([...activeness.filter(x => x.id !== item.id), item]);
     }
     else {
-      setActiveness([...activeness, item]);
+      const uuid = uuidv4();
+      setActiveness([...activeness, { ...item, id: uuid }]);
     }
     setEditMode(false);
     setViewActiveness(item);
