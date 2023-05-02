@@ -155,3 +155,8 @@ Failed to load resource: Origin is not allowed by Access-Control-Allow-Origin. S
 
 - `npm install mobx`
 - `npm install mobx-react-lite`
+
+### Проблема 
+
+Решение - Обновление состояния с помощью действий  [runInAction](https://mobx.js.org/actions.html#updating-state-using-actions) 
+

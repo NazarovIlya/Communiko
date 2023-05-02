@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import { Activeness } from "../model/Activeness";
 import client from "../api/requestClient";
 
@@ -17,13 +17,17 @@ export default class CurrentRepository {
     this.loadingInit = true;
     try {
       const activities = await client.Activities.items();
-      activities.forEach((e) => {
-        this.activities.push(e);
+      runInAction(() => {
+        activities.forEach((e) => {
+          this.activities.push(e);
+        });
+        this.loadingInit = !true;
       });
-      this.loadingInit = !true;
     } catch (error) {
-      console.log(`error = ${error}`);
-      this.loadingInit = !true;
+      runInAction(() => {
+        console.log(`error = ${error}`);
+        this.loadingInit = !true;
+      });
     }
   }
 }
