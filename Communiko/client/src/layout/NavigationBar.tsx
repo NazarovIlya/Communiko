@@ -1,11 +1,10 @@
 import React from 'react';
 import { Button, Container, Menu } from 'semantic-ui-react';
+import { useStore } from '../Repository/Repository';
 
-interface PropsNavigationBar {
-  openForm: () => void;
-}
-
-export function NavigationBar({ openForm }: PropsNavigationBar) {
+export function NavigationBar() {
+  const { repo } = useStore();
+  const { handleOpenForm } = repo;
   return (
     <Menu fixed='top'>
       <Container>
@@ -15,7 +14,7 @@ export function NavigationBar({ openForm }: PropsNavigationBar) {
         </Menu.Item>
         <Menu.Item name='Activeness' />
         < Menu.Item >
-          <Button positive content='Append Activeness' onClick={() => openForm()} />
+          <Button positive content='Append Activeness' onClick={() => handleOpenForm()} />
         </ Menu.Item >
       </Container>
     </Menu >

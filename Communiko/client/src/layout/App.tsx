@@ -18,7 +18,7 @@ function App() {
 
   // const [activeness, setActiveness] = useState<Activeness[]>([]);
   // const [selectedActiveness, setViewActiveness] = useState<Activeness | undefined>(undefined);
-  const [editMode, setEditMode] = useState<boolean>(false);
+  // const [editMode, setEditMode] = useState<boolean>(false);
 
   useEffect(() => {
     repo.loadActivities();
@@ -74,9 +74,9 @@ function App() {
 
   return (
     < >
-      <NavigationBar openForm={repo.handleOpenForm} />
+      <NavigationBar />
       <Container style={{ marginTop: '5em' }}>
-        <ActivenessItems items={repo.activities}
+        <ActivenessItems /*items={repo.activities}*/
           selectItem={repo.selectedActiveness}
           viewActiveness={repo.handleViewActiveness}
           cancelViewActiveness={repo.handleCancelViewActiveness}

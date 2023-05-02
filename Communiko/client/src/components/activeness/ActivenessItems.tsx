@@ -6,7 +6,7 @@ import { ActivenessEditForm } from "./ActivenessEditForm";
 import { useStore } from "../../Repository/Repository";
 
 interface PropsActivenessItems {
-  items: Activeness[];
+
   selectItem: Activeness | undefined;
   viewActiveness: (id: string) => void;
   cancelViewActiveness: () => void;
@@ -18,7 +18,7 @@ interface PropsActivenessItems {
 }
 
 export function ActivenessItems(
-  { items,
+  {
     selectItem,
     viewActiveness,
     cancelViewActiveness,
@@ -29,14 +29,14 @@ export function ActivenessItems(
     removeActiveness
   }: PropsActivenessItems) {
   const { repo } = useStore();
-  const { editMode } = repo;
+  const { editMode, activities } = repo;
 
   return (
     <div>
       <Grid style={{ color: 'white' }}>
         <Grid.Column width='10'>
           {
-            items.map(e => (
+            activities.map(e => (
               <div key={e.id}>
                 <ActivenessItem activenessItem={e}
                   selected={viewActiveness}
