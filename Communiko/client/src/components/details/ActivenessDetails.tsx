@@ -9,7 +9,8 @@ export default function ActivenessDetails() {
     handleOpenForm,
     selectedActiveness: item,
     loading,
-    handleRemoveActiveness } = repo;
+    handleRemoveActiveness
+  } = repo;
   if (!item) return <LoadingComponent />;
   return (
     <Card fluid>

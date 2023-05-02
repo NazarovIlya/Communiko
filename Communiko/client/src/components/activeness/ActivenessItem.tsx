@@ -2,7 +2,6 @@ import { Button, Card } from "semantic-ui-react";
 import { Activeness } from "../../model/Activeness";
 import { useStore } from "../../Repository/Repository";
 import { observer } from "mobx-react-lite";
-import LoadingComponent from "../loading/LoadingComponent";
 
 interface Props {
   activenessItem: Activeness
@@ -28,7 +27,12 @@ export default observer(function ActivenessItem({ activenessItem }: Props) {
       </Card.Content>
       <Card.Content extra>
         <div className='ui three buttons'>
-          <Button loading={loading} basic onClick={() => handleRemoveActiveness(activenessItem.id)} color='green'>Remove</Button>
+          <Button basic
+            loading={loading}
+            onClick={() => handleRemoveActiveness(activenessItem.id)}
+            color='green'>
+            Remove
+          </Button>
           <Button basic onClick={() => handleViewActiveness(activenessItem.id)} color='green'>Details</Button>
         </div>
       </Card.Content>

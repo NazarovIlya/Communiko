@@ -12,7 +12,6 @@ export default observer(function ActivenessEditForm() {
     handleEditActiveness,
     handleCreateActiveness,
     loading
-
   } = repo;
 
   let tempActiveness: Activeness = selectedActiveness ?? {

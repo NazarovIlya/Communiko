@@ -1,6 +1,4 @@
 import { useEffect } from 'react';
-
-import { Activeness } from "../model/Activeness";
 import { Container } from 'semantic-ui-react';
 import { NavigationBar } from './NavigationBar';
 import { observer } from 'mobx-react-lite';
@@ -9,12 +7,8 @@ import { useStore } from '../Repository/Repository';
 import ActivenessItems from '../components/activeness/ActivenessItems';
 
 function App() {
-
   const { repo } = useStore();
-
-  useEffect(() => {
-    repo.loadActivities();
-  }, [repo]);
+  useEffect(() => { repo.loadActivities(); }, [repo]);
 
   if (repo.loadingInit) {
     return <LoadingComponent text='Please wait...' />;

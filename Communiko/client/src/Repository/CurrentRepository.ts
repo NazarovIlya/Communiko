@@ -54,8 +54,6 @@ export default class CurrentRepository {
   }
 
   handleCreateActiveness = async (item: Activeness) => {
-    console.log(item);
-
     this.loading = true;
     item.id = uuidv4();
     try {
@@ -79,11 +77,7 @@ export default class CurrentRepository {
     try {
       await client.Activities.update(item);
       runInAction(() => {
-        // let items = this.activities.filter(e => e.id !== item.id);
-        // this.activities = [];
-        // this.activities.push(...items, item);
         this.activities = [...this.activities.filter(e => e.id !== item.id), item];
-
         this.selectedActiveness = item;
         this.editMode = false;
         this.loading = false;
@@ -93,23 +87,17 @@ export default class CurrentRepository {
       runInAction(() => {
         this.loading = false;
       });
-
-      // setEditMode(false);
-      // setViewActiveness(item);
     }
   }
+
   handleRemoveActiveness = async (id: string) => {
     this.loading = true;
     try {
       await client.Activities.remove(id);
       runInAction(() => {
-        // let items = this.activities.filter(e => e.id !== item.id);
-        // this.activities = [];
-        // this.activities.push(...items, item);
         this.activities = [...this.activities.filter(x => x.id !== id)];
         this.handleCancelViewActiveness();
         this.loading = false;
-
       });
     } catch (error) {
       console.log(error);
@@ -117,11 +105,5 @@ export default class CurrentRepository {
         this.loading = false;
       });
     }
-
-    // client.Activities.remove(id)
-    //   .then(() => {
-    //     setActiveness([...activeness.filter(x => x.id !== id)]);
-    //     setViewActiveness(undefined);
-    //   });
   }
 }
