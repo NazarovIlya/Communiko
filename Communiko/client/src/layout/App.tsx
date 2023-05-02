@@ -16,29 +16,6 @@ function App() {
     repo.loadActivities();
   }, [repo]);
 
-  function handleEditOrCreateActiveness(item: Activeness) {
-    // if (item.id) {
-    //   client.Activities.update(item).then(() => {
-    //     setActiveness([...activeness.filter(x => x.id !== item.id), item]);
-    //   });
-    // } else {
-    //   item.id = uuidv4();
-    //   client.Activities.create(item).then(() => {
-    //     setActiveness([...activeness, item]);
-    //   });
-    // }
-
-    // setEditMode(false);
-    // setViewActiveness(item);
-  }
-
-  function handleRemoveActiveness(id: string) {
-    // client.Activities.remove(id)
-    //   .then(() => {
-    //     setActiveness([...activeness.filter(x => x.id !== id)]);
-    //     setViewActiveness(undefined);
-    //   });
-  }
   if (repo.loadingInit) {
     return <LoadingComponent text='Please wait...' />;
   }
@@ -47,10 +24,7 @@ function App() {
     < >
       <NavigationBar />
       <Container style={{ marginTop: '5em' }}>
-        <ActivenessItems
-          editOrCreate={handleEditOrCreateActiveness}
-          removeActiveness={handleRemoveActiveness}
-        />
+        <ActivenessItems />
       </Container >
     </ >
   );

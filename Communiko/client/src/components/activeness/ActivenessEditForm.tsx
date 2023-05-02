@@ -2,17 +2,18 @@ import { Button, Form, Icon, Label, Segment } from "semantic-ui-react";
 import { Activeness } from "../../model/Activeness";
 import { ChangeEvent, useState } from "react";
 import { useStore } from "../../Repository/Repository";
+import { observer } from "mobx-react-lite";
 
-interface PropsActivenessEditForm {
-  editOrCreate: (id: Activeness) => void;
-}
-
-export default function ActivenessEditForm(
-  {
-    editOrCreate
-  }: PropsActivenessEditForm) {
+export default observer(function ActivenessEditForm() {
   const { repo } = useStore();
-  const { selectedActiveness, handleCloseForm } = repo;
+  const {
+    selectedActiveness,
+    handleCloseForm,
+    handleEditActiveness,
+    handleCreateActiveness,
+    loading
+
+  } = repo;
 
   let tempActiveness: Activeness = selectedActiveness ?? {
     id: '',
@@ -27,7 +28,16 @@ export default function ActivenessEditForm(
   const [activeness, setActiveness] = useState(tempActiveness);
 
   function handleSubmit() {
-    editOrCreate(activeness);
+    console.log("+");
+
+    if (activeness.id) {
+      console.log('if (activeness.id) ');
+      handleEditActiveness(activeness);
+    }
+    else {
+      console.log('else {');
+      handleCreateActiveness(activeness);
+    }
   }
 
   function handleChange(arg: ChangeEvent<HTMLInputElement>) {
@@ -48,10 +58,10 @@ export default function ActivenessEditForm(
         <Form.Input type="date" placeholder='Point Time' name="pointTime" value={activeness.pointTime} />
         <Form.Input placeholder='Location' name='location' value={activeness.location} />
         <div className='ui three buttons'>
-          <Button type='submit'>Submit</Button>
+          <Button loading={loading} type='submit'>Submit</Button>
           <Button basic color='green' onClick={() => handleCloseForm()}>Close</Button>
         </div>
       </Form>
     </Segment >
   );
-}
+})

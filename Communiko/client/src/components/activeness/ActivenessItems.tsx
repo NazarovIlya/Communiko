@@ -6,43 +6,23 @@ import ActivenessItem from "./ActivenessItem";
 import ActivenessDetails from "../details/ActivenessDetails";
 import ActivenessEditForm from "./ActivenessEditForm";
 
-interface PropsActivenessItems {
-  editOrCreate: (id: Activeness) => void;
-  removeActiveness: (id: string) => void;
-}
-
-export default observer(function ActivenessItems(
-  {
-    editOrCreate,
-    removeActiveness
-  }: PropsActivenessItems) {
+export default observer(function ActivenessItems() {
   const { repo } = useStore();
   const {
     editMode,
     activities,
-    selectedActiveness,
+    selectedActiveness
   } = repo;
 
   return (
     <div>
       <Grid style={{ color: 'white' }}>
         <Grid.Column width='10'>
-          {
-            activities.map(e => (
-              <div key={e.id}>
-                <ActivenessItem activenessItem={e}
-                  removeActiveness={removeActiveness} />
-              </div>
-            ))
-          }
+          {activities.map(e => <ActivenessItem activenessItem={e} />)}
         </Grid.Column>
         <Grid.Column width='6'>
-          {selectedActiveness && !editMode && < ActivenessDetails
-            removeActiveness={removeActiveness}
-          />}
-          {editMode && <ActivenessEditForm
-            editOrCreate={editOrCreate}
-          />}
+          {selectedActiveness && !editMode && < ActivenessDetails />}
+          {editMode && <ActivenessEditForm />}
         </Grid.Column>
       </Grid>
     </div >

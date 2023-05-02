@@ -1,19 +1,21 @@
 import { Button, Card } from "semantic-ui-react";
 import { Activeness } from "../../model/Activeness";
 import { useStore } from "../../Repository/Repository";
+import { observer } from "mobx-react-lite";
+import LoadingComponent from "../loading/LoadingComponent";
 
-interface PropsActiveness {
-  activenessItem: Activeness;
-  removeActiveness: (id: string) => void;
+interface Props {
+  activenessItem: Activeness
 }
 
-export default function ActivenessItem(
-  {
-    activenessItem,
-    removeActiveness
-  }: PropsActiveness) {
+export default observer(function ActivenessItem({ activenessItem }: Props) {
   const { repo } = useStore();
-  const { handleViewActiveness, selectedActiveness } = repo;
+  const
+    {
+      handleViewActiveness,
+      handleRemoveActiveness,
+      loading
+    } = repo;
 
   return (
     <Card key={activenessItem.id} fluid>
@@ -26,10 +28,10 @@ export default function ActivenessItem(
       </Card.Content>
       <Card.Content extra>
         <div className='ui three buttons'>
-          <Button basic onClick={() => removeActiveness(activenessItem.id)} color='green'>Remove</Button>
+          <Button loading={loading} basic onClick={() => handleRemoveActiveness(activenessItem.id)} color='green'>Remove</Button>
           <Button basic onClick={() => handleViewActiveness(activenessItem.id)} color='green'>Details</Button>
         </div>
       </Card.Content>
     </Card>
   );
-}
+})
