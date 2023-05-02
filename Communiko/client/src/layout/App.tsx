@@ -7,8 +7,10 @@ import { ActivenessItems } from '../components/activeness/ActivenessItems';
 
 import { v4 as uuidv4 } from 'uuid';
 import client from '../api/requestClient';
-import { useStore } from '../Repository/CurrentRepository';
+
 import { observer } from 'mobx-react-lite';
+import LoadingComponent from '../components/loading/LoadingComponent';
+import { useStore } from '../Repository/Repository';
 
 function App() {
 
@@ -19,9 +21,8 @@ function App() {
   const [editMode, setEditMode] = useState<boolean>(false);
 
   useEffect(() => {
-    client.Activities.items()
-      .then(res => setActiveness(res))
-  }, []);
+    repo.loadActivities();
+  }, [repo]);
 
   function handleViewActiveness(id: string) {
     setViewActiveness(activeness.find(e => e.id === id));
@@ -64,12 +65,15 @@ function App() {
         setViewActiveness(undefined);
       });
   }
+  if (repo.loadingInit) {
+    return <LoadingComponent text='Please wait...' />;
+  }
 
   return (
-    <div>
+    < >
       <NavigationBar openForm={handleOpenForm} />
       <Container style={{ marginTop: '5em' }}>
-        <ActivenessItems items={activeness}
+        <ActivenessItems items={repo.activities}
           selectItem={selectedActiveness}
           viewActiveness={handleViewActiveness}
           cancelViewActiveness={handleCancelViewActiveness}
@@ -80,7 +84,7 @@ function App() {
           removeActiveness={handleRemoveActiveness}
         />
       </Container >
-    </div >
+    </ >
   );
 }
 
