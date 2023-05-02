@@ -37,6 +37,8 @@ export default class CurrentRepository {
   }
 
   handleCancelViewActiveness = async () => {
+    console.log("+");
+
     this.selectedActiveness = undefined;
     this.handleCloseForm();
   }

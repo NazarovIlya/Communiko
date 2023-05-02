@@ -17,7 +17,7 @@ export default observer(function ActivenessItems() {
     <div>
       <Grid style={{ color: 'white' }}>
         <Grid.Column width='10'>
-          {activities.map(e => <ActivenessItem activenessItem={e} />)}
+          {activities.map(e => <ActivenessItem activenessItem={e} key={e.id} />)}
         </Grid.Column>
         <Grid.Column width='6'>
           {selectedActiveness && !editMode && < ActivenessDetails />}

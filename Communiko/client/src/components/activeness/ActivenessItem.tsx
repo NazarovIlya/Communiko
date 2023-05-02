@@ -2,6 +2,7 @@ import { Button, Card } from "semantic-ui-react";
 import { Activeness } from "../../model/Activeness";
 import { useStore } from "../../Repository/Repository";
 import { observer } from "mobx-react-lite";
+import { SyntheticEvent, useState } from "react";
 
 interface Props {
   activenessItem: Activeness
@@ -16,6 +17,11 @@ export default observer(function ActivenessItem({ activenessItem }: Props) {
       loading
     } = repo;
 
+  const [btn, setBtn] = useState('');
+  function handleDeleteActivity(arg: SyntheticEvent<HTMLButtonElement>, id: string) {
+    setBtn(arg.currentTarget.name);
+    handleRemoveActiveness(id)
+  }
   return (
     <Card key={activenessItem.id} fluid>
       <Card.Content>
@@ -28,12 +34,17 @@ export default observer(function ActivenessItem({ activenessItem }: Props) {
       <Card.Content extra>
         <div className='ui three buttons'>
           <Button basic
-            loading={loading}
-            onClick={() => handleRemoveActiveness(activenessItem.id)}
+            name={activenessItem.id}
+            loading={loading && btn === activenessItem.id}
+            onClick={(arg) => handleDeleteActivity(arg, activenessItem.id)}
             color='green'>
             Remove
           </Button>
-          <Button basic onClick={() => handleViewActiveness(activenessItem.id)} color='green'>Details</Button>
+          <Button basic
+            onClick={() => handleViewActiveness(activenessItem.id)}
+            color='green'>
+            Details
+          </Button>
         </div>
       </Card.Content>
     </Card>

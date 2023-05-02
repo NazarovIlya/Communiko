@@ -1,6 +1,7 @@
 import { Button, Card, Icon } from "semantic-ui-react";
 import { useStore } from "../../Repository/Repository";
 import LoadingComponent from "../loading/LoadingComponent";
+import { SyntheticEvent, useState } from "react";
 
 export default function ActivenessDetails() {
   const { repo } = useStore();
@@ -11,6 +12,11 @@ export default function ActivenessDetails() {
     loading,
     handleRemoveActiveness
   } = repo;
+  const [btn, setBtn] = useState('');
+  function handleDeleteActivity(arg: SyntheticEvent<HTMLButtonElement>, id: string) {
+    setBtn(arg.currentTarget.name);
+    handleRemoveActiveness(id)
+  }
   if (!item) return <LoadingComponent />;
   return (
     <Card fluid>
@@ -31,7 +37,13 @@ export default function ActivenessDetails() {
       <Card.Content extra>
         <div className='ui three buttons'>
           <Button basic color='green' onClick={() => handleOpenForm(item.id)}>Edit</Button>
-          <Button loading={loading} basic color='green' onClick={() => handleRemoveActiveness(item.id)}>Remove</Button>
+          <Button basic
+            name={item.id}
+            loading={loading && btn === item.id}
+            onClick={(arg) => handleDeleteActivity(arg, item.id)}
+            color='green'>
+            Remove
+          </Button>
           <Button basic color='green' onClick={() => handleCancelViewActiveness()}>Close</Button>
         </div>
       </Card.Content>
