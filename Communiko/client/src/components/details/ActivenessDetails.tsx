@@ -2,24 +2,21 @@ import { Button, Card, Icon } from "semantic-ui-react";
 import { useStore } from "../../Repository/Repository";
 import LoadingComponent from "../loading/LoadingComponent";
 import { SyntheticEvent, useState } from "react";
+import { observer } from "mobx-react-lite";
 
-export default function ActivenessDetails() {
+export default observer(function ActivenessDetails() {
   const { repo } = useStore();
   const {
     handleCancelViewActiveness,
     handleOpenForm,
-    selectedActiveness: item,
+    selectedActiveness,
     loading,
-    handleRemoveActiveness
+    handleDeleteActivity,
+    btnId
   } = repo;
-  const [btn, setBtn] = useState('');
-  function handleDeleteActivity(arg: SyntheticEvent<HTMLButtonElement>, id: string) {
-    setBtn(arg.currentTarget.name);
-    handleRemoveActiveness(id)
-  }
-  if (!item) return <LoadingComponent />;
+  const item = selectedActiveness!;
   return (
-    <Card fluid>
+    <Card fluid key={item.id}>
       <Card.Content>
         <Card.Header>{item.title}</Card.Header>
         <Card.Meta>
@@ -36,17 +33,27 @@ export default function ActivenessDetails() {
       </Card.Content>
       <Card.Content extra>
         <div className='ui three buttons'>
-          <Button basic color='green' onClick={() => handleOpenForm(item.id)}>Edit</Button>
           <Button basic
-            name={item.id}
-            loading={loading && btn === item.id}
-            onClick={(arg) => handleDeleteActivity(arg, item.id)}
+            color='green'
+            disabled={loading}
+            onClick={() => handleOpenForm(item.id)}>
+            Edit
+          </Button>
+          <Button basic
+            name={`${item.id}details`}
+            disabled={loading}
+            loading={loading && btnId === `${item!.id}details`}
+            onClick={(e) => handleDeleteActivity(e, item!.id)}
             color='green'>
             Remove
           </Button>
-          <Button basic color='green' onClick={() => handleCancelViewActiveness()}>Close</Button>
+          <Button basic
+            color='green'
+            onClick={() => handleCancelViewActiveness()}>
+            Close
+          </Button>
         </div>
       </Card.Content>
     </Card>
   );
-}
+})

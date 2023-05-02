@@ -13,15 +13,11 @@ export default observer(function ActivenessItem({ activenessItem }: Props) {
   const
     {
       handleViewActiveness,
-      handleRemoveActiveness,
-      loading
+      handleDeleteActivity,
+      loading,
+      btnId
     } = repo;
 
-  const [btn, setBtn] = useState('');
-  function handleDeleteActivity(arg: SyntheticEvent<HTMLButtonElement>, id: string) {
-    setBtn(arg.currentTarget.name);
-    handleRemoveActiveness(id)
-  }
   return (
     <Card key={activenessItem.id} fluid>
       <Card.Content>
@@ -34,8 +30,9 @@ export default observer(function ActivenessItem({ activenessItem }: Props) {
       <Card.Content extra>
         <div className='ui three buttons'>
           <Button basic
-            name={activenessItem.id}
-            loading={loading && btn === activenessItem.id}
+            name={`${activenessItem.id}items`}
+            loading={loading && btnId === `${activenessItem.id}items`}
+            disabled={loading}
             onClick={(arg) => handleDeleteActivity(arg, activenessItem.id)}
             color='green'>
             Remove
@@ -47,6 +44,6 @@ export default observer(function ActivenessItem({ activenessItem }: Props) {
           </Button>
         </div>
       </Card.Content>
-    </Card>
+    </Card >
   );
 })

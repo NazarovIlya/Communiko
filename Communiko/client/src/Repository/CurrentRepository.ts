@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { Activeness } from "../model/Activeness";
 import client from "../api/requestClient";
 import { v4 as uuidv4 } from 'uuid';
+import { SyntheticEvent } from "react";
 
 export default class CurrentRepository {
   selectedActiveness: Activeness | undefined = undefined;
@@ -9,6 +10,7 @@ export default class CurrentRepository {
   editMode: boolean = false;
   loadingInit: boolean = false;
   loading: boolean = false;
+  btnId: string = '';
 
   constructor() {
     makeAutoObservable(this);
@@ -37,8 +39,6 @@ export default class CurrentRepository {
   }
 
   handleCancelViewActiveness = async () => {
-    console.log("+");
-
     this.selectedActiveness = undefined;
     this.handleCloseForm();
   }
@@ -107,5 +107,10 @@ export default class CurrentRepository {
         this.loading = false;
       });
     }
+  }
+
+  handleDeleteActivity = async (arg: SyntheticEvent<HTMLButtonElement>, id: string) => {
+    this.btnId = arg.currentTarget.name;
+    this.handleRemoveActiveness(id);
   }
 }
