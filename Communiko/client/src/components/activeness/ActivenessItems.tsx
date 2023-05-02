@@ -3,13 +3,14 @@ import { Activeness } from "../../model/Activeness";
 import { ActivenessItem } from "./ActivenessItem";
 import { ActivenessDetails } from "../details/ActivenessDetails";
 import { ActivenessEditForm } from "./ActivenessEditForm";
+import { useStore } from "../../Repository/Repository";
 
 interface PropsActivenessItems {
   items: Activeness[];
   selectItem: Activeness | undefined;
   viewActiveness: (id: string) => void;
   cancelViewActiveness: () => void;
-  editMode: boolean;
+
   formOpen: (id: string) => void;
   formClose: () => void;
   editOrCreate: (id: Activeness) => void;
@@ -21,12 +22,15 @@ export function ActivenessItems(
     selectItem,
     viewActiveness,
     cancelViewActiveness,
-    editMode,
+
     formOpen,
     formClose,
     editOrCreate,
     removeActiveness
   }: PropsActivenessItems) {
+  const { repo } = useStore();
+  const { editMode } = repo;
+
   return (
     <div>
       <Grid style={{ color: 'white' }}>
