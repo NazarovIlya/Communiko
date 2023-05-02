@@ -1,21 +1,29 @@
 import { makeAutoObservable } from "mobx";
-import { createContext, useContext } from "react";
-
-export interface Repository {
-  repo: CurrentRepository
-}
+import { Activeness } from "../model/Activeness";
+import client from "../api/requestClient";
 
 export default class CurrentRepository {
+  selectActiveness: Activeness | null = null;
+  activities: Activeness[] = [];
+  editMode: boolean = false;
+  loading: boolean = false;
+  loadingInit: boolean = false;
+
   constructor() {
     makeAutoObservable(this);
   }
-}
-export const repository: Repository = {
-  repo: new CurrentRepository()
-}
 
-export const RepositoryContext = createContext(repository);
-
-export function useStore() {
-  return useContext(RepositoryContext);
+  loadActivities = async () => {
+    this.loadingInit = true;
+    try {
+      const activities = await client.Activities.items();
+      activities.forEach((e) => {
+        this.activities.push(e);
+      });
+      this.loadingInit = !true;
+    } catch (error) {
+      console.log(`error = ${error}`);
+      this.loadingInit = !true;
+    }
+  }
 }
