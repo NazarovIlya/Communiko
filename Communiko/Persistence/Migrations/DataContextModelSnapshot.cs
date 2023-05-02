@@ -40,8 +40,8 @@ namespace Persistence.Migrations
                     b.Property<string>("Location")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("PointTime")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateOnly>("PointTime")
+                        .HasColumnType("date");
 
                     b.Property<string>("Title")
                         .HasColumnType("text");

@@ -45,7 +45,7 @@ export function ActivenessEditForm(
         <Form.Input placeholder='Category' name="category" value={activeness.category} />
         <Form.Input placeholder='Description' name="description" value={activeness.description} />
         <Form.Input placeholder='City' name="city" value={activeness.city} />
-        <Form.Input placeholder='Point Time' name="pointTime" value={activeness.pointTime} />
+        <Form.Input type="date" placeholder='Point Time' name="pointTime" value={activeness.pointTime} />
         <Form.Input placeholder='Location' name='location' value={activeness.location} />
         <div className='ui three buttons'>
           <Button type='submit'>Submit</Button>

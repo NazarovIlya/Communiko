@@ -20,7 +20,7 @@ namespace Persistence.Migrations
                     Category = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     City = table.Column<string>(type: "text", nullable: true),
-                    PointTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    PointTime = table.Column<DateOnly>(type: "date", nullable: false),
                     Location = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>

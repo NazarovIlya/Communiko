@@ -16,12 +16,13 @@ namespace Persistence.ExperimentalData
         int category = Random.Shared.Next(1, 10);
         int city = Random.Shared.Next(1, 10);
         int location = Random.Shared.Next(1, 10);
+        DateOnly date = DateOnly.FromDateTime(DateTime.Now).AddMonths(month);
 
         activities.Add(
             new Activeness
             {
               Title = $"Тестовая активность #{i}",
-              PointTime = DateTime.SpecifyKind(DateTime.Now.AddMonths(month), DateTimeKind.Utc),
+              PointTime = date,
               Description = $"Описание #{month}",
               Category = $"Категория #{category}",
               City = $"Город #{city}",

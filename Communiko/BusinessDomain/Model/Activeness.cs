@@ -12,7 +12,7 @@ namespace BusinessDomain.Model
     public string Category { get; set; }
     public string Description { get; set; }
     public string City { get; set; }
-    public DateTime PointTime { get; set; }
+    public DateOnly PointTime { get; set; }
     public string Location { get; set; }
   }
 }

@@ -146,7 +146,12 @@ Failed to load resource: Origin is not allowed by Access-Control-Allow-Origin. S
 - Документация [для react](https://react.semantic-ui.com/usage/)
 Установка `npm install semantic-ui-react semantic-ui-css`
 
-## Библиотека для генерации UIDD
+## Библиотека для генерации UUID
 
 - `npm install uuid` [url](https://www.npmjs.com/package/uuid)
 - `npm i --save-dev @types/uuid` добавление поддержки ts
+
+## Библиотека для управления состоянием в приложениях на JS/TS
+
+- `npm install mobx`
+- `npm install mobx-react-lite`

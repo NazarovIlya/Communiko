@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { Activeness } from "../model/Activeness";
-import { Container } from 'semantic-ui-react';
+import { Button, Container } from 'semantic-ui-react';
 import { NavigationBar } from './NavigationBar';
 import { ActivenessItems } from '../components/activeness/ActivenessItems';
 
 import { v4 as uuidv4 } from 'uuid';
 import client from '../api/requestClient';
+import { useStore } from '../Repository/CurrentRepository';
+import { observer } from 'mobx-react-lite';
 
 function App() {
+
+  const { repo } = useStore();
+
   const [activeness, setActiveness] = useState<Activeness[]>([]);
   const [selectedActiveness, setViewActiveness] = useState<Activeness | undefined>(undefined);
   const [editMode, setEditMode] = useState<boolean>(false);
@@ -38,12 +43,16 @@ function App() {
 
   function handleEditOrCreateActiveness(item: Activeness) {
     if (item.id) {
-      setActiveness([...activeness.filter(x => x.id !== item.id), item]);
+      client.Activities.update(item).then(() => {
+        setActiveness([...activeness.filter(x => x.id !== item.id), item]);
+      });
+    } else {
+      item.id = uuidv4();
+      client.Activities.create(item).then(() => {
+        setActiveness([...activeness, item]);
+      });
     }
-    else {
-      const uuid = uuidv4();
-      setActiveness([...activeness, { ...item, id: uuid }]);
-    }
+
     setEditMode(false);
     setViewActiveness(item);
   }
@@ -70,9 +79,9 @@ function App() {
           editOrCreate={handleEditOrCreateActiveness}
           removeActiveness={handleRemoveActiveness}
         />
-      </Container>
+      </Container >
     </div >
   );
 }
 
-export default App;
+export default observer(App);
