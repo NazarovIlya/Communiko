@@ -6,7 +6,7 @@ import { SyntheticEvent } from "react";
 
 export default class CurrentRepository {
   selectedActiveness: Activeness | undefined = undefined;
-  activities: Activeness[] = [];
+  mapActivities: Map<string, Activeness> = new Map<string, Activeness>();
   editMode: boolean = false;
   loadingInit: boolean = false;
   loading: boolean = false;
@@ -22,7 +22,8 @@ export default class CurrentRepository {
       const activities = await client.Activities.items();
       runInAction(() => {
         activities.forEach((e) => {
-          this.activities.push(e);
+          // this.activities.push(e);
+          this.mapActivities.set(e.id, e);
         });
         this.loadingInit = !true;
       });
@@ -34,34 +35,36 @@ export default class CurrentRepository {
     }
   }
 
-  handleViewActiveness = async (id: string) => {
-    this.selectedActiveness = this.activities.find(e => e.id === id);
+  viewActiveness = async (id: string) => {
+    // this.selectedActiveness = this.activities.find(e => e.id === id);
+    this.selectedActiveness = this.mapActivities.get(id);
   }
 
-  handleCancelViewActiveness = async () => {
+  cancelViewActiveness = async () => {
     this.selectedActiveness = undefined;
-    this.handleCloseForm();
+    this.closeForm();
   }
 
   setEditMode = (mode: boolean) => { this.editMode = mode; }
 
-  handleOpenForm = async (id?: string) => {
-    if (id) { this.handleViewActiveness(id); }
-    else { this.handleCancelViewActiveness(); }
+  openForm = async (id?: string) => {
+    if (id) { this.viewActiveness(id); }
+    else { this.cancelViewActiveness(); }
     this.setEditMode(true);
   }
 
-  handleCloseForm = async () => {
+  closeForm = async () => {
     this.setEditMode(false);
   }
 
-  handleCreateActiveness = async (item: Activeness) => {
+  createActiveness = async (item: Activeness) => {
     this.loading = true;
     item.id = uuidv4();
     try {
       await client.Activities.create(item);
       runInAction(() => {
-        this.activities.push(item);
+        // this.activities.push(item);
+        this.mapActivities.set(item.id, item);
         this.selectedActiveness = item;
         this.editMode = false;
         this.loading = false;
@@ -74,12 +77,13 @@ export default class CurrentRepository {
     }
   }
 
-  handleEditActiveness = async (item: Activeness) => {
+  updateActiveness = async (item: Activeness) => {
     this.loading = true;
     try {
       await client.Activities.update(item);
       runInAction(() => {
-        this.activities = [...this.activities.filter(e => e.id !== item.id), item];
+        // this.activities = [...this.activities.filter(e => e.id !== item.id), item];
+        this.mapActivities.set(item.id, item);
         this.selectedActiveness = item;
         this.editMode = false;
         this.loading = false;
@@ -92,13 +96,14 @@ export default class CurrentRepository {
     }
   }
 
-  handleRemoveActiveness = async (id: string) => {
+  removeActiveness = async (id: string) => {
     this.loading = true;
     try {
       await client.Activities.remove(id);
       runInAction(() => {
-        this.activities = [...this.activities.filter(x => x.id !== id)];
-        this.handleCancelViewActiveness();
+        // this.activities = [...this.activities.filter(x => x.id !== id)];
+        this.mapActivities.delete(id);
+        this.cancelViewActiveness();
         this.loading = false;
       });
     } catch (error) {
@@ -109,8 +114,20 @@ export default class CurrentRepository {
     }
   }
 
-  handleDeleteActivity = async (arg: SyntheticEvent<HTMLButtonElement>, id: string) => {
+  deleteActiveness = async (arg: SyntheticEvent<HTMLButtonElement>, id: string) => {
     this.btnId = arg.currentTarget.name;
-    this.handleRemoveActiveness(id);
+    this.removeActiveness(id);
+  }
+
+
+  sortByTitle = (x: Activeness, y: Activeness): number => {
+    return x.title.toLowerCase().localeCompare(y.title.toLowerCase());
+  }
+
+  get activities() {
+    return Array.from(
+      this.mapActivities
+        .values())
+      .sort(this.sortByTitle);
   }
 }

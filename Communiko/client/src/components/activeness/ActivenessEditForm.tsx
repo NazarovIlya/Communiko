@@ -1,16 +1,16 @@
 import { Button, Form, Icon, Label, Segment } from "semantic-ui-react";
 import { Activeness } from "../../model/Activeness";
 import { ChangeEvent, useState } from "react";
-import { useStore } from "../../Repository/Repository";
+import { useRepository } from "../../Repository/Repository";
 import { observer } from "mobx-react-lite";
 
 export default observer(function ActivenessEditForm() {
-  const { repo } = useStore();
+  const { repo } = useRepository();
   const {
     selectedActiveness,
-    handleCloseForm,
-    handleEditActiveness,
-    handleCreateActiveness,
+    closeForm,
+    updateActiveness,
+    createActiveness,
     loading
   } = repo;
 
@@ -27,15 +27,11 @@ export default observer(function ActivenessEditForm() {
   const [activeness, setActiveness] = useState(tempActiveness);
 
   function handleSubmit() {
-    console.log("+");
-
     if (activeness.id) {
-      console.log('if (activeness.id) ');
-      handleEditActiveness(activeness);
+      updateActiveness(activeness);
     }
     else {
-      console.log('else {');
-      handleCreateActiveness(activeness);
+      createActiveness(activeness);
     }
   }
 
@@ -58,7 +54,7 @@ export default observer(function ActivenessEditForm() {
         <Form.Input placeholder='Location' name='location' value={activeness.location} />
         <div className='ui three buttons'>
           <Button loading={loading} type='submit'>Submit</Button>
-          <Button basic color='green' onClick={() => handleCloseForm()}>Close</Button>
+          <Button basic color='green' onClick={() => closeForm()}>Close</Button>
         </div>
       </Form>
     </Segment >

@@ -1,12 +1,12 @@
 import { Grid } from "semantic-ui-react";
-import { useStore } from "../../Repository/Repository";
+import { useRepository } from "../../Repository/Repository";
 import { observer } from "mobx-react-lite";
 import ActivenessItem from "./ActivenessItem";
 import ActivenessDetails from "../details/ActivenessDetails";
 import ActivenessEditForm from "./ActivenessEditForm";
 
 export default observer(function ActivenessItems() {
-  const { repo } = useStore();
+  const { repo } = useRepository();
   const {
     editMode,
     activities,

@@ -1,19 +1,19 @@
 import { Button, Card } from "semantic-ui-react";
 import { Activeness } from "../../model/Activeness";
-import { useStore } from "../../Repository/Repository";
+import { useRepository } from "../../Repository/Repository";
 import { observer } from "mobx-react-lite";
-import { SyntheticEvent, useState } from "react";
 
-interface Props {
+interface PropsActivenessItem {
   activenessItem: Activeness
 }
 
-export default observer(function ActivenessItem({ activenessItem }: Props) {
-  const { repo } = useStore();
+export default observer(function ActivenessItem(
+  { activenessItem }: PropsActivenessItem) {
+  const { repo } = useRepository();
   const
     {
-      handleViewActiveness,
-      handleDeleteActivity,
+      viewActiveness,
+      deleteActiveness,
       loading,
       btnId
     } = repo;
@@ -33,12 +33,12 @@ export default observer(function ActivenessItem({ activenessItem }: Props) {
             name={`${activenessItem.id}items`}
             loading={loading && btnId === `${activenessItem.id}items`}
             disabled={loading}
-            onClick={(arg) => handleDeleteActivity(arg, activenessItem.id)}
+            onClick={(arg) => deleteActiveness(arg, activenessItem.id)}
             color='green'>
             Remove
           </Button>
           <Button basic
-            onClick={() => handleViewActiveness(activenessItem.id)}
+            onClick={() => viewActiveness(activenessItem.id)}
             color='green'>
             Details
           </Button>

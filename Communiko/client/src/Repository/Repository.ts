@@ -11,6 +11,6 @@ export const repository: Repository = {
 
 export const RepositoryContext = createContext(repository);
 
-export function useStore() {
+export function useRepository() {
   return useContext(RepositoryContext);
 }

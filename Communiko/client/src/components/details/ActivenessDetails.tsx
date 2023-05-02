@@ -1,17 +1,15 @@
 import { Button, Card, Icon } from "semantic-ui-react";
-import { useStore } from "../../Repository/Repository";
-import LoadingComponent from "../loading/LoadingComponent";
-import { SyntheticEvent, useState } from "react";
+import { useRepository } from "../../Repository/Repository";
 import { observer } from "mobx-react-lite";
 
 export default observer(function ActivenessDetails() {
-  const { repo } = useStore();
+  const { repo } = useRepository();
   const {
-    handleCancelViewActiveness,
-    handleOpenForm,
+    cancelViewActiveness,
+    openForm,
     selectedActiveness,
     loading,
-    handleDeleteActivity,
+    deleteActiveness,
     btnId
   } = repo;
   const item = selectedActiveness!;
@@ -36,20 +34,20 @@ export default observer(function ActivenessDetails() {
           <Button basic
             color='green'
             disabled={loading}
-            onClick={() => handleOpenForm(item.id)}>
+            onClick={() => openForm(item.id)}>
             Edit
           </Button>
           <Button basic
             name={`${item.id}details`}
             disabled={loading}
             loading={loading && btnId === `${item!.id}details`}
-            onClick={(e) => handleDeleteActivity(e, item!.id)}
+            onClick={(e) => deleteActiveness(e, item!.id)}
             color='green'>
             Remove
           </Button>
           <Button basic
             color='green'
-            onClick={() => handleCancelViewActiveness()}>
+            onClick={() => cancelViewActiveness()}>
             Close
           </Button>
         </div>
