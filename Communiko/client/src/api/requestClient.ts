@@ -5,6 +5,20 @@ axios.defaults.baseURL = 'http://localhost:11222/api';
 
 const responseData = <T>(res: AxiosResponse<T>) => res.data;
 
+const sleep = (delay: number) => {
+  return new Promise((res) => { setTimeout(res, delay); });
+}
+
+axios.interceptors.response.use(async response => {
+  try {
+    await sleep(0);
+    return response;
+  } catch (error) {
+    console.log(error);
+    return await Promise.reject(error)
+  }
+});
+
 const requests = {
   get: <T>(url: string) => axios.get<T>(url).then(responseData),
   delete: <T>(url: string) => axios.delete<T>(url).then(responseData),
