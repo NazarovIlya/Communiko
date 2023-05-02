@@ -6,7 +6,6 @@ export default class CurrentRepository {
   selectedActiveness: Activeness | undefined = undefined;
   activities: Activeness[] = [];
   editMode: boolean = false;
-  loading: boolean = false;
   loadingInit: boolean = false;
 
   constructor() {
@@ -32,6 +31,8 @@ export default class CurrentRepository {
   }
 
   handleViewActiveness = async (id: string) => {
+    console.log(`handleViewActiveness`);
+    console.log(`id = ${id}`);
     this.selectedActiveness = this.activities.find(e => e.id === id);
   }
 

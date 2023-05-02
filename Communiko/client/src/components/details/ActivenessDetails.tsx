@@ -1,20 +1,18 @@
 import { Button, Card, Icon } from "semantic-ui-react";
-import { Activeness } from "../../model/Activeness";
+import { useStore } from "../../Repository/Repository";
+import LoadingComponent from "../loading/LoadingComponent";
 
 interface PropsActivenessDetails {
-  item: Activeness;
-  cancelViewActiveness: () => void;
-  formOpen: (id: string) => void;
   removeActiveness: (id: string) => void;
 }
 
-export function ActivenessDetails(
+export default function ActivenessDetails(
   {
-    item,
-    cancelViewActiveness,
-    formOpen,
     removeActiveness
   }: PropsActivenessDetails) {
+  const { repo } = useStore();
+  const { handleCancelViewActiveness, handleOpenForm, selectedActiveness: item } = repo;
+  if (!item) return <LoadingComponent />;
   return (
     <Card fluid>
       <Card.Content>
@@ -33,9 +31,9 @@ export function ActivenessDetails(
       </Card.Content>
       <Card.Content extra>
         <div className='ui three buttons'>
-          <Button basic color='green' onClick={() => formOpen(item.id)}>Edit</Button>
+          <Button basic color='green' onClick={() => handleOpenForm(item.id)}>Edit</Button>
           <Button basic color='green' onClick={() => removeActiveness(item.id)}>Remove</Button>
-          <Button basic color='green' onClick={() => cancelViewActiveness()}>Close</Button>
+          <Button basic color='green' onClick={() => handleCancelViewActiveness()}>Close</Button>
         </div>
       </Card.Content>
     </Card>

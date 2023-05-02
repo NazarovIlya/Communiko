@@ -1,18 +1,20 @@
 import { Button, Card } from "semantic-ui-react";
 import { Activeness } from "../../model/Activeness";
+import { useStore } from "../../Repository/Repository";
 
 interface PropsActiveness {
   activenessItem: Activeness;
-  selected: (id: string) => void;
   removeActiveness: (id: string) => void;
 }
 
-export function ActivenessItem(
+export default function ActivenessItem(
   {
     activenessItem,
-    selected,
     removeActiveness
   }: PropsActiveness) {
+  const { repo } = useStore();
+  const { handleViewActiveness, selectedActiveness } = repo;
+
   return (
     <Card key={activenessItem.id} fluid>
       <Card.Content>
@@ -23,9 +25,9 @@ export function ActivenessItem(
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <div className='ui two buttons'>
+        <div className='ui three buttons'>
           <Button basic onClick={() => removeActiveness(activenessItem.id)} color='green'>Remove</Button>
-          <Button basic onClick={() => selected(activenessItem.id)} color='green'>Details</Button>
+          <Button basic onClick={() => handleViewActiveness(activenessItem.id)} color='green'>Details</Button>
         </div>
       </Card.Content>
     </Card>

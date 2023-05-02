@@ -1,20 +1,20 @@
 import { Button, Form, Icon, Label, Segment } from "semantic-ui-react";
 import { Activeness } from "../../model/Activeness";
 import { ChangeEvent, useState } from "react";
+import { useStore } from "../../Repository/Repository";
 
 interface PropsActivenessEditForm {
-  selectItem: Activeness | undefined;
-  formClose: () => void;
   editOrCreate: (id: Activeness) => void;
 }
 
-export function ActivenessEditForm(
+export default function ActivenessEditForm(
   {
-    formClose,
-    selectItem,
     editOrCreate
   }: PropsActivenessEditForm) {
-  let tempActiveness: Activeness = selectItem ?? {
+  const { repo } = useStore();
+  const { selectedActiveness, handleCloseForm } = repo;
+
+  let tempActiveness: Activeness = selectedActiveness ?? {
     id: '',
     title: '',
     category: '',
@@ -49,7 +49,7 @@ export function ActivenessEditForm(
         <Form.Input placeholder='Location' name='location' value={activeness.location} />
         <div className='ui three buttons'>
           <Button type='submit'>Submit</Button>
-          <Button basic color='green' onClick={() => formClose()}>Close</Button>
+          <Button basic color='green' onClick={() => handleCloseForm()}>Close</Button>
         </div>
       </Form>
     </Segment >
