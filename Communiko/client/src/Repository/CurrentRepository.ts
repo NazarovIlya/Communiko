@@ -22,7 +22,6 @@ export default class CurrentRepository {
       const activities = await client.Activities.items();
       runInAction(() => {
         activities.forEach((e) => {
-          // this.activities.push(e);
           this.mapActivities.set(e.id, e);
         });
         this.loadingInit = !true;
@@ -36,7 +35,6 @@ export default class CurrentRepository {
   }
 
   viewActiveness = async (id: string) => {
-    // this.selectedActiveness = this.activities.find(e => e.id === id);
     this.selectedActiveness = this.mapActivities.get(id);
   }
 
@@ -63,7 +61,6 @@ export default class CurrentRepository {
     try {
       await client.Activities.create(item);
       runInAction(() => {
-        // this.activities.push(item);
         this.mapActivities.set(item.id, item);
         this.selectedActiveness = item;
         this.editMode = false;
@@ -82,7 +79,6 @@ export default class CurrentRepository {
     try {
       await client.Activities.update(item);
       runInAction(() => {
-        // this.activities = [...this.activities.filter(e => e.id !== item.id), item];
         this.mapActivities.set(item.id, item);
         this.selectedActiveness = item;
         this.editMode = false;
@@ -101,7 +97,6 @@ export default class CurrentRepository {
     try {
       await client.Activities.remove(id);
       runInAction(() => {
-        // this.activities = [...this.activities.filter(x => x.id !== id)];
         this.mapActivities.delete(id);
         this.cancelViewActiveness();
         this.loading = false;
