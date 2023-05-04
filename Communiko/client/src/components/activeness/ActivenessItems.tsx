@@ -4,6 +4,8 @@ import { observer } from "mobx-react-lite";
 import ActivenessItem from "./ActivenessItem";
 import ActivenessDetails from "../details/ActivenessDetails";
 import ActivenessEditForm from "./ActivenessEditForm";
+import { useEffect } from "react";
+import LoadingComponent from "../loading/LoadingComponent";
 
 export default observer(function ActivenessItems() {
   const { repo } = useRepository();
@@ -12,6 +14,12 @@ export default observer(function ActivenessItems() {
     activities,
     selectedActiveness
   } = repo;
+  useEffect(() => { repo.loadActivities(); }, [repo]);
+
+  if (repo.loadingInit) {
+    return <LoadingComponent text='Please wait...' />;
+  }
+
 
   return (
     <div>
