@@ -30,7 +30,8 @@ const Activities = {
   items: () => requests.get<Activeness[]>('/Activeness'),
   remove: (id: string) => requests.delete<void>(`/Activeness/${id}`),
   update: (item: Activeness) => requests.put<void>(`/Activeness/${item.id}`, item),
-  create: (item: Activeness) => requests.post<void>(`/Activeness/`, item)
+  create: (item: Activeness) => requests.post<void>(`/Activeness/`, item),
+  item: (id: string) => requests.get<Activeness>(`/Activeness/${id}`),
 }
 
 const client = {
