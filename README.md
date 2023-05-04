@@ -172,3 +172,4 @@ Failed to load resource: Origin is not allowed by Access-Control-Allow-Origin. S
 
 - `npm i react-router-dom`
 
+_[решение проблемы рендеринга компонентов для действий создания и обновления](https://react.dev/learn/preserving-and-resetting-state#option-2-resetting-state-with-a-key)_
