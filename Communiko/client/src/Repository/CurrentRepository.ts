@@ -34,26 +34,23 @@ export default class CurrentRepository {
     }
   }
 
-  viewActiveness = async (id: string) => {
-    this.selectedActiveness = this.mapActivities.get(id);
-  }
-
-  cancelViewActiveness = async () => {
-    this.selectedActiveness = undefined;
-    this.closeForm();
+  loadActiveness = async (id: string) => {
+    let item = this.mapActivities.get(id);
+    if (item) this.selectedActiveness = item;
+    else {
+      this.loadingInit = true;
+      try {
+        item = await client.Activities.item(id);
+        this.selectedActiveness = item;
+        this.loadingInit = !true;
+      } catch (error) {
+        console.log(error);
+        this.loadingInit = !true;
+      }
+    }
   }
 
   setEditMode = (mode: boolean) => { this.editMode = mode; }
-
-  openForm = async (id?: string) => {
-    if (id) { this.viewActiveness(id); }
-    else { this.cancelViewActiveness(); }
-    this.setEditMode(true);
-  }
-
-  closeForm = async () => {
-    this.setEditMode(false);
-  }
 
   createActiveness = async (item: Activeness) => {
     this.loading = true;
@@ -98,7 +95,6 @@ export default class CurrentRepository {
       await client.Activities.remove(id);
       runInAction(() => {
         this.mapActivities.delete(id);
-        this.cancelViewActiveness();
         this.loading = false;
       });
     } catch (error) {

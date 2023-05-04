@@ -2,6 +2,7 @@ import { Button, Card } from "semantic-ui-react";
 import { Activeness } from "../../model/Activeness";
 import { useRepository } from "../../repository/Repository";
 import { observer } from "mobx-react-lite";
+import { Link } from "react-router-dom";
 
 interface PropsActivenessItem {
   activenessItem: Activeness
@@ -12,7 +13,6 @@ export default observer(function ActivenessItem(
   const { repo } = useRepository();
   const
     {
-      viewActiveness,
       deleteActiveness,
       loading,
       btnId
@@ -38,7 +38,7 @@ export default observer(function ActivenessItem(
             Remove
           </Button>
           <Button basic
-            onClick={() => viewActiveness(activenessItem.id)}
+            as={Link} to={`/activenessItems/${activenessItem.id}`}
             color='green'>
             Details
           </Button>

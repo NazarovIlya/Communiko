@@ -8,7 +8,6 @@ export default observer(function ActivenessEditForm() {
   const { repo } = useRepository();
   const {
     selectedActiveness,
-    closeForm,
     updateActiveness,
     createActiveness,
     loading
@@ -54,7 +53,8 @@ export default observer(function ActivenessEditForm() {
         <Form.Input placeholder='Location' name='location' value={activeness.location} />
         <div className='ui three buttons'>
           <Button loading={loading} type='submit'>Submit</Button>
-          <Button basic color='green' onClick={() => closeForm()}>Close</Button>
+          <Button basic color='green'>Close
+          </Button>
         </div>
       </Form>
     </Segment >

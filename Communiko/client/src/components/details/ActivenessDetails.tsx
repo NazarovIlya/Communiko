@@ -1,18 +1,27 @@
 import { Button, Card, Icon } from "semantic-ui-react";
 import { useRepository } from "../../repository/Repository";
 import { observer } from "mobx-react-lite";
+import LoadingComponent from "../loading/LoadingComponent";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 export default observer(function ActivenessDetails() {
   const { repo } = useRepository();
   const {
-    cancelViewActiveness,
-    openForm,
+    loadActiveness,
     selectedActiveness,
     loading,
+    loadingInit,
     deleteActiveness,
     btnId
   } = repo;
+  const { id } = useParams();
+  useEffect(() => {
+    if (id) loadActiveness(id);
+  }, [id, loadActiveness]);
   const item = selectedActiveness!;
+
+  if (loadingInit || !item) return <LoadingComponent />;
   return (
     <Card fluid key={item.id}>
       <Card.Content>
@@ -33,8 +42,7 @@ export default observer(function ActivenessDetails() {
         <div className='ui three buttons'>
           <Button basic
             color='green'
-            disabled={loading}
-            onClick={() => openForm(item.id)}>
+            disabled={loading}>
             Edit
           </Button>
           <Button basic
@@ -46,12 +54,11 @@ export default observer(function ActivenessDetails() {
             Remove
           </Button>
           <Button basic
-            color='green'
-            onClick={() => cancelViewActiveness()}>
+            color='green'>
             Close
           </Button>
         </div>
       </Card.Content>
-    </Card>
+    </Card >
   );
 })
