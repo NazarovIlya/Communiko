@@ -1,6 +1,5 @@
-import { Button, Card, Icon, Item, Label, Segment } from "semantic-ui-react";
+import { Button, Icon, Item, Label, Segment } from "semantic-ui-react";
 import { Activeness } from "../../model/Activeness";
-import { useRepository } from "../../repository/Repository";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 

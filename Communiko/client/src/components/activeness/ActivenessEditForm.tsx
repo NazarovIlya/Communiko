@@ -1,5 +1,4 @@
 import { Button, Form, Icon, Label, Segment } from "semantic-ui-react";
-import { Activeness } from "../../model/Activeness";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useRepository } from "../../repository/Repository";
 import { observer } from "mobx-react-lite";
@@ -9,7 +8,6 @@ import { v4 as uuidv4 } from 'uuid';
 export default observer(function ActivenessEditForm() {
   const { repo } = useRepository();
   const {
-    selectedActiveness,
     updateActiveness,
     createActiveness,
     loadActiveness,

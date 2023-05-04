@@ -1,8 +1,8 @@
-import { Button, Card, Grid, Icon } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import { useRepository } from "../../repository/Repository";
 import { observer } from "mobx-react-lite";
 import LoadingComponent from "../loading/LoadingComponent";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import ActivenessDetailsChat from "./ActivenessDetailsChat";
 import ActivenessDetailsHeader from "./ActivenessDetailsHeader";
@@ -15,10 +15,7 @@ export default observer(function ActivenessDetails() {
   const {
     loadActiveness,
     selectedActiveness,
-    loading,
-    loadingInit,
-    deleteActiveness,
-    btnId
+    loadingInit
   } = repo;
   const { id } = useParams();
   useEffect(() => {
