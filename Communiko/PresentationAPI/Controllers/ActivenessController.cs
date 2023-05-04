@@ -9,9 +9,14 @@ namespace PresentationAPI.Controllers
   public class ActivenessController : BaseController
   {
     [HttpGet("{id}")]
-    public async Task<ActionResult<Activeness>> Get(Guid id)
+    public async Task<IActionResult> Get(Guid id)
     {
-      return await Mediator.Send(new ItemActivities.Query() { Id = id });
+      var result = await Mediator.Send(new ItemActivities.Query() { Id = id });
+      if (result.IsSuccess && result.Value != null)
+        return Ok(result.Value);
+      if (result.IsSuccess && result.Value == null)
+        return NotFound();
+      return BadRequest(result.Error);
     }
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Activeness>>> Get()

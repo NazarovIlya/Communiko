@@ -1,3 +1,4 @@
+using Application.AppConfig;
 using BusinessDomain.Model;
 using MediatR;
 using Persistence;
@@ -6,12 +7,12 @@ namespace Application.Activities
 {
   public class ItemActivities
   {
-    public class Query : IRequest<Activeness>
+    public class Query : IRequest<ValidationResult<Activeness>>
     {
       public Guid Id { get; set; }
     }
 
-    public class Handler : IRequestHandler<Query, Activeness>
+    public class Handler : IRequestHandler<Query, ValidationResult<Activeness>>
     {
       private readonly DataContext context;
 
@@ -20,10 +21,11 @@ namespace Application.Activities
         this.context = context;
       }
 
-      public async Task<Activeness> Handle(Query request,
+      public async Task<ValidationResult<Activeness>> Handle(Query request,
        CancellationToken cancellationToken)
       {
-        return await context.Activities.FindAsync(request.Id);
+        return ValidationResult<Activeness>
+                .Success(await context.Activities.FindAsync(request.Id));
       }
     }
   }
