@@ -160,3 +160,15 @@ Failed to load resource: Origin is not allowed by Access-Control-Allow-Origin. S
 
 Решение - Обновление состояния с помощью действий  [runInAction](https://mobx.js.org/actions.html#updating-state-using-actions) 
 
+## Маршрутизация 
+
+Библиотека [React Router](https://reactrouter.com/) | [npm](https://www.npmjs.com/package/react-router)
+
+[create-browser-router](https://reactrouter.com/en/main/routers/create-browser-router)
+
+- `npm i react-router`
+
+Библиотека [React Router Dom](https://www.npmjs.com/package/react-router-dom)
+
+- `npm i react-router-dom`
+
