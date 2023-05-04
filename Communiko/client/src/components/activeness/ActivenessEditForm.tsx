@@ -3,7 +3,8 @@ import { Activeness } from "../../model/Activeness";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useRepository } from "../../repository/Repository";
 import { observer } from "mobx-react-lite";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
 export default observer(function ActivenessEditForm() {
   const { repo } = useRepository();
@@ -25,6 +26,7 @@ export default observer(function ActivenessEditForm() {
     location: ''
   });
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (id) loadActiveness(id).then(e => setActiveness(e!));
@@ -32,10 +34,14 @@ export default observer(function ActivenessEditForm() {
 
   function handleSubmit() {
     if (activeness.id) {
-      updateActiveness(activeness);
-    }
-    else {
-      createActiveness(activeness);
+      updateActiveness(activeness).then(
+        () => navigate(`/activenessItems/${activeness.id}`)
+      );
+    } else {
+      activeness.id = uuidv4();
+      createActiveness(activeness).then(
+        () => navigate(`/activenessItems/${activeness.id}`)
+      );
     }
   }
 
