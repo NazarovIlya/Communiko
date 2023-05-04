@@ -1,5 +1,5 @@
 import { Button, Card, Icon } from "semantic-ui-react";
-import { useRepository } from "../../Repository/Repository";
+import { useRepository } from "../../repository/Repository";
 import { observer } from "mobx-react-lite";
 
 export default observer(function ActivenessDetails() {

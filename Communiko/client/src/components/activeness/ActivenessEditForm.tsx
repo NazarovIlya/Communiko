@@ -1,7 +1,7 @@
 import { Button, Form, Icon, Label, Segment } from "semantic-ui-react";
 import { Activeness } from "../../model/Activeness";
 import { ChangeEvent, useState } from "react";
-import { useRepository } from "../../Repository/Repository";
+import { useRepository } from "../../repository/Repository";
 import { observer } from "mobx-react-lite";
 
 export default observer(function ActivenessEditForm() {

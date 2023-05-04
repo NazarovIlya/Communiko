@@ -1,5 +1,5 @@
 import { Grid } from "semantic-ui-react";
-import { useRepository } from "../../Repository/Repository";
+import { useRepository } from "../../repository/Repository";
 import { observer } from "mobx-react-lite";
 import ActivenessItem from "./ActivenessItem";
 import ActivenessDetails from "../details/ActivenessDetails";

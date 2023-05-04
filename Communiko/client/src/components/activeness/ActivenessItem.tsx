@@ -1,6 +1,6 @@
 import { Button, Card } from "semantic-ui-react";
 import { Activeness } from "../../model/Activeness";
-import { useRepository } from "../../Repository/Repository";
+import { useRepository } from "../../repository/Repository";
 import { observer } from "mobx-react-lite";
 
 interface PropsActivenessItem {

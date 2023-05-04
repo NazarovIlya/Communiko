@@ -3,7 +3,7 @@ import { Container } from 'semantic-ui-react';
 import { NavigationBar } from './NavigationBar';
 import { observer } from 'mobx-react-lite';
 import LoadingComponent from '../components/loading/LoadingComponent';
-import { useRepository } from '../Repository/Repository';
+import { useRepository } from '../repository/Repository';
 import ActivenessItems from '../components/activeness/ActivenessItems';
 
 function App() {

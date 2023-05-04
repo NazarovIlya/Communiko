@@ -1,5 +1,5 @@
 import { Button, Container, Menu } from 'semantic-ui-react';
-import { useRepository } from '../Repository/Repository';
+import { useRepository } from '../repository/Repository';
 
 export function NavigationBar() {
   const { repo } = useRepository();
