@@ -2,7 +2,7 @@ import { Button, Card, Icon } from "semantic-ui-react";
 import { useRepository } from "../../repository/Repository";
 import { observer } from "mobx-react-lite";
 import LoadingComponent from "../loading/LoadingComponent";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 
 export default observer(function ActivenessDetails() {
@@ -42,6 +42,7 @@ export default observer(function ActivenessDetails() {
         <div className='ui three buttons'>
           <Button basic
             color='green'
+            as={Link} to={`/updateActiveness/${id}`}
             disabled={loading}>
             Edit
           </Button>
@@ -50,10 +51,12 @@ export default observer(function ActivenessDetails() {
             disabled={loading}
             loading={loading && btnId === `${item!.id}details`}
             onClick={(e) => deleteActiveness(e, item!.id)}
+            as={Link} to={`/activenessItems`}
             color='green'>
             Remove
           </Button>
           <Button basic
+            as={Link} to={`/activenessItems`}
             color='green'>
             Close
           </Button>

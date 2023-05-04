@@ -13,7 +13,8 @@ export const routes: RouteObject[] = [
       { path: '', element: <HomePage /> },
       { path: 'activenessItems', element: <ActivenessItems /> },
       { path: 'activenessItems/:id', element: <ActivenessDetails /> },
-      { path: 'createActiveness', element: <ActivenessEditForm /> }
+      { path: 'createActiveness', element: <ActivenessEditForm /> },
+      { path: 'updateActiveness/:id', element: <ActivenessEditForm /> },
     ]
   }
 ];

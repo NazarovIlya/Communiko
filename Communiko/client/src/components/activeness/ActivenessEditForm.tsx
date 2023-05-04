@@ -1,8 +1,9 @@
 import { Button, Form, Icon, Label, Segment } from "semantic-ui-react";
 import { Activeness } from "../../model/Activeness";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useRepository } from "../../repository/Repository";
 import { observer } from "mobx-react-lite";
+import { Link, useParams } from "react-router-dom";
 
 export default observer(function ActivenessEditForm() {
   const { repo } = useRepository();
@@ -10,10 +11,11 @@ export default observer(function ActivenessEditForm() {
     selectedActiveness,
     updateActiveness,
     createActiveness,
+    loadActiveness,
     loading
   } = repo;
 
-  let tempActiveness: Activeness = selectedActiveness ?? {
+  const [activeness, setActiveness] = useState({
     id: '',
     title: '',
     category: '',
@@ -21,9 +23,12 @@ export default observer(function ActivenessEditForm() {
     city: '',
     pointTime: '',
     location: ''
-  }
+  });
+  const { id } = useParams();
 
-  const [activeness, setActiveness] = useState(tempActiveness);
+  useEffect(() => {
+    if (id) loadActiveness(id).then(e => setActiveness(e!));
+  }, [id, loadActiveness]);
 
   function handleSubmit() {
     if (activeness.id) {
@@ -52,8 +57,15 @@ export default observer(function ActivenessEditForm() {
         <Form.Input type="date" placeholder='Point Time' name="pointTime" value={activeness.pointTime} />
         <Form.Input placeholder='Location' name='location' value={activeness.location} />
         <div className='ui three buttons'>
-          <Button loading={loading} type='submit'>Submit</Button>
-          <Button basic color='green'>Close
+          <Button loading={loading} type='submit'
+
+          >
+            Submit
+          </Button>
+          <Button basic color='green'
+            as={Link} to={`/activenessItems`}
+          >
+            Close
           </Button>
         </div>
       </Form>

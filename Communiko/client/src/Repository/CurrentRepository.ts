@@ -36,13 +36,18 @@ export default class CurrentRepository {
 
   loadActiveness = async (id: string) => {
     let item = this.mapActivities.get(id);
-    if (item) this.selectedActiveness = item;
+    if (item) {
+      this.selectedActiveness = item;
+      return item;
+    }
     else {
       this.loadingInit = true;
       try {
         item = await client.Activities.item(id);
         this.selectedActiveness = item;
         this.loadingInit = !true;
+        return item;
+
       } catch (error) {
         console.log(error);
         this.loadingInit = !true;
