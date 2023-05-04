@@ -179,3 +179,8 @@ _[решение проблемы рендеринга компонентов д
 Библиотека – [react-calendar](https://www.npmjs.com/package/react-calendar) | [github](https://github.com/wojtekmaj/react-calendar)
 - `npm i react-calendar`
 - `npm i @types/react-calendar` явное указание на ts
+
+## Валидация 
+
+[FluentValidation.AspNetCore](https://www.nuget.org/packages/FluentValidation.AspNetCore/)
+- `dotnet add package FluentValidation.AspNetCore`
