@@ -1,5 +1,6 @@
 using AutoMapper;
 using BusinessDomain.Model;
+using FluentValidation;
 using MediatR;
 using Persistence;
 
@@ -10,6 +11,14 @@ namespace Application.Activities
     public class Command : IRequest
     {
       public Activeness Item { get; set; }
+    }
+
+    public class CommandValidator : AbstractValidator<Command>
+    {
+      public CommandValidator()
+      {
+        RuleFor(x => x.Item).SetValidator(new ActivitiesValidators());
+      }
     }
 
     public class Handler : IRequestHandler<Command>

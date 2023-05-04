@@ -12,13 +12,14 @@ namespace Application.Activities
       public Activeness Item { get; set; }
     }
 
-    public class CommandValidator : AbstractValidator<Activeness>
+    public class CommandValidator : AbstractValidator<Command>
     {
       public CommandValidator()
       {
-        RuleFor(x => x.Title).NotEmpty();
+        RuleFor(x => x.Item).SetValidator(new ActivitiesValidators());
       }
     }
+
     public class Handler : IRequestHandler<Command>
     {
       private readonly DataContext context;
