@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite";
 import ActivenessItem from "./ActivenessItem";
 import { useEffect } from "react";
 import LoadingComponent from "../loading/LoadingComponent";
+import ActivityFilters from "./ActivenessFilters";
 
 export default observer(function ActivenessItems() {
   const { repo } = useRepository();
@@ -23,7 +24,7 @@ export default observer(function ActivenessItems() {
           {activities.map(e => <ActivenessItem activenessItem={e} key={e.id} />)}
         </Grid.Column>
         <Grid.Column width='6'>
-          ActivenessDetails | ActivenessEditForm
+          <ActivityFilters />
         </Grid.Column>
       </Grid>
     </div >
