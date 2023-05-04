@@ -11,12 +11,9 @@ namespace PresentationAPI.Controllers
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(Guid id)
     {
-      var result = await Mediator.Send(new ItemActivities.Query() { Id = id });
-      if (result.IsSuccess && result.Value != null)
-        return Ok(result.Value);
-      if (result.IsSuccess && result.Value == null)
-        return NotFound();
-      return BadRequest(result.Error);
+      return base.HandleResult<Activeness>(
+        await Mediator.Send(new ItemActivities.Query() { Id = id })
+      );
     }
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Activeness>>> Get()
