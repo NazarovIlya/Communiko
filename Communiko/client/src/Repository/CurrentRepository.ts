@@ -16,20 +16,24 @@ export default class CurrentRepository {
     makeAutoObservable(this);
   }
 
+  private setLoadingInit = (value: boolean) => {
+    runInAction(() => { this.loadingInit = value; });
+  }
+
   loadActivities = async () => {
-    this.loadingInit = true;
+    this.setLoadingInit(true);
     try {
       const activities = await client.Activities.items();
       runInAction(() => {
         activities.forEach((e) => {
           this.mapActivities.set(e.id, e);
         });
-        this.loadingInit = !true;
+        this.setLoadingInit(!true);
       });
     } catch (error) {
       runInAction(() => {
         console.log(`error = ${error}`);
-        this.loadingInit = !true;
+        this.setLoadingInit(!true);
       });
     }
   }
@@ -41,15 +45,16 @@ export default class CurrentRepository {
       return item;
     }
     else {
-      this.loadingInit = true;
+      this.setLoadingInit(true);
+
       try {
         item = await client.Activities.item(id);
         runInAction(() => { this.selectedActiveness = item; });
-        this.loadingInit = !true;
+        this.setLoadingInit(!true);
         return item;
       } catch (error) {
         console.log(error);
-        this.loadingInit = !true;
+        this.setLoadingInit(!true);
       }
     }
   }
