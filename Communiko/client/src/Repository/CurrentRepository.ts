@@ -44,10 +44,9 @@ export default class CurrentRepository {
       this.loadingInit = true;
       try {
         item = await client.Activities.item(id);
-        this.selectedActiveness = item;
+        runInAction(() => { this.selectedActiveness = item; });
         this.loadingInit = !true;
         return item;
-
       } catch (error) {
         console.log(error);
         this.loadingInit = !true;
