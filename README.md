@@ -173,3 +173,9 @@ Failed to load resource: Origin is not allowed by Access-Control-Allow-Origin. S
 - `npm i react-router-dom`
 
 _[решение проблемы рендеринга компонентов для действий создания и обновления](https://react.dev/learn/preserving-and-resetting-state#option-2-resetting-state-with-a-key)_
+
+## Красивый календарь
+
+Библиотека – [react-calendar](https://www.npmjs.com/package/react-calendar) | [github](https://github.com/wojtekmaj/react-calendar)
+- `npm i react-calendar`
+- `npm i @types/react-calendar` явное указание на ts
