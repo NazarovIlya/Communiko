@@ -9,7 +9,9 @@ export const routes: RouteObject[] = [
     path: '/',
     element: <App />,
     children: [
-      { path: '', element: <HomePage /> }
+      { path: '', element: <HomePage /> },
+      { path: 'activenessItems', element: <ActivenessItems /> },
+      { path: 'createActiveness', element: <ActivenessEditForm /> }
     ]
   }
 ];
