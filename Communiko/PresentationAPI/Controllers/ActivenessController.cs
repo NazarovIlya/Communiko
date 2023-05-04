@@ -16,18 +16,18 @@ namespace PresentationAPI.Controllers
       );
     }
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Activeness>>> Get()
+    public async Task<IActionResult> Get()
     {
-      return await Mediator.Send(new ItemsActivities.Query());
+      return base.HandleResult(
+        await Mediator.Send(new ItemsActivities.Query())
+      );
     }
     [HttpPost]
     public async Task<IActionResult> Create(Activeness activeness)
     {
-      Debug.WriteLine(activeness);
-      return Ok(await Mediator.Send(new CreateActivities.Command()
-      {
-        Item = activeness
-      }));
+      return base.HandleResult(
+        await Mediator.Send(new CreateActivities.Command() { Item = activeness })
+      );
     }
     [HttpPut("{id}")]
     public async Task<IActionResult> Edit(Guid id, Activeness activeness)
