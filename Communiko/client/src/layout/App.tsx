@@ -5,6 +5,7 @@ import { observer } from 'mobx-react-lite';
 import LoadingComponent from '../components/loading/LoadingComponent';
 import { useRepository } from '../repository/Repository';
 import ActivenessItems from '../components/activeness/ActivenessItems';
+import { Outlet } from 'react-router-dom';
 
 function App() {
   const { repo } = useRepository();
@@ -18,7 +19,7 @@ function App() {
     < >
       <NavigationBar />
       <Container style={{ marginTop: '5em' }}>
-        <ActivenessItems />
+        <Outlet />
       </Container >
     </ >
   );
