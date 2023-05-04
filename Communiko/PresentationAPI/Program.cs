@@ -3,6 +3,9 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Persistence.ExperimentalData;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Application.Activities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +28,11 @@ builder.Services.AddCors(options =>
           .WithOrigins(builder.Configuration["Client-host"]);
   });
 });
+
+// builder.Services.AddValidatorsFromAssemblyContaining<Create>();
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateActivities>();
+
 
 var app = builder.Build();
 

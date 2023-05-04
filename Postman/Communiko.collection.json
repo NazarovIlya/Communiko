@@ -242,6 +242,58 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "FluentValidation.AspNetCore",
+			"item": [
+				{
+					"name": "Добавление записи HTTP-400",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require(\"moment\");",
+									"",
+									"pm.environment.set(",
+									"    'activenessDate', ",
+									"    moment().format('YYYY-MM-DD')",
+									"            );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{$guid}}\",\n\t// \"title\": \"Тестовая активность #333\",\n    \"category\": \"Категория #333\",\n    \"description\": \"Описание #000\",\n    \"city\": \"Город #000\",\n    \"pointTime\": \"{{activenessDate}}\", \n    \"location\": \"Место проведения #000\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:11222/api/Activeness/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Activeness",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
