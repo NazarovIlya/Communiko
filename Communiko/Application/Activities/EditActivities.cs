@@ -1,3 +1,4 @@
+using Application.AppConfig;
 using AutoMapper;
 using BusinessDomain.Model;
 using FluentValidation;
@@ -8,7 +9,7 @@ namespace Application.Activities
 {
   public class EditActivities
   {
-    public class Command : IRequest
+    public class Command : IRequest<ValidationResult<Unit>>
     {
       public Activeness Item { get; set; }
     }
@@ -21,7 +22,7 @@ namespace Application.Activities
       }
     }
 
-    public class Handler : IRequestHandler<Command>
+    public class Handler : IRequestHandler<Command, ValidationResult<Unit>>
     {
       private readonly DataContext context;
       private readonly IMapper mapper;
@@ -32,15 +33,15 @@ namespace Application.Activities
         this.mapper = mapper;
       }
 
-      public async Task<Unit> Handle(Command request,
+      public async Task<ValidationResult<Unit>> Handle(Command request,
         CancellationToken cancellationToken)
       {
-        var activity = await context.Activities
-                                    .FindAsync(request.Item.Id);
-
-        mapper.Map(request.Item, activity);
-        await context.SaveChangesAsync();
-        return Unit.Value;
+        var activeness = await context.Activities.FindAsync(request.Item.Id);
+        if (activeness == null) return null;
+        mapper.Map(request.Item, activeness);
+        var result = await context.SaveChangesAsync() > 0;
+        if (!result) return ValidationResult<Unit>.Failure("Ошибка обновления активности");
+        return ValidationResult<Unit>.Success(Unit.Value);
       }
     }
   }

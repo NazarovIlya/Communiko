@@ -33,7 +33,7 @@ namespace PresentationAPI.Controllers
     public async Task<IActionResult> Edit(Guid id, Activeness activeness)
     {
       activeness.Id = id;
-      return Ok(await Mediator.Send(new EditActivities.Command
+      return base.HandleResult(await Mediator.Send(new EditActivities.Command
       {
         Item = activeness
       }));
