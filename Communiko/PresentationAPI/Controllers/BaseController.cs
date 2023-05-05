@@ -23,6 +23,7 @@ namespace PresentationAPI.Controllers
 
     protected IActionResult HandleResult<T>(ValidationResult<T> obj)
     {
+      if (obj == null) return NotFound();
       if (obj.IsSuccess && obj.Value != null)
         return Ok(obj.Value);
       if (obj.IsSuccess && obj.Value == null)

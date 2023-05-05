@@ -41,7 +41,7 @@ namespace PresentationAPI.Controllers
     [HttpDelete("{id}")]
     public async Task<IActionResult> Remove(Guid id)
     {
-      return Ok(await Mediator.Send(new RemoveActivities.Command
+      return base.HandleResult(await Mediator.Send(new RemoveActivities.Command
       {
         Id = id
       }));
