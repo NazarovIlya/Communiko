@@ -184,3 +184,9 @@ _[решение проблемы рендеринга компонентов д
 
 [FluentValidation.AspNetCore](https://www.nuget.org/packages/FluentValidation.AspNetCore/)
 - `dotnet add package FluentValidation.AspNetCore`
+
+## Нотификация
+
+[React Toastify](https://www.npmjs.com/package/react-toastify)
+
+- `npm i react-toastify`
