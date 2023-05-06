@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 import { Activeness } from '../model/Activeness';
+import { toast } from 'react-toastify';
 
 axios.defaults.baseURL = 'http://localhost:11222/api';
 
@@ -12,12 +13,13 @@ const sleep = (delay: number) => {
 axios.interceptors.response.use(async response => {
   try {
     await sleep(0);
+    toast.info('Сообщение');
     return response;
   } catch (error) {
     console.log(error);
     return await Promise.reject(error)
   }
-});
+}, (error) => { toast.warning('Ошибка'); });
 
 const requests = {
   get: <T>(url: string) => axios.get<T>(url).then(responseData),
