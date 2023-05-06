@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios'
 import { Activeness } from '../model/Activeness';
 import { toast } from 'react-toastify';
+import { router } from '../router/Router';
 
 axios.defaults.baseURL = 'http://localhost:11222/api';
 
@@ -11,15 +12,22 @@ const sleep = (delay: number) => {
 }
 
 axios.interceptors.response.use(async response => {
-  try {
-    await sleep(0);
-    toast.info('Сообщение');
-    return response;
-  } catch (error) {
-    console.log(error);
-    return await Promise.reject(error)
+  await sleep(0);
+  toast.info('Сообщение');
+  return response;
+}, (error) => {
+  const { data, status, config } = error.response;
+  switch (status) {
+    case 404:
+      toast.error('Ошибка 404');
+      router.navigate('/not-found');
+      break;
+    default:
+      toast.info('Другая ошибка');
+      break;
   }
-}, (error) => { toast.warning('Ошибка'); });
+  return Promise.reject(error);
+});
 
 const requests = {
   get: <T>(url: string) => axios.get<T>(url).then(responseData),
