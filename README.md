@@ -190,3 +190,8 @@ _[решение проблемы рендеринга компонентов д
 [React Toastify](https://www.npmjs.com/package/react-toastify)
 
 - `npm i react-toastify`
+
+## Формы ввода 
+
+[Formik](https://formik.org/docs/overview#npm)
+- `npm install formik`
