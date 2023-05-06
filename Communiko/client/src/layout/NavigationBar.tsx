@@ -10,6 +10,7 @@ export function NavigationBar() {
           Communiko project
         </Menu.Item>
         <Menu.Item as={NavLink} to='/activenessItems' name='Activeness' />
+        <Menu.Item as={NavLink} to='/bugs' name='Bugs' />
         < Menu.Item >
           <Button positive content='Append Activeness' as={NavLink} to='/createActiveness' />
         </ Menu.Item >
