@@ -7,6 +7,8 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Application.Activities;
 using PresentationAPI.Middleware;
+using BusinessDomain.Model;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +35,15 @@ builder.Services.AddCors(options =>
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateActivities>();
 
+builder.Services.AddAuthentication();
+
+builder.Services.AddIdentityCore<AppUser>(op =>
+{
+  // op.Password.RequiredLength = 8;
+  // op.Password.RequireUppercase = false;
+}).AddEntityFrameworkStores<DataContext>();
+
+
 var app = builder.Build();
 
 app.UseMiddleware<MiddlewareExceptions>();
@@ -51,8 +62,9 @@ using (var serviceScope = app.Services.CreateScope())
   try
   {
     var context = serviceProvider.GetRequiredService<DataContext>();
+    var um = serviceProvider.GetRequiredService<UserManager<AppUser>>();
     await context.Database.MigrateAsync();
-    await TestDataProvider.Provide(context, 100);
+    await TestDataProvider.Provide(context, um, 5);
   }
   catch (Exception e)
   {

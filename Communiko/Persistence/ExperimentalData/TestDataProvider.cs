@@ -1,11 +1,27 @@
 using BusinessDomain.Model;
+using Microsoft.AspNetCore.Identity;
 
 namespace Persistence.ExperimentalData
 {
   public class TestDataProvider
   {
-    public static async Task Provide(DataContext context, int count = 30)
+    public static async Task Provide(DataContext context, UserManager<AppUser> um, int count = 30)
     {
+      if (!um.Users.Any())
+      {
+        for (int i = 0; i < 5; i++)
+        {
+          AppUser user = new AppUser()
+          {
+            NickName = $"nick_{i}",
+            UserName = $"user_{i}",
+            Email = $"user_{i}@ksergei.tech",
+            FullName = $"Full Name {i}"
+          };
+          var r = await um.CreateAsync(user, $"QWErt%^&${i}!");
+        }
+      }
+
       if (context.Activities.Any()) return;
 
       List<Activeness> activities = new List<Activeness>();
