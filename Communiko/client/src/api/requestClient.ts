@@ -16,7 +16,7 @@ axios.interceptors.response.use(async response => {
   toast.info('Сообщение');
   return response;
 }, (error) => {
-  const { data, status, config } = error.response;
+  const { status } = error.response;
   switch (status) {
     case 404:
       toast.error('Ошибка 404');

@@ -1,4 +1,4 @@
-import { Button, Icon, Label, Segment } from "semantic-ui-react";
+import { Button, Label, Segment } from "semantic-ui-react";
 import { useEffect, useState } from "react";
 import { useRepository } from "../../repository/Repository";
 import { observer } from "mobx-react-lite";
