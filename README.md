@@ -212,3 +212,4 @@ _[решение проблемы рендеринга компонентов д
 
 Identity
 - `dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore`
+- `dotnet ef migrations add identity-added -s PresentationAPI -p Persistence`
