@@ -51,7 +51,7 @@ export default observer(function ActivenessEditForm() {
 
   return (
     <Segment>
-      <Formik initialValues={activeness} onSubmit={v => console.log(v)}>
+      <Formik enableReinitialize initialValues={activeness} onSubmit={v => console.log(v)}>
         {({ values: activeness, handleChange, handleSubmit }) => (
 
           <Form onSubmit={handleSubmit} onChange={handleChange} >
