@@ -1,10 +1,10 @@
-import { Button, Form, Icon, Label, Segment } from "semantic-ui-react";
+import { Button, Icon, Label, Segment } from "semantic-ui-react";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useRepository } from "../../repository/Repository";
 import { observer } from "mobx-react-lite";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
-import { Formik } from "formik";
+import { Formik, Form, Field } from "formik";
 
 export default observer(function ActivenessEditForm() {
   const { repo } = useRepository();
@@ -58,12 +58,12 @@ export default observer(function ActivenessEditForm() {
             <Label>
               <Icon name='id badge' /> {activeness.id}
             </Label>
-            <Form.Input placeholder='Title' name="title" value={activeness.title} />
-            <Form.Input placeholder='Category' name="category" value={activeness.category} />
-            <Form.Input placeholder='Description' name="description" value={activeness.description} />
-            <Form.Input placeholder='City' name="city" value={activeness.city} />
-            <Form.Input type="date" placeholder='Point Time' name="pointTime" value={activeness.pointTime} />
-            <Form.Input placeholder='Location' name='location' value={activeness.location} />
+            <Field placeholder='Title' name="title" value={activeness.title} />
+            <Field placeholder='Category' name="category" value={activeness.category} />
+            <Field placeholder='Description' name="description" value={activeness.description} />
+            <Field placeholder='City' name="city" value={activeness.city} />
+            <Field type="date" placeholder='Point Time' name="pointTime" value={activeness.pointTime} />
+            <Field placeholder='Location' name='location' value={activeness.location} />
             <div className='ui three buttons'>
               <Button loading={loading} type='submit'
               >
