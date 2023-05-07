@@ -201,3 +201,9 @@ _[решение проблемы рендеринга компонентов д
 Конструктор схем для анализа и проверки значений во время выполнения.
 - `npm i yup`
 - `npm i @types/yup`
+
+## Работа с датами
+
+[date-fns](https://date-fns.org/v2.30.0/docs/format)
+[React Datepicker](https://reactdatepicker.com/#example-default)
+- `npm i react-datepicker`
