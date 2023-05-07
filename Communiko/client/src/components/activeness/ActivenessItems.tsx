@@ -1,60 +1,32 @@
 import { Grid } from "semantic-ui-react";
-import { Activeness } from "../../model/Activeness";
-import { ActivenessItem } from "./ActivenessItem";
-import { ActivenessDetails } from "../details/ActivenessDetails";
-import { ActivenessEditForm } from "./ActivenessEditForm";
+import { useRepository } from "../../repository/Repository";
+import { observer } from "mobx-react-lite";
+import ActivenessItem from "./ActivenessItem";
+import { useEffect } from "react";
+import LoadingComponent from "../loading/LoadingComponent";
+import ActivityFilters from "./ActivenessFilters";
 
-interface PropsActivenessItems {
-  items: Activeness[];
-  selectItem: Activeness | undefined;
-  viewActiveness: (id: string) => void;
-  cancelViewActiveness: () => void;
-  editMode: boolean;
-  formOpen: (id: string) => void;
-  formClose: () => void;
-  editOrCreate: (id: Activeness) => void;
-  removeActiveness: (id: string) => void;
-}
+export default observer(function ActivenessItems() {
+  const { repo } = useRepository();
+  const {
+    activities
+  } = repo;
+  useEffect(() => { repo.loadActivities(); }, [repo]);
 
-export function ActivenessItems(
-  { items,
-    selectItem,
-    viewActiveness,
-    cancelViewActiveness,
-    editMode,
-    formOpen,
-    formClose,
-    editOrCreate,
-    removeActiveness
-  }: PropsActivenessItems) {
+  if (repo.loadingInit) {
+    return <LoadingComponent text='Please wait...' />;
+  }
+
   return (
     <div>
       <Grid style={{ color: 'white' }}>
         <Grid.Column width='10'>
-          {
-            items.map(e => (
-              <div key={e.id}>
-                <ActivenessItem activenessItem={e}
-                  selected={viewActiveness}
-                  removeActiveness={removeActiveness} />
-              </div>
-            ))
-          }
+          {activities.map(e => <ActivenessItem activenessItem={e} key={e.id} />)}
         </Grid.Column>
         <Grid.Column width='6'>
-          {selectItem && !editMode && < ActivenessDetails
-            item={selectItem}
-            cancelViewActiveness={cancelViewActiveness}
-            formOpen={formOpen}
-            removeActiveness={removeActiveness}
-          />}
-          {editMode && <ActivenessEditForm
-            formClose={formClose}
-            selectItem={selectItem}
-            editOrCreate={editOrCreate}
-          />}
+          <ActivityFilters />
         </Grid.Column>
       </Grid>
-    </div>
+    </div >
   );
-}
+})

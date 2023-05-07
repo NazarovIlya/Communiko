@@ -9,29 +9,31 @@ namespace PresentationAPI.Controllers
   public class ActivenessController : BaseController
   {
     [HttpGet("{id}")]
-    public async Task<ActionResult<Activeness>> Get(Guid id)
+    public async Task<IActionResult> Get(Guid id)
     {
-      return await Mediator.Send(new ItemActivities.Query() { Id = id });
+      return base.HandleResult<Activeness>(
+        await Mediator.Send(new ItemActivities.Query() { Id = id })
+      );
     }
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Activeness>>> Get()
+    public async Task<IActionResult> Get()
     {
-      return await Mediator.Send(new ItemsActivities.Query());
+      return base.HandleResult(
+        await Mediator.Send(new ItemsActivities.Query())
+      );
     }
     [HttpPost]
     public async Task<IActionResult> Create(Activeness activeness)
     {
-      Debug.WriteLine(activeness);
-      return Ok(await Mediator.Send(new CreateActivities.Command()
-      {
-        Item = activeness
-      }));
+      return base.HandleResult(
+        await Mediator.Send(new CreateActivities.Command() { Item = activeness })
+      );
     }
     [HttpPut("{id}")]
     public async Task<IActionResult> Edit(Guid id, Activeness activeness)
     {
       activeness.Id = id;
-      return Ok(await Mediator.Send(new EditActivities.Command
+      return base.HandleResult(await Mediator.Send(new EditActivities.Command
       {
         Item = activeness
       }));
@@ -39,7 +41,7 @@ namespace PresentationAPI.Controllers
     [HttpDelete("{id}")]
     public async Task<IActionResult> Remove(Guid id)
     {
-      return Ok(await Mediator.Send(new RemoveActivities.Command
+      return base.HandleResult(await Mediator.Send(new RemoveActivities.Command
       {
         Id = id
       }));

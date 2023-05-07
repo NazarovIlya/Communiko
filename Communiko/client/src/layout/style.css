@@ -5,3 +5,25 @@ body {
 .ui.top.fixed.menu {
   background-color: #989898;
 }
+
+.home_page {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(to right, rgba(0, 0, 255, 0.365), rgb(184, 165, 168)) !important;
+  height: 100vh;
+}
+
+.home_page .ui.menu .ui.button,
+.ui.menu a.ui.inverted.button {
+  margin-left: 1em;
+}
+
+.home_page h1.ui.header {
+  font-size: 50px;
+  font-weight: 700;
+}
+
+.react-calendar {
+  width: 100%;
+  border: none;
+}

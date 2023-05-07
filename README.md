@@ -155,3 +155,43 @@ Failed to load resource: Origin is not allowed by Access-Control-Allow-Origin. S
 
 - `npm install mobx`
 - `npm install mobx-react-lite`
+
+### Проблема 
+
+Решение - Обновление состояния с помощью действий  [runInAction](https://mobx.js.org/actions.html#updating-state-using-actions) 
+
+## Маршрутизация 
+
+Библиотека [React Router](https://reactrouter.com/) | [npm](https://www.npmjs.com/package/react-router)
+
+[create-browser-router](https://reactrouter.com/en/main/routers/create-browser-router)
+
+- `npm i react-router`
+
+Библиотека [React Router Dom](https://www.npmjs.com/package/react-router-dom)
+
+- `npm i react-router-dom`
+
+_[решение проблемы рендеринга компонентов для действий создания и обновления](https://react.dev/learn/preserving-and-resetting-state#option-2-resetting-state-with-a-key)_
+
+## Красивый календарь
+
+Библиотека – [react-calendar](https://www.npmjs.com/package/react-calendar) | [github](https://github.com/wojtekmaj/react-calendar)
+- `npm i react-calendar`
+- `npm i @types/react-calendar` явное указание на ts
+
+## Валидация 
+
+[FluentValidation.AspNetCore](https://www.nuget.org/packages/FluentValidation.AspNetCore/)
+- `dotnet add package FluentValidation.AspNetCore`
+
+## Нотификация
+
+[React Toastify](https://www.npmjs.com/package/react-toastify)
+
+- `npm i react-toastify`
+
+## Формы ввода 
+
+[Formik](https://formik.org/docs/overview#npm)
+- `npm install formik`

@@ -3,6 +3,10 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Persistence.ExperimentalData;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Application.Activities;
+using PresentationAPI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,7 +30,12 @@ builder.Services.AddCors(options =>
   });
 });
 
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateActivities>();
+
 var app = builder.Build();
+
+app.UseMiddleware<MiddlewareExceptions>();
 
 if (app.Environment.IsDevelopment())
 {

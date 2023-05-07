@@ -62,7 +62,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:11222/api/Activeness/361eafa9-b860-4bdb-94cc-97b3d09c1e15",
+							"raw": "http://localhost:11222/api/Activeness/13420414-0de3-4745-8282-7397b5c26c40",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -71,7 +71,7 @@
 							"path": [
 								"api",
 								"Activeness",
-								"361eafa9-b860-4bdb-94cc-97b3d09c1e15"
+								"13420414-0de3-4745-8282-7397b5c26c40"
 							]
 						}
 					},
@@ -83,7 +83,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:11222/api/Activeness/361eafa9-b860-4bdb-94cc-97b3d09c1e15",
+							"raw": "http://localhost:11222/api/Activeness/577d7187-81cf-4e4f-b97f-ba203a790f66",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -92,7 +92,7 @@
 							"path": [
 								"api",
 								"Activeness",
-								"361eafa9-b860-4bdb-94cc-97b3d09c1e15"
+								"577d7187-81cf-4e4f-b97f-ba203a790f66"
 							]
 						}
 					},
@@ -127,7 +127,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": \"{{$guid}}\",\n\t\"title\": \"Тестовая активность #333\",\n    \"category\": \"Категория #333\",\n    \"description\": \"Описание #000\",\n    \"city\": \"Город #000\",\n    \"pointTime\": \"{{activenessDate}}\",\n    \"location\": \"Место проведения #000\"\n}"
+							"raw": "{\n    \"id\": \"{{$guid}}\",\n\t\"title\": \"Тестовая активность #сывс\",\n    \"category\": \"Категория #сывс\",\n    \"description\": \"Описание #сыв\",\n    \"city\": \"Город #сыв\",\n    \"pointTime\": \"{{activenessDate}}\",\n    \"location\": \"Место проведения #ййй\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:11222/api/Activeness/",
@@ -174,10 +174,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    //\"id\": \"361eafa9-b860-4bdb-94cc-97b3d09c1e15\",\n    \"title\": \"Тестовая активность #777\",\n    \"category\": \"Категория #777\",\n    \"description\": \"Описание #777\",\n    \"city\": \"Город #777\",\n    \"pointTime\": \"{{activenessDate}}\",\n    \"location\": \"Место проведения #123\"\n}"
+							"raw": "{\n    //\"id\": \"361eafa9-b860-4bdb-94cc-97b3d09c1e15\",\n    \"title\": \"Тестовая активность #777ййй\",\n    \"category\": \"Категория #777й11йй\",\n    \"description\": \"Описание #777\",\n    \"city\": \"Город #777\",\n    \"pointTime\": \"{{activenessDate}}\",\n    \"location\": \"Место проведения #123\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:11222/api/Activeness/361eafa9-b860-4bdb-94cc-97b3d09c1e15",
+							"raw": "http://localhost:11222/api/Activeness/13420414-0de3-4745-8282-7397b5c26c401",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -186,7 +186,7 @@
 							"path": [
 								"api",
 								"Activeness",
-								"361eafa9-b860-4bdb-94cc-97b3d09c1e15"
+								"13420414-0de3-4745-8282-7397b5c26c401"
 							]
 						}
 					},
@@ -236,6 +236,173 @@
 								"api",
 								"Activeness",
 								"361eafa9-b860-4bdb-94cc-97b3d09c1e15"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FluentValidation.AspNetCore",
+			"item": [
+				{
+					"name": "Добавление записи HTTP-400",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require(\"moment\");",
+									"",
+									"pm.environment.set(",
+									"    'activenessDate', ",
+									"    moment().format('YYYY-MM-DD')",
+									"            );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{$guid}}\",\n    // \"id\": \"3a969930-c656-415b-bca3-569cc70cfa7a\",\n\t\"title\": \"Тестовая активность #123\",\n    \"category\": \"Категория #123\",\n    \"description\": \"Описание #123\",\n    \"city\": \"Город #132\",\n    \"pointTime\": \"2222-02-28\",\n    \"location\": \"Место проведения #123\"\n}\n\n// --- Ожидание ---\n// {\n//  \"title\": \"One or more validation errors occurred.\",\n//     \"status\": 400,\n//     \"traceId\": \"00-63e1720236f2c7fe6722cbb462ac6020-093b3d781d1e3498-00\",\n//     \"errors\": {\n//         \"Title\": [\n//             \"'Title' должно быть заполнено.\"\n//         ],\n//         \"Description\": [\n//             \"'Description' должно быть заполнено.\"\n//         ]\n//     }\n// }"
+						},
+						"url": {
+							"raw": "http://localhost:11222/api/Activeness/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Activeness",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Обновление записи HTTP-400",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require(\"moment\");",
+									"",
+									"pm.environment.set(",
+									"    'activenessDate', ",
+									"    moment().format('YYYY-MM-DD')",
+									"            );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    //\"id\": \"361eafa9-b860-4bdb-94cc-97b3d09c1e15\",\n    \"title\": \"Тестовая активность #777\",\n    // \"category\": \"Новое Категория #777\",\n    \"description\": \"НОВОЕ Описание #777\",\n    \"city\": \"Город #777\",\n    // \"pointTime\": \"{{activenessDate}}\",\n    \"location\": \"Место проведения #123\"\n}\n\n// --- Ожидание ---\n// {\n//     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",\n//     \"title\": \"One or more validation errors occurred.\",\n//     \"status\": 400,\n//     \"traceId\": \"00-c0c6a5b518744c13b7b4e4841311e8f9-dc137857aabab26d-00\",\n//     \"errors\": {\n//         \"Category\": [\n//             \"'Category' должно быть заполнено.\"\n//         ],\n//         \"PointTime\": [\n//             \"'Point Time' должно быть заполнено.\"\n//         ]\n//     }\n// }"
+						},
+						"url": {
+							"raw": "http://localhost:11222/api/Activeness/ba7f0f16-3f81-4e71-92bb-10591e7f4174",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Activeness",
+								"ba7f0f16-3f81-4e71-92bb-10591e7f4174"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BugController",
+			"item": [
+				{
+					"name": "400 Bad Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:11222/api/Bug/status400",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Bug",
+								"status400"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "404 Not Found",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:11222/api/Bug/status404",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Bug",
+								"status404"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "500 Internal Server Error",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:11222/api/Bug/status500",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Bug",
+								"status500"
 							]
 						}
 					},

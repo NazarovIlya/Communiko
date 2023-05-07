@@ -1,20 +1,20 @@
 import { Button, Form, Icon, Label, Segment } from "semantic-ui-react";
-import { Activeness } from "../../model/Activeness";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
+import { useRepository } from "../../repository/Repository";
+import { observer } from "mobx-react-lite";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
-interface PropsActivenessEditForm {
-  selectItem: Activeness | undefined;
-  formClose: () => void;
-  editOrCreate: (id: Activeness) => void;
-}
+export default observer(function ActivenessEditForm() {
+  const { repo } = useRepository();
+  const {
+    updateActiveness,
+    createActiveness,
+    loadActiveness,
+    loading
+  } = repo;
 
-export function ActivenessEditForm(
-  {
-    formClose,
-    selectItem,
-    editOrCreate
-  }: PropsActivenessEditForm) {
-  let tempActiveness: Activeness = selectItem ?? {
+  const [activeness, setActiveness] = useState({
     id: '',
     title: '',
     category: '',
@@ -22,12 +22,25 @@ export function ActivenessEditForm(
     city: '',
     pointTime: '',
     location: ''
-  }
+  });
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-  const [activeness, setActiveness] = useState(tempActiveness);
+  useEffect(() => {
+    if (id) loadActiveness(id).then(e => setActiveness(e!));
+  }, [id, loadActiveness]);
 
   function handleSubmit() {
-    editOrCreate(activeness);
+    if (activeness.id) {
+      updateActiveness(activeness).then(
+        () => navigate(`/activenessItems/${activeness.id}`)
+      );
+    } else {
+      activeness.id = uuidv4();
+      createActiveness(activeness).then(
+        () => navigate(`/activenessItems/${activeness.id}`)
+      );
+    }
   }
 
   function handleChange(arg: ChangeEvent<HTMLInputElement>) {
@@ -48,10 +61,18 @@ export function ActivenessEditForm(
         <Form.Input type="date" placeholder='Point Time' name="pointTime" value={activeness.pointTime} />
         <Form.Input placeholder='Location' name='location' value={activeness.location} />
         <div className='ui three buttons'>
-          <Button type='submit'>Submit</Button>
-          <Button basic color='green' onClick={() => formClose()}>Close</Button>
+          <Button loading={loading} type='submit'
+
+          >
+            Submit
+          </Button>
+          <Button basic color='green'
+            as={Link} to={`/activenessItems`}
+          >
+            Close
+          </Button>
         </div>
       </Form>
     </Segment >
   );
-}
+})

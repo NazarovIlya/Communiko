@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Application.Activities;
+using Application.AppConfig;
 using BusinessDomain.Model;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +19,16 @@ namespace PresentationAPI.Controllers
         return mediator ??= HttpContext.RequestServices
                                        .GetService<IMediator>();
       }
+    }
+
+    protected IActionResult HandleResult<T>(ValidationResult<T> obj)
+    {
+      if (obj == null) return NotFound();
+      if (obj.IsSuccess && obj.Value != null)
+        return Ok(obj.Value);
+      if (obj.IsSuccess && obj.Value == null)
+        return NotFound();
+      return BadRequest(obj.Error);
     }
   }
 }

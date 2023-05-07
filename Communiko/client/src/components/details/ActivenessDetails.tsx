@@ -1,43 +1,40 @@
-import { Button, Card, Icon } from "semantic-ui-react";
-import { Activeness } from "../../model/Activeness";
+import { Grid } from "semantic-ui-react";
+import { useRepository } from "../../repository/Repository";
+import { observer } from "mobx-react-lite";
+import LoadingComponent from "../loading/LoadingComponent";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import ActivenessDetailsChat from "./ActivenessDetailsChat";
+import ActivenessDetailsHeader from "./ActivenessDetailsHeader";
+import ActivenessDetailsInfo from "./ActivenessDetailsInfo";
+import ActivenessDetailsSidebar from "./ActivenessDetailsSidebar";
 
-interface PropsActivenessDetails {
-  item: Activeness;
-  cancelViewActiveness: () => void;
-  formOpen: (id: string) => void;
-  removeActiveness: (id: string) => void;
-}
 
-export function ActivenessDetails(
-  {
-    item,
-    cancelViewActiveness,
-    formOpen,
-    removeActiveness
-  }: PropsActivenessDetails) {
+export default observer(function ActivenessDetails() {
+  const { repo } = useRepository();
+  const {
+    loadActiveness,
+    selectedActiveness,
+    loadingInit
+  } = repo;
+  const { id } = useParams();
+  useEffect(() => {
+    if (id) loadActiveness(id);
+  }, [id, loadActiveness]);
+  const item = selectedActiveness!;
+
+  if (loadingInit || !item) return <LoadingComponent />;
+
   return (
-    <Card fluid>
-      <Card.Content>
-        <Card.Header>{item.title}</Card.Header>
-        <Card.Meta>
-          <span className='date'>{item.pointTime}</span>
-        </Card.Meta>
-        <Card.Description>{item.category}</Card.Description>
-        <Card.Description>{item.description}</Card.Description>
-        <Card.Description>{item.city}</Card.Description>
-        <Card.Description>{item.location}</Card.Description>
-      </Card.Content>
-      <Card.Content extra>
-        <Icon name='user' />
-        <label htmlFor="">{item.id}</label>
-      </Card.Content>
-      <Card.Content extra>
-        <div className='ui three buttons'>
-          <Button basic color='green' onClick={() => formOpen(item.id)}>Edit</Button>
-          <Button basic color='green' onClick={() => removeActiveness(item.id)}>Remove</Button>
-          <Button basic color='green' onClick={() => cancelViewActiveness()}>Close</Button>
-        </div>
-      </Card.Content>
-    </Card>
+    <Grid>
+      <Grid.Column width={10}>
+        <ActivenessDetailsHeader item={item} />
+        <ActivenessDetailsInfo item={item} />
+        <ActivenessDetailsChat />
+      </Grid.Column>
+      <Grid.Column width={6}>
+        <ActivenessDetailsSidebar />
+      </Grid.Column>
+    </Grid>
   );
-}
+})
