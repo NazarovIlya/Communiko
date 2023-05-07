@@ -4,6 +4,7 @@ import { useRepository } from "../../repository/Repository";
 import { observer } from "mobx-react-lite";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
+import { Formik } from "formik";
 
 export default observer(function ActivenessEditForm() {
   const { repo } = useRepository();
@@ -30,49 +31,54 @@ export default observer(function ActivenessEditForm() {
     if (id) loadActiveness(id).then(e => setActiveness(e!));
   }, [id, loadActiveness]);
 
-  function handleSubmit() {
-    if (activeness.id) {
-      updateActiveness(activeness).then(
-        () => navigate(`/activenessItems/${activeness.id}`)
-      );
-    } else {
-      activeness.id = uuidv4();
-      createActiveness(activeness).then(
-        () => navigate(`/activenessItems/${activeness.id}`)
-      );
-    }
-  }
+  // function handleSubmit() {
+  //   if (activeness.id) {
+  //     updateActiveness(activeness).then(
+  //       () => navigate(`/activenessItems/${activeness.id}`)
+  //     );
+  //   } else {
+  //     activeness.id = uuidv4();
+  //     createActiveness(activeness).then(
+  //       () => navigate(`/activenessItems/${activeness.id}`)
+  //     );
+  //   }
+  // }
 
-  function handleChange(arg: ChangeEvent<HTMLInputElement>) {
-    const { name, value } = arg.target;
-    setActiveness({ ...activeness, [name]: value })
-  }
+  // function handleChange(arg: ChangeEvent<HTMLInputElement>) {
+  //   const { name, value } = arg.target;
+  //   setActiveness({ ...activeness, [name]: value })
+  // }
 
   return (
     <Segment>
-      <Form onSubmit={handleSubmit} onChange={handleChange} >
-        <Label>
-          <Icon name='id badge' /> {activeness.id}
-        </Label>
-        <Form.Input placeholder='Title' name="title" value={activeness.title} />
-        <Form.Input placeholder='Category' name="category" value={activeness.category} />
-        <Form.Input placeholder='Description' name="description" value={activeness.description} />
-        <Form.Input placeholder='City' name="city" value={activeness.city} />
-        <Form.Input type="date" placeholder='Point Time' name="pointTime" value={activeness.pointTime} />
-        <Form.Input placeholder='Location' name='location' value={activeness.location} />
-        <div className='ui three buttons'>
-          <Button loading={loading} type='submit'
+      <Formik initialValues={activeness} onSubmit={v => console.log(v)}>
+        {({ values: activeness, handleChange, handleSubmit }) => (
 
-          >
-            Submit
-          </Button>
-          <Button basic color='green'
-            as={Link} to={`/activenessItems`}
-          >
-            Close
-          </Button>
-        </div>
-      </Form>
+          <Form onSubmit={handleSubmit} onChange={handleChange} >
+            <Label>
+              <Icon name='id badge' /> {activeness.id}
+            </Label>
+            <Form.Input placeholder='Title' name="title" value={activeness.title} />
+            <Form.Input placeholder='Category' name="category" value={activeness.category} />
+            <Form.Input placeholder='Description' name="description" value={activeness.description} />
+            <Form.Input placeholder='City' name="city" value={activeness.city} />
+            <Form.Input type="date" placeholder='Point Time' name="pointTime" value={activeness.pointTime} />
+            <Form.Input placeholder='Location' name='location' value={activeness.location} />
+            <div className='ui three buttons'>
+              <Button loading={loading} type='submit'
+              >
+                Submit
+              </Button>
+              <Button basic color='green'
+                as={Link} to={`/activenessItems`}
+              >
+                Close
+              </Button>
+            </div>
+          </Form>
+        )}
+      </Formik>
+
     </Segment >
   );
 })
