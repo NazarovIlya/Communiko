@@ -195,3 +195,9 @@ _[решение проблемы рендеринга компонентов д
 
 [Formik](https://formik.org/docs/overview#npm)
 - `npm install formik`
+
+## Базовая валидация yup
+
+Конструктор схем для анализа и проверки значений во время выполнения.
+- `npm i yup`
+- `npm i @types/yup`
