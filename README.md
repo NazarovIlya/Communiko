@@ -207,3 +207,8 @@ _[решение проблемы рендеринга компонентов д
 [date-fns](https://date-fns.org/v2.30.0/docs/format)
 [React Datepicker](https://reactdatepicker.com/#example-default)
 - `npm i react-datepicker`
+
+## Авторизация пользователей
+
+Identity
+- `dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore`
