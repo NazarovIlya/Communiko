@@ -64,6 +64,7 @@ builder.Services.AddIdentityCore<AppUser>(op =>
 {
   // op.Password.RequiredLength = 8;
   // op.Password.RequireUppercase = false;
+  op.User.RequireUniqueEmail = true;
 }).AddEntityFrameworkStores<DataContext>();
 
 

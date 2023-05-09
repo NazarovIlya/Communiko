@@ -501,6 +501,37 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Регистрация пользователя",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"i@ksergei.tech\",\n  \"password\": \"QwEr!2#4\",\n  \"nickName\": \"ksergei3\",\n  \"username\": \"iksergei3\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:11222/api/Account/registration",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Account",
+								"registration"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
