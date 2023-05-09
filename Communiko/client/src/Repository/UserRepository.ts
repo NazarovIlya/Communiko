@@ -19,7 +19,6 @@ export default class UserRepository {
       repository.authRepo.setToken(user.token);
       runInAction(() => { this.user = user; });
       router.navigate('/activenessItems');
-
     } catch (error) {
       throw error;
     }
@@ -34,5 +33,14 @@ export default class UserRepository {
 
   get isLoggedIn() {
     return localStorage.getItem('user-jwt') !== null;
+  }
+
+  getCurrentUser = async () => {
+    try {
+      const user = await client.Account.current();
+      runInAction(() => { this.user = user; });
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
