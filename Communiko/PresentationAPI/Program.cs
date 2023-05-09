@@ -9,6 +9,7 @@ using Application.Activities;
 using PresentationAPI.Middleware;
 using BusinessDomain.Model;
 using Microsoft.AspNetCore.Identity;
+using PresentationAPI.JwtService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,7 +37,7 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateActivities>();
 
 builder.Services.AddAuthentication();
-
+builder.Services.AddScoped<JwtTokenService>();
 builder.Services.AddIdentityCore<AppUser>(op =>
 {
   // op.Password.RequiredLength = 8;
