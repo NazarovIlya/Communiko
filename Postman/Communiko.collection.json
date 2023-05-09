@@ -409,6 +409,73 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "AccountController",
+			"item": [
+				{
+					"name": "/auth 200 Ok",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"user_1@ksergei.tech\",\n  \"password\": \"QWErt%^&$1!\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:11222/api/Account/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Account",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/auth 401 Unauthorized",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"Unauthorized@ksergei.tech\",\n  \"password\": \"QWErt%^&$1!\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:11222/api/Account/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Account",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
