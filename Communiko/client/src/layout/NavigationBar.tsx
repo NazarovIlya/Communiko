@@ -1,13 +1,20 @@
-import { Button, Container, Menu } from 'semantic-ui-react';
+import { Button, Container, Dropdown, DropdownMenu, Icon, Menu, MenuItem } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
+import { repository } from '../repository/Repository';
+import { observer } from 'mobx-react-lite';
 
-export function NavigationBar() {
+export default observer(function NavigationBar() {
+  const { userRepo } = repository;
   return (
     <Menu fixed='top'>
       <Container>
-        <Menu.Item as={NavLink} to='/' header>
-          <img src="/images/logo.png" alt="logo" />
-          Communiko project
+        <Menu.Item>
+          <Dropdown text={userRepo.user?.nickName}>
+            <DropdownMenu>
+              <Dropdown.Item onClick={() => { }} icon='user' text='Profile' />
+              <Dropdown.Item onClick={() => { userRepo.logout(); }} icon='log out' text='Logout' />
+            </DropdownMenu>
+          </Dropdown>
         </Menu.Item>
         <Menu.Item as={NavLink} to='/activenessItems' name='Activeness' />
         <Menu.Item as={NavLink} to='/bugs' name='Bugs' />
@@ -17,4 +24,4 @@ export function NavigationBar() {
       </Container>
     </Menu >
   );
-}
+})

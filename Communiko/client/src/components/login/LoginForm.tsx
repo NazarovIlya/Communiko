@@ -10,7 +10,7 @@ export default observer(function LoginForm() {
     <Formik
       initialValues={{ email: '', password: '', error: null }}
       onSubmit={(values, { setErrors }) => {
-        userRepo.auth(values).catch(e => setErrors({ error: "Пользователь не найден" }))
+        userRepo.login(values).catch(e => setErrors({ error: "Пользователь не найден" }))
       }}
     >
       {({ handleSubmit }) => (

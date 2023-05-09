@@ -12,13 +12,14 @@ export default class UserRepository {
     makeAutoObservable(this)
   }
 
-
-  auth = async (credentials: UserForm) => {
+  login = async (credentials: UserForm) => {
     try {
       const user = await client.Account.auth(credentials);
+      this.user = user;
       repository.authRepo.setToken(user.token);
       runInAction(() => { this.user = user; });
       router.navigate('/activenessItems');
+
     } catch (error) {
       throw error;
     }
@@ -29,5 +30,9 @@ export default class UserRepository {
     localStorage.removeItem('user-jwt');
     this.user = null;
     router.navigate('/');
+  }
+
+  get isLoggedIn() {
+    return localStorage.getItem('user-jwt') !== null;
   }
 }
