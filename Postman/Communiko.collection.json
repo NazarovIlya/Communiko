@@ -532,6 +532,33 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Проверка авторизации",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imlrc2VyZ2VpMyIsIm5hbWVpZCI6ImQxZjU5MTkzLTU1ZGUtNGVmOC05MjI4LTdkNTU2ODRkZDk0YiIsImVtYWlsIjoiaTJAa3NlcmdlaS50ZWNoIiwibmJmIjoxNjgzNjExMzYwLCJleHAiOjE2ODM2MTI1NjAsImlhdCI6MTY4MzYxMTM2MH0.MQaYa1D9WcNPSilysv1UUaQZyQ2nMaXTVqoWyhvTvM_teYkvXYdGFol6XQrPgd1Xm_0BzRNL6r6onJv664q0LQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:11222/api/Account/current",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Account",
+								"current"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

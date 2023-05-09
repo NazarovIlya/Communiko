@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using PresentationAPI.JwtService;
 using PresentationAPI.ModelDto;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace PresentationAPI.Controllers
 {
@@ -74,6 +75,20 @@ namespace PresentationAPI.Controllers
       }
 
       return BadRequest(result.Errors);
+    }
+
+    [Authorize]
+    [HttpGet("current")]
+    public async Task<ActionResult<AppUserDto>> Current()
+    {
+      var user = await userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
+
+      return new AppUserDto
+      {
+        NickName = user.NickName,
+        Username = user.UserName,
+        Token = jwtTokenService.CreateToken(user)
+      };
     }
   }
 }
