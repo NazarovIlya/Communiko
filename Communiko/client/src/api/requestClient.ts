@@ -2,6 +2,8 @@ import axios, { AxiosResponse } from 'axios'
 import { Activeness } from '../model/Activeness';
 import { toast } from 'react-toastify';
 import { router } from '../router/Router';
+import { User } from '../model/user';
+import { UserForm } from "../model/UserForm";
 
 axios.defaults.baseURL = 'http://localhost:11222/api';
 
@@ -47,8 +49,15 @@ const Activities = {
   item: (id: string) => requests.get<Activeness>(`/Activeness/${id}`),
 }
 
+const Account = {
+  current: () => requests.get<User>('/Account/current'),
+  auth: (user: UserForm) => requests.post<User>('/Account/auth', user),
+  register: (user: UserForm) => requests.post<User>('/Account/registration', user)
+}
+
 const client = {
-  Activities
+  Activities,
+  Account
 }
 
 export default client;
