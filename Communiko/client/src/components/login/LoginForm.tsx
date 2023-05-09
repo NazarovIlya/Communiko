@@ -9,9 +9,11 @@ export default observer(function LoginForm() {
   return (
     <Formik
       initialValues={{ email: '', password: '', error: null }}
-      onSubmit={(values, { setErrors }) => userRepo.auth(values).catch(e => setErrors({ error: "Данные неверны " }))}
+      onSubmit={(values, { setErrors }) => {
+        userRepo.auth(values).catch(e => setErrors({ error: "Пользователь не найден" }))
+      }}
     >
-      {({ handleSubmit, isSubmitting, errors }) => (
+      {({ handleSubmit }) => (
         <Form className='ui form' onSubmit={handleSubmit} >
           <Header as='h2' content='Login to Communiko' color="green" textAlign="center" />
           <Field placeholder="Email" name='email' />

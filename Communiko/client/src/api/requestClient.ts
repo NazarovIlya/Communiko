@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { router } from '../router/Router';
 import { User } from '../model/user';
 import { UserForm } from "../model/UserForm";
+import { repository } from '../repository/Repository';
 
 axios.defaults.baseURL = 'http://localhost:11222/api';
 
@@ -12,6 +13,12 @@ const responseData = <T>(res: AxiosResponse<T>) => res.data;
 const sleep = (delay: number) => {
   return new Promise((res) => { setTimeout(res, delay); });
 }
+
+axios.interceptors.request.use(config => {
+  const token = repository.authRepo.token;
+  if (token && config.headers) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+})
 
 axios.interceptors.response.use(async response => {
   await sleep(0);
