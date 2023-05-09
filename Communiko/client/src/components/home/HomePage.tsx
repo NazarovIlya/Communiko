@@ -15,9 +15,9 @@ export default function HomePage() {
           Communiko
         </Header>
         <Button inverted
-          content='Activeness Items'
+          content='Auth'
           as={NavLink}
-          to='/activenessItems'
+          to='/auth'
           size='huge'
         />
       </Container>

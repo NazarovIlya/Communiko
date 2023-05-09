@@ -22,6 +22,9 @@ axios.interceptors.response.use(async response => {
       toast.error('Ошибка 404');
       router.navigate('/not-found');
       break;
+    case 401:
+      toast.error('401 Пользователь не авторизован');
+      break;
     default:
       toast.info('Другая ошибка');
       break;
