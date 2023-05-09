@@ -219,3 +219,4 @@ Identity
 1. [JSON Web Tokens](https://jwt.io)
 2. [Timestamp в обычную дату](https://i-leon.ru/tools/time)
 - `dotnet add package System.IdentityModel.Tokens.Jwt`
+- `dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer`

@@ -426,7 +426,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"email\": \"user_1@ksergei.tech\",\n  \"password\": \"QWErt%^&$1!\"\n}"
+							"raw": "{\n  \"email\": \"user_3@ksergei.tech\",\n  \"password\": \"QWErt%^&$3!\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:11222/api/Account/auth",
@@ -470,6 +470,33 @@
 								"api",
 								"Account",
 								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Activeness by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXJfMyIsIm5hbWVpZCI6IjQ1ZDFhZjE4LWNhYzEtNDRlOS1hZjY1LTU5ZDQwYWU1ZDNkZSIsImVtYWlsIjoidXNlcl8zQGtzZXJnZWkudGVjaCIsIm5iZiI6MTY4MzYwOTc3NywiZXhwIjoxNjgzNjEwOTc3LCJpYXQiOjE2ODM2MDk3Nzd9.TXTldkzsivhTgfAQKV1vSLCfOluyY3Jg_Q9df7EBG9oa3B2YbLSJp7bJACOA-mOcYA0546T8S-OQiwIczWu6zQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:11222/api/Activeness/0aed99b4-1a4f-4a65-a53d-bdc1566a338d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Activeness",
+								"0aed99b4-1a4f-4a65-a53d-bdc1566a338d"
 							]
 						}
 					},

@@ -1,11 +1,12 @@
 using BusinessDomain.Model;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PresentationAPI.JwtService;
 using PresentationAPI.ModelDto;
-
 namespace PresentationAPI.Controllers
 {
+  [AllowAnonymous]
   [ApiController]
   [Route("api/[controller]")]
   public class AccountController : ControllerBase
