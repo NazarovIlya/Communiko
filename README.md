@@ -220,3 +220,5 @@ Identity
 2. [Timestamp в обычную дату](https://i-leon.ru/tools/time)
 - `dotnet add package System.IdentityModel.Tokens.Jwt`
 - `dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer`
+
+Дополнительная информация по [ASP.NET Core security](https://learn.microsoft.com/en-us/aspnet/core/security/?view=aspnetcore-7.0)
