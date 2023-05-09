@@ -213,3 +213,9 @@ _[решение проблемы рендеринга компонентов д
 Identity
 - `dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore`
 - `dotnet ef migrations add identity-added -s PresentationAPI -p Persistence`
+
+## Jwt
+
+1. [JSON Web Tokens](https://jwt.io)
+2. [Timestamp в обычную дату](https://i-leon.ru/tools/time)
+- `dotnet add package System.IdentityModel.Tokens.Jwt`
