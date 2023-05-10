@@ -2,11 +2,13 @@ import { observer } from "mobx-react-lite";
 import { NavLink } from "react-router-dom";
 import { Button, Container, Header, Segment } from "semantic-ui-react";
 import { repository } from "../../repository/Repository";
+import LoginForm from "../login/LoginForm";
 
 export default observer(function HomePage() {
-  const { userRepo } = repository;
+  const { userRepo, modalRepo } = repository;
 
   return (
+
     <Segment inverted
       textAlign='center'
       vertical
@@ -27,8 +29,7 @@ export default observer(function HomePage() {
           :
           (<Button inverted
             content='Auth'
-            as={NavLink}
-            to='/auth'
+            onClick={() => { modalRepo.show(<LoginForm />) }}
             size='huge' />)
         }
       </Container>

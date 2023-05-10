@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import { repository } from '../repository/Repository';
 import { useEffect } from 'react';
 import LoadingComponent from '../components/loading/LoadingComponent';
+import ModalForm from '../components/modals/ModalForm';
 
 function App() {
   const location = useLocation();
@@ -23,7 +24,11 @@ function App() {
   if (!authRepo.appLoaded) return <LoadingComponent text='Loading app...' />
 
   if (location.pathname === '/') {
-    return (<><HomePage /></>);
+    return (
+      <>
+        <ModalForm />
+        <HomePage />
+      </>);
   } else {
     return (<>
       <ToastContainer
