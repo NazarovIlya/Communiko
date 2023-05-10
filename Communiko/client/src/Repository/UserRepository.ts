@@ -44,4 +44,17 @@ export default class UserRepository {
       console.log(error);
     }
   }
+
+  signUp = async (credentials: UserForm) => {
+    try {
+      const user = await client.Account.register(credentials);
+      this.user = user;
+      repository.authRepo.setToken(user.token);
+      runInAction(() => { this.user = user; });
+      router.navigate('/activenessItems');
+      repository.modalRepo.hide();
+    } catch (error) {
+      throw error;
+    }
+  }
 }
