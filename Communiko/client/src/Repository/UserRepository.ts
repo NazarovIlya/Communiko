@@ -32,7 +32,7 @@ export default class UserRepository {
   }
 
   get isLoggedIn() {
-    return localStorage.getItem('user-jwt') !== null;
+    return !!this.user;
   }
 
   getCurrentUser = async () => {
