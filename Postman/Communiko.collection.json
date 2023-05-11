@@ -482,12 +482,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXJfMyIsIm5hbWVpZCI6IjQ1ZDFhZjE4LWNhYzEtNDRlOS1hZjY1LTU5ZDQwYWU1ZDNkZSIsImVtYWlsIjoidXNlcl8zQGtzZXJnZWkudGVjaCIsIm5iZiI6MTY4MzYwOTc3NywiZXhwIjoxNjgzNjEwOTc3LCJpYXQiOjE2ODM2MDk3Nzd9.TXTldkzsivhTgfAQKV1vSLCfOluyY3Jg_Q9df7EBG9oa3B2YbLSJp7bJACOA-mOcYA0546T8S-OQiwIczWu6zQ",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXJfMyIsIm5hbWVpZCI6IjQ1ZDFhZjE4LWNhYzEtNDRlOS1hZjY1LTU5ZDQwYWU1ZDNkZSIsImVtYWlsIjoidXNlcl8zQGtzZXJnZWkudGVjaCIsIm5iZiI6MTY4MzYzMjg4MywiZXhwIjoxNjgzNjM0MDgzLCJpYXQiOjE2ODM2MzI4ODN9.lHbGCu_vukWvJzyGo4IN_Cw8O6iNdiztPXsTH_kz4T5OOPSOnH122BY2flBSxij3_hUc7oDfdySSQjxoPWeNvg",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:11222/api/Activeness/0aed99b4-1a4f-4a65-a53d-bdc1566a338d",
+							"raw": "http://localhost:11222/api/Activeness/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -496,7 +496,7 @@
 							"path": [
 								"api",
 								"Activeness",
-								"0aed99b4-1a4f-4a65-a53d-bdc1566a338d"
+								""
 							]
 						}
 					},
@@ -515,7 +515,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"email\": \"i@ksergei.tech\",\n  \"password\": \"QwEr!2#4\",\n  \"nickName\": \"ksergei3\",\n  \"username\": \"iksergei3\"\n}"
+							"raw": "{\n  \"email\": \"\",\n  \"password\": \"QwEr!2#4\",\n  \"nickName\": \"\",\n  \"username\": \"\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:11222/api/Account/registration",
@@ -555,6 +555,121 @@
 								"api",
 								"Account",
 								"current"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AppUserActiveness Test",
+			"item": [
+				{
+					"name": "Get token user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"user_3@ksergei.tech\",\n  \"password\": \"QWErt%^&$3!\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:11222/api/Account/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Account",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get activeness auth user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXJfMyIsIm5hbWVpZCI6ImMzZGE5OTBjLWQzZjEtNDlhOC1hOWFmLTYyNmUxMGY5NjdlMyIsImVtYWlsIjoidXNlcl8zQGtzZXJnZWkudGVjaCIsIm5iZiI6MTY4Mzc5MjI0MiwiZXhwIjoxNjgzNzkzNDQyLCJpYXQiOjE2ODM3OTIyNDJ9.dHMCnVea-9au0o4oOb7nbvawdjtlxfK8BTUYeb0X2C8CmQVZGrM8WyHvo3Xy9eDN59w7Xt0uf6qer2Ue_MfQYA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:11222/api/Activeness/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Activeness",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create activeness",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require(\"moment\");",
+									"",
+									"pm.environment.set(",
+									"    'activenessDate', ",
+									"    moment().format('YYYY-MM-DD')",
+									"            );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXJfMyIsIm5hbWVpZCI6ImMzZGE5OTBjLWQzZjEtNDlhOC1hOWFmLTYyNmUxMGY5NjdlMyIsImVtYWlsIjoidXNlcl8zQGtzZXJnZWkudGVjaCIsIm5iZiI6MTY4Mzc5MjI0MiwiZXhwIjoxNjgzNzkzNDQyLCJpYXQiOjE2ODM3OTIyNDJ9.dHMCnVea-9au0o4oOb7nbvawdjtlxfK8BTUYeb0X2C8CmQVZGrM8WyHvo3Xy9eDN59w7Xt0uf6qer2Ue_MfQYA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{$guid}}\",\n\t\"title\": \"Тестовая активность #сывс\",\n    \"category\": \"Категория #сывс\",\n    \"description\": \"Описание #сыв\",\n    \"city\": \"Город #сыв\",\n    \"pointTime\": \"{{activenessDate}}\",\n    \"location\": \"Место проведения #ййй\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:11222/api/Activeness/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Activeness",
+								""
 							]
 						}
 					},
