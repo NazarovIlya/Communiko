@@ -15,6 +15,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Application.Interface;
+using Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -66,6 +68,9 @@ builder.Services.AddIdentityCore<AppUser>(op =>
   // op.Password.RequireUppercase = false;
   op.User.RequireUniqueEmail = true;
 }).AddEntityFrameworkStores<DataContext>();
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IAppUserAccessor, AppUserAccessor>();
 
 
 var app = builder.Build();
