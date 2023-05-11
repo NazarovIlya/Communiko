@@ -14,5 +14,7 @@ namespace BusinessDomain.Model
     public string City { get; set; }
     public DateOnly PointTime { get; set; }
     public string Location { get; set; }
+    public ICollection<AppUserActiveness> Participants { get; set; }
+    public Activeness() => Participants = new List<AppUserActiveness>();
   }
 }
