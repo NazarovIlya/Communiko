@@ -578,7 +578,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"email\": \"user_1@ksergei.tech\",\n  \"password\": \"QWErt%^&$1!\"\n}"
+							"raw": "{\n  \"email\": \"user_0@ksergei.tech\",\n  \"password\": \"QWErt%^&$0!\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:11222/api/Account/auth",
@@ -603,7 +603,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXJfMSIsIm5hbWVpZCI6ImMzNGM5MWJjLTJjOWUtNDQzYS1hYWFiLWJmNDBiOTMxOTQwMiIsImVtYWlsIjoidXNlcl8xQGtzZXJnZWkudGVjaCIsIm5iZiI6MTY4MzgwMTU5MCwiZXhwIjoxNjgzODAyNzkwLCJpYXQiOjE2ODM4MDE1OTB9.oa6zU8Ug9zTddAHFDsXF0sgnIMz1GKX6UTpF02OS70MgOWWzxWuJW2c6SCa4g5gnY2WZrjEwm_kslKBKtR53sQ",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXJfMCIsIm5hbWVpZCI6ImE4ZmVhNjEwLWQ3MjAtNDE0MC04ZmIyLWE3MTI5NzhhZTViZSIsImVtYWlsIjoidXNlcl8wQGtzZXJnZWkudGVjaCIsIm5iZiI6MTY4MzgwOTM1NiwiZXhwIjoxNjgzODEwNTU2LCJpYXQiOjE2ODM4MDkzNTZ9.aYOc1hq3GgegXiu5sy4uF3h8TAa8jQpuZ7X55N2ThfS8SaERqdNshz7a-nPriGNXPneVLUyKKvFd13SpNpmISQ",
 								"type": "text"
 							}
 						],
@@ -630,12 +630,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXJfMSIsIm5hbWVpZCI6ImMzNGM5MWJjLTJjOWUtNDQzYS1hYWFiLWJmNDBiOTMxOTQwMiIsImVtYWlsIjoidXNlcl8xQGtzZXJnZWkudGVjaCIsIm5iZiI6MTY4MzgwMjUwNywiZXhwIjoxNjgzODAzNzA3LCJpYXQiOjE2ODM4MDI1MDd9.4aLBjgQwmH2T76r4huNpQgDDBS5c_a1zjQePKr3Y0D0_DafU8X-Nz9jJhbhV5ctgmUARtubqIK0M-EFYHY7bEQ",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXJfMSIsIm5hbWVpZCI6ImMzNGM5MWJjLTJjOWUtNDQzYS1hYWFiLWJmNDBiOTMxOTQwMiIsImVtYWlsIjoidXNlcl8xQGtzZXJnZWkudGVjaCIsIm5iZiI6MTY4MzgwOTU1NCwiZXhwIjoxNjgzODEwNzU0LCJpYXQiOjE2ODM4MDk1NTR9.7UrBNSMC_bY7ly8Z-fMIxdw76tqB5fU_Net5OO-Tb5N-UOTqT8b-vX4uRVnJccPYgXt2VViwFbjTp7cNlBjmyQ",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:11222/api/Activeness/53f9c814-4956-4d9a-b680-78f000839dbd",
+							"raw": "http://localhost:11222/api/Activeness/1c8c6caf-bf22-4761-aeff-3adc59e659a3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -644,7 +644,35 @@
 							"path": [
 								"api",
 								"Activeness",
-								"53f9c814-4956-4d9a-b680-78f000839dbd"
+								"1c8c6caf-bf22-4761-aeff-3adc59e659a3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update activeness",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXJfNCIsIm5hbWVpZCI6IjUxZWFkNGUzLWRlMzMtNGFmOC1hZjdlLWM4MDcxOWIzZjdiYiIsImVtYWlsIjoidXNlcl80QGtzZXJnZWkudGVjaCIsIm5iZiI6MTY4MzgwNzQwOCwiZXhwIjoxNjgzODA4NjA4LCJpYXQiOjE2ODM4MDc0MDh9.Aol5KrJVisds3gmyS6AAPYWVw43hkVBGJcBKvx3-8uJVgAofdjxr0oJh3FCmatcLkCD3gfRTeR5UVZ4fUsk-3A",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:11222/api/Activeness/2dfa138e-2e7b-40ea-8b47-98cb94421d8a/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Activeness",
+								"2dfa138e-2e7b-40ea-8b47-98cb94421d8a",
+								"update"
 							]
 						}
 					},
@@ -678,13 +706,13 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXJfMSIsIm5hbWVpZCI6ImMzNGM5MWJjLTJjOWUtNDQzYS1hYWFiLWJmNDBiOTMxOTQwMiIsImVtYWlsIjoidXNlcl8xQGtzZXJnZWkudGVjaCIsIm5iZiI6MTY4Mzc5Nzc3MiwiZXhwIjoxNjgzNzk4OTcyLCJpYXQiOjE2ODM3OTc3NzJ9.VqfhsPfw4HRJkjyl7IdseiomSpHGjk1RC-e3vyOB2bDtK75jkpVuaOBAJ7ZXSOp-y3bZjovzngWYYup6CtetfQ",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXJfMCIsIm5hbWVpZCI6ImE4ZmVhNjEwLWQ3MjAtNDE0MC04ZmIyLWE3MTI5NzhhZTViZSIsImVtYWlsIjoidXNlcl8wQGtzZXJnZWkudGVjaCIsIm5iZiI6MTY4MzgwOTM1NiwiZXhwIjoxNjgzODEwNTU2LCJpYXQiOjE2ODM4MDkzNTZ9.aYOc1hq3GgegXiu5sy4uF3h8TAa8jQpuZ7X55N2ThfS8SaERqdNshz7a-nPriGNXPneVLUyKKvFd13SpNpmISQ",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": \"{{$guid}}\",\n\t\"title\": \"Тестовая активность #10101o10\",\n    \"category\": \"Категория #2110\",\n    \"description\": \"Описание #110\",\n    \"city\": \"Город #110\",\n    \"pointTime\": \"{{activenessDate}}\",\n    \"location\": \"Место проведения #110\"\n}"
+							"raw": "{\n    \"id\": \"{{$guid}}\",\n\t\"title\": \"!!!!!!!!!!!!!!! ####\",\n    \"category\": \"Новый год\",\n    \"description\": \"Новый год\",\n    \"city\": \"Новый год\",\n    \"pointTime\": \"{{activenessDate}}\",\n    \"location\": \"Новый год\",\n    \"isActual\": true\n}"
 						},
 						"url": {
 							"raw": "http://localhost:11222/api/Activeness/",
@@ -697,6 +725,58 @@
 								"api",
 								"Activeness",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Обновление записи полное Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require(\"moment\");",
+									"",
+									"pm.environment.set(",
+									"    'activenessDate', ",
+									"    moment().format('YYYY-MM-DD')",
+									"            );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXJfMCIsIm5hbWVpZCI6ImE4ZmVhNjEwLWQ3MjAtNDE0MC04ZmIyLWE3MTI5NzhhZTViZSIsImVtYWlsIjoidXNlcl8wQGtzZXJnZWkudGVjaCIsIm5iZiI6MTY4MzgwOTgxOSwiZXhwIjoxNjgzODExMDE5LCJpYXQiOjE2ODM4MDk4MTl9.PX05WdgiTB5XPQQvPkAUfc4Ct1q1q0tUFH3Bpjs1SH_HmKWSYZNqY73vpKG0LO2RSPIMt-MZoMC6o2-Bpzi5JA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    //\"id\": \"361eafa9-b860-4bdb-94cc-97b3d09c1e15\",\n    \"title\": \"ЙЦУКЕНГШЩ  ОБНОВА \",\n    \"category\": \"Категория #777й11йй\",\n    \"description\": \"Описание #777\",\n    \"city\": \"Город #777\",\n    \"pointTime\": \"{{activenessDate}}\",\n    \"location\": \"Место проведения #123\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:11222/api/Activeness/1c8c6caf-bf22-4761-aeff-3adc59e659a3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Activeness",
+								"1c8c6caf-bf22-4761-aeff-3adc59e659a3"
 							]
 						}
 					},
