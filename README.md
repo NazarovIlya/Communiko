@@ -222,3 +222,6 @@ Identity
 - `dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer`
 
 Дополнительная информация по [ASP.NET Core security](https://learn.microsoft.com/en-us/aspnet/core/security/?view=aspnetcore-7.0)
+
+Новая миграция. Отношения много активностей <=> много людей
+- `dotnet ef migrations add AppUserActiveness -s PresentationAPI -p Persistence`
