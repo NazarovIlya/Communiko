@@ -409,6 +409,158 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "AccountController",
+			"item": [
+				{
+					"name": "/auth 200 Ok",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"user_3@ksergei.tech\",\n  \"password\": \"QWErt%^&$3!\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:11222/api/Account/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Account",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/auth 401 Unauthorized",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"Unauthorized@ksergei.tech\",\n  \"password\": \"QWErt%^&$1!\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:11222/api/Account/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Account",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Activeness by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXJfMyIsIm5hbWVpZCI6IjQ1ZDFhZjE4LWNhYzEtNDRlOS1hZjY1LTU5ZDQwYWU1ZDNkZSIsImVtYWlsIjoidXNlcl8zQGtzZXJnZWkudGVjaCIsIm5iZiI6MTY4MzYwOTc3NywiZXhwIjoxNjgzNjEwOTc3LCJpYXQiOjE2ODM2MDk3Nzd9.TXTldkzsivhTgfAQKV1vSLCfOluyY3Jg_Q9df7EBG9oa3B2YbLSJp7bJACOA-mOcYA0546T8S-OQiwIczWu6zQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:11222/api/Activeness/0aed99b4-1a4f-4a65-a53d-bdc1566a338d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Activeness",
+								"0aed99b4-1a4f-4a65-a53d-bdc1566a338d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Регистрация пользователя",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"i@ksergei.tech\",\n  \"password\": \"QwEr!2#4\",\n  \"nickName\": \"ksergei3\",\n  \"username\": \"iksergei3\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:11222/api/Account/registration",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Account",
+								"registration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Проверка авторизации",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imlrc2VyZ2VpMyIsIm5hbWVpZCI6ImQxZjU5MTkzLTU1ZGUtNGVmOC05MjI4LTdkNTU2ODRkZDk0YiIsImVtYWlsIjoiaTJAa3NlcmdlaS50ZWNoIiwibmJmIjoxNjgzNjExMzYwLCJleHAiOjE2ODM2MTI1NjAsImlhdCI6MTY4MzYxMTM2MH0.MQaYa1D9WcNPSilysv1UUaQZyQ2nMaXTVqoWyhvTvM_teYkvXYdGFol6XQrPgd1Xm_0BzRNL6r6onJv664q0LQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:11222/api/Account/current",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Account",
+								"current"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

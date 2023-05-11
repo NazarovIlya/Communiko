@@ -5,6 +5,7 @@ import ActivenessEditForm from "../components/activeness/ActivenessEditForm";
 import ActivenessDetails from "../components/details/ActivenessDetails";
 import BugTest from "../components/errors/BugTest";
 import NotFound from "../components/errors/NotFound";
+import LoginForm from "../components/login/LoginForm";
 
 export const routes: RouteObject[] = [
   {
@@ -15,6 +16,7 @@ export const routes: RouteObject[] = [
       { path: 'activenessItems/:id', element: <ActivenessDetails /> },
       { path: 'createActiveness', element: <ActivenessEditForm key='create' /> },
       { path: 'updateActiveness/:id', element: <ActivenessEditForm key='update' /> },
+      { path: 'auth', element: <LoginForm /> },
       { path: 'bugs', element: <BugTest /> },
       { path: '404', element: <NotFound /> },
       { path: '*', element: <Navigate replace to='404' /> },

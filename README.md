@@ -195,3 +195,30 @@ _[решение проблемы рендеринга компонентов д
 
 [Formik](https://formik.org/docs/overview#npm)
 - `npm install formik`
+
+## Базовая валидация yup
+
+Конструктор схем для анализа и проверки значений во время выполнения.
+- `npm i yup`
+- `npm i @types/yup`
+
+## Работа с датами
+
+[date-fns](https://date-fns.org/v2.30.0/docs/format)
+[React Datepicker](https://reactdatepicker.com/#example-default)
+- `npm i react-datepicker`
+
+## Авторизация пользователей
+
+Identity
+- `dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore`
+- `dotnet ef migrations add identity-added -s PresentationAPI -p Persistence`
+
+## Jwt
+
+1. [JSON Web Tokens](https://jwt.io)
+2. [Timestamp в обычную дату](https://i-leon.ru/tools/time)
+- `dotnet add package System.IdentityModel.Tokens.Jwt`
+- `dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer`
+
+Дополнительная информация по [ASP.NET Core security](https://learn.microsoft.com/en-us/aspnet/core/security/?view=aspnetcore-7.0)

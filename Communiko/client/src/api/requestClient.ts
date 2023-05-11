@@ -2,6 +2,9 @@ import axios, { AxiosResponse } from 'axios'
 import { Activeness } from '../model/Activeness';
 import { toast } from 'react-toastify';
 import { router } from '../router/Router';
+import { User } from '../model/user';
+import { UserForm } from "../model/UserForm";
+import { repository } from '../repository/Repository';
 
 axios.defaults.baseURL = 'http://localhost:11222/api';
 
@@ -11,16 +14,25 @@ const sleep = (delay: number) => {
   return new Promise((res) => { setTimeout(res, delay); });
 }
 
+axios.interceptors.request.use(config => {
+  const token = repository.authRepo.token;
+  if (token && config.headers) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+})
+
 axios.interceptors.response.use(async response => {
   await sleep(0);
   toast.info('Сообщение');
   return response;
 }, (error) => {
-  const { data, status, config } = error.response;
+  const { status } = error.response;
   switch (status) {
     case 404:
       toast.error('Ошибка 404');
       router.navigate('/not-found');
+      break;
+    case 401:
+      toast.error('401 Пользователь не авторизован');
       break;
     default:
       toast.info('Другая ошибка');
@@ -44,8 +56,15 @@ const Activities = {
   item: (id: string) => requests.get<Activeness>(`/Activeness/${id}`),
 }
 
+const Account = {
+  current: () => requests.get<User>('/Account/current'),
+  auth: (user: UserForm) => requests.post<User>('/Account/auth', user),
+  register: (user: UserForm) => requests.post<User>('/Account/registration', user)
+}
+
 const client = {
-  Activities
+  Activities,
+  Account
 }
 
 export default client;

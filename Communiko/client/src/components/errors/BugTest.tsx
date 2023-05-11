@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
 import { Button, Header, Segment } from "semantic-ui-react";
 import axios from 'axios';
 
 export default function BugTest() {
   const baseUrl = 'http://localhost:11222/api/';
-  const [errors, setErrors] = useState(null);
 
   function handleStatus400() {
     axios.get(baseUrl + 'bug/status400').catch(err => console.log(err.response));

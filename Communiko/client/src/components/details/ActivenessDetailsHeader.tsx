@@ -42,7 +42,12 @@ export default observer(function ActivenessDetailsHeader({ item }: PropsActivene
             content='Close'
             as={Link} to='/activenessItems'
           />
-          <Button basic color='orange' floated='right'>
+          <Button
+            basic
+            color='orange'
+            floated='right'
+            as={Link} to={`/updateActiveness/${item.id}`}
+          >
             Update
           </Button>
         </Segment>

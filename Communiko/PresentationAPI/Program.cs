@@ -7,10 +7,22 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Application.Activities;
 using PresentationAPI.Middleware;
+using BusinessDomain.Model;
+using Microsoft.AspNetCore.Identity;
+using PresentationAPI.JwtService;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(op =>
+{
+  var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+  op.Filters.Add(new AuthorizeFilter(policy));
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(typeof(ItemsActivities.Handler));
@@ -33,6 +45,29 @@ builder.Services.AddCors(options =>
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateActivities>();
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+.AddJwtBearer(op =>
+{
+  op.TokenValidationParameters = new TokenValidationParameters
+  {
+    ValidateIssuerSigningKey = true,
+    IssuerSigningKey = new SymmetricSecurityKey(
+      Encoding.UTF8.GetBytes(builder.Configuration["Secret-key"])),
+    ValidateIssuer = false,
+    ValidateAudience = false
+  };
+});
+builder.Services.AddAuthorization();
+builder.Services.AddScoped<JwtTokenService>();
+
+builder.Services.AddIdentityCore<AppUser>(op =>
+{
+  // op.Password.RequiredLength = 8;
+  // op.Password.RequireUppercase = false;
+  op.User.RequireUniqueEmail = true;
+}).AddEntityFrameworkStores<DataContext>();
+
+
 var app = builder.Build();
 
 app.UseMiddleware<MiddlewareExceptions>();
@@ -51,8 +86,9 @@ using (var serviceScope = app.Services.CreateScope())
   try
   {
     var context = serviceProvider.GetRequiredService<DataContext>();
+    var um = serviceProvider.GetRequiredService<UserManager<AppUser>>();
     await context.Database.MigrateAsync();
-    await TestDataProvider.Provide(context, 100);
+    await TestDataProvider.Provide(context, um, 5);
   }
   catch (Exception e)
   {
