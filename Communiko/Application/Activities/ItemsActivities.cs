@@ -1,5 +1,6 @@
 using Application.AppConfig;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using BusinessDomain.Model;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -23,12 +24,9 @@ public class ItemsActivities
     public async Task<ValidationResult<List<ActivenessDto>>> Handle(Query request, CancellationToken token)
     {
       var items = await context.Activities
-                               .Include(activeness => activeness.Participants)
-                               .ThenInclude(user => user.AppUser)
-                               .ToListAsync();
-
-      var result = mapper.Map<List<ActivenessDto>>(items);
-      return ValidationResult<List<ActivenessDto>>.Success(result);
+                          .ProjectTo<ActivenessDto>(mapper.ConfigurationProvider)
+                          .ToListAsync();
+      return ValidationResult<List<ActivenessDto>>.Success(items);
     }
   }
 }
