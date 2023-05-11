@@ -225,3 +225,6 @@ Identity
 
 Новая миграция. Отношения много активностей <=> много людей
 - `dotnet ef migrations add AppUserActiveness -s PresentationAPI -p Persistence`
+
+## Загрузка связанных сущностей
+[Loading Related Entities](https://learn.microsoft.com/en-us/ef/ef6/querying/related-data)

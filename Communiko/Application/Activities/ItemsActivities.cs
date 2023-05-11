@@ -19,7 +19,11 @@ public class ItemsActivities
 
     public async Task<ValidationResult<List<Activeness>>> Handle(Query request, CancellationToken token)
     {
-      return ValidationResult<List<Activeness>>.Success(await context.Activities.ToListAsync());
+      var items = await context.Activities
+                               .Include(activeness => activeness.Participants)
+                               .ThenInclude(user => user.AppUser)
+                               .ToListAsync();
+      return ValidationResult<List<Activeness>>.Success(items);
     }
   }
 }
