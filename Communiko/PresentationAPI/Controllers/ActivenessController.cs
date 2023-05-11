@@ -1,5 +1,6 @@
 using Application.Activities;
 using BusinessDomain.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PresentationAPI.Controllers
@@ -27,6 +28,7 @@ namespace PresentationAPI.Controllers
         await Mediator.Send(new CreateActivities.Command() { Item = activeness })
       );
     }
+    [Authorize(Policy = "IsActivenessAuthor")]
     [HttpPut("{id}")]
     public async Task<IActionResult> Edit(Guid id, Activeness activeness)
     {
@@ -36,6 +38,7 @@ namespace PresentationAPI.Controllers
         Item = activeness
       }));
     }
+    [Authorize(Policy = "IsActivenessAuthor")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Remove(Guid id)
     {

@@ -59,7 +59,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     ValidateAudience = false
   };
 });
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(op =>
+{
+  op.AddPolicy("IsActivenessAuthor", policy =>
+  {
+    policy.Requirements.Add(new IsHostRequirement());
+  });
+});
+
+builder.Services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler>();
+
 builder.Services.AddScoped<JwtTokenService>();
 
 builder.Services.AddIdentityCore<AppUser>(op =>
