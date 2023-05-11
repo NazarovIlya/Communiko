@@ -44,5 +44,10 @@ namespace PresentationAPI.Controllers
         Id = id
       }));
     }
+    [HttpPost("{id}/update")]
+    public async Task<IActionResult> Update(Guid id)
+    {
+      return HandleResult(await Mediator.Send(new UpdateAppUserActiveness.Command { Id = id }));
+    }
   }
 }
