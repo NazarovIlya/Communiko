@@ -10,6 +10,7 @@ namespace BusinessDomain.Model
     public DateOnly PointTime { get; set; }
     public string Location { get; set; }
     public string AuthorName { get; set; }
+    public bool IsActual { get; set; }
     public ICollection<UserDto> Users { get; set; }
   }
 }
