@@ -1,7 +1,5 @@
-using System.Diagnostics;
 using Application.Activities;
 using BusinessDomain.Model;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PresentationAPI.Controllers
@@ -11,7 +9,7 @@ namespace PresentationAPI.Controllers
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(Guid id)
     {
-      return base.HandleResult<Activeness>(
+      return base.HandleResult<ActivenessDto>(
         await Mediator.Send(new ItemActivities.Query() { Id = id })
       );
     }

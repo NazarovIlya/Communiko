@@ -1,31 +1,39 @@
 using Application.AppConfig;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using BusinessDomain.Model;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.Activities
 {
   public class ItemActivities
   {
-    public class Query : IRequest<ValidationResult<Activeness>>
+    public class Query : IRequest<ValidationResult<ActivenessDto>>
     {
       public Guid Id { get; set; }
     }
 
-    public class Handler : IRequestHandler<Query, ValidationResult<Activeness>>
+    public class Handler : IRequestHandler<Query, ValidationResult<ActivenessDto>>
     {
       private readonly DataContext context;
+      private readonly IMapper mapper;
 
-      public Handler(DataContext context)
+      public Handler(DataContext context, IMapper mapper)
       {
         this.context = context;
+        this.mapper = mapper;
       }
 
-      public async Task<ValidationResult<Activeness>> Handle(Query request,
+      public async Task<ValidationResult<ActivenessDto>> Handle(Query request,
        CancellationToken cancellationToken)
       {
-        return ValidationResult<Activeness>
-                .Success(await context.Activities.FindAsync(request.Id));
+        var activeness = await context.Activities
+        .ProjectTo<ActivenessDto>(mapper.ConfigurationProvider)
+        .FirstOrDefaultAsync(item => item.Id == request.Id);
+        return ValidationResult<ActivenessDto>
+                .Success(activeness);
       }
     }
   }
