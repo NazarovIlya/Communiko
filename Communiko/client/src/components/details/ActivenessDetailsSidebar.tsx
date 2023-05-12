@@ -1,8 +1,14 @@
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import { Icon, Item, Label, List, Segment } from "semantic-ui-react";
+import { UserProfile } from "../../model/UserProfile";
 
-export default observer(function ActivenessDetailsSidebar() {
+interface Props {
+  participants: UserProfile[] | undefined;
+}
+
+export default observer(function ActivenessDetailsSidebar({ participants }: Props) {
+  const items = participants!;
   return (
     <>
       <Segment
@@ -13,34 +19,27 @@ export default observer(function ActivenessDetailsSidebar() {
         inverted
         color='grey'
       >
-        2 involved
+        {items.length} involved
       </Segment>
       <Segment attached>
         <List relaxed divided>
-          <Item style={{ position: 'relative' }}>
-            <Label
-              style={{ position: 'absolute' }}
-              color='green'
-              ribbon='right'
-            >
-              <Icon name='user secret' />
-            </Label>
-            <Item.Content verticalAlign='middle'>
-              <Item.Header as='h3'>
-                <Link to={`#`}>User Name</Link>
-              </Item.Header>
-              <Item.Extra style={{ color: 'grey' }}>Text</Item.Extra>
-            </Item.Content>
-          </Item>
-
-          <Item style={{ position: 'relative' }}>
-            <Item.Content>
-              <Item.Header as='h3' >
-                <Link to={`#`}>User Name</Link>
-              </Item.Header>
-              <Item.Extra style={{ color: 'grey' }}>Text</Item.Extra>
-            </Item.Content>
-          </Item>
+          {items.map((item) => (
+            <Item style={{ position: 'relative' }} key={item.userName}>
+              <Label
+                style={{ position: 'absolute' }}
+                color='green'
+                ribbon='right'
+              >
+                <Icon name='user secret' />
+              </Label>
+              <Item.Content verticalAlign='middle'>
+                <Item.Header as='h3'>
+                  <Link to={`#`}>{`${item.fullName}`}</Link>
+                </Item.Header>
+                <Item.Extra style={{ color: 'grey' }}>Text</Item.Extra>
+              </Item.Content>
+            </Item>
+          ))}
         </List>
       </Segment>
     </>

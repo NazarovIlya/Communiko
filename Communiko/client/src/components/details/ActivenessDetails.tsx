@@ -33,7 +33,7 @@ export default observer(function ActivenessDetails() {
         <ActivenessDetailsChat />
       </Grid.Column>
       <Grid.Column width={6}>
-        <ActivenessDetailsSidebar />
+        <ActivenessDetailsSidebar participants={selectedActiveness.users} />
       </Grid.Column>
     </Grid>
   );
