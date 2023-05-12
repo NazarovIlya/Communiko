@@ -38,7 +38,7 @@ export default observer(function ActivenessItem(
         </Label>
       </Segment>
       <Segment secondary>
-        <ActivenessListParticipants />
+        <ActivenessListParticipants participants={activity.users!} />
       </Segment>
       <Segment clearing>
         <Label style={{ marginBottom: '10px' }}>

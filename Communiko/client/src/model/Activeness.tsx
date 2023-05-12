@@ -1,3 +1,5 @@
+import { UserProfile } from "./UserProfile";
+
 export interface Activeness {
   id: string;
   title: string;
@@ -6,4 +8,7 @@ export interface Activeness {
   city: string;
   pointTime: string;
   location: string;
+  authorName?: string;
+  isActual?: boolean;
+  users?: UserProfile[]
 }
