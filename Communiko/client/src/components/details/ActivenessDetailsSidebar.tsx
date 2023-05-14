@@ -38,7 +38,7 @@ export default observer(function ActivenessDetailsSidebar(
               }
               <Item.Content verticalAlign='middle'>
                 <Item.Header as='h3'>
-                  <Link to={`#`}>{`${item.fullName}`}</Link>
+                  <Link to={`#`}>{`${item.nickName}`}</Link>
                 </Item.Header>
                 <Item.Extra style={{ color: 'grey' }}>Text</Item.Extra>
               </Item.Content>
