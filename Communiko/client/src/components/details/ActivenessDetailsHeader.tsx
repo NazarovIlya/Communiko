@@ -29,7 +29,7 @@ export default observer(function ActivenessDetailsHeader({ item }: PropsActivene
                   />
                   <p>{item.pointTime}</p>
                   <p>
-                    Author <strong>Name</strong>
+                    {item.author?.fullName}
                   </p>
                 </Item.Content>
               </Item>

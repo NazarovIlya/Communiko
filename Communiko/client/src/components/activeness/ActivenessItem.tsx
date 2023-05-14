@@ -22,7 +22,7 @@ export default observer(function ActivenessItem(
                 to={`/activenessItems/${activenessItem.id}`}>
                 {activity.title}
               </Item.Header>
-              <Item.Description>Author</Item.Description>
+              <Item.Description>{activity?.authorName}</Item.Description>
             </Item.Content>
           </Item>
         </Item.Group>
