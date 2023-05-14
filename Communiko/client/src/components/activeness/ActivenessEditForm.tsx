@@ -47,6 +47,7 @@ export default observer(function ActivenessEditForm() {
       );
     } else {
       activeness.id = uuidv4();
+      activeness.isActual = true;
       createActiveness(activeness).then(
         () => navigate(`/activenessItems/${activeness.id}`)
       );
