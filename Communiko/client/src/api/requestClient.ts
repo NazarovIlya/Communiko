@@ -54,6 +54,7 @@ const Activities = {
   update: (item: Activeness) => requests.put<void>(`/Activeness/${item.id}`, item),
   create: (item: Activeness) => requests.post<void>(`/Activeness/`, item),
   item: (id: string) => requests.get<Activeness>(`/Activeness/${id}`),
+  join: (id: string) => requests.post<Activeness>(`/Activeness/${id}/join`, {}),
 }
 
 const Account = {
