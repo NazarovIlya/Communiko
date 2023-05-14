@@ -8,7 +8,6 @@ interface Props {
 }
 
 export default observer(function ActivenessDetailsSidebar({ participants }: Props) {
-  const items = participants!;
   return (
     <>
       <Segment
@@ -19,11 +18,11 @@ export default observer(function ActivenessDetailsSidebar({ participants }: Prop
         inverted
         color='grey'
       >
-        {items.length} involved
+        {participants?.length} involved
       </Segment>
       <Segment attached>
         <List relaxed divided>
-          {items.map((item) => (
+          {participants?.map((item) => (
             <Item style={{ position: 'relative' }} key={item.userName}>
               <Label
                 style={{ position: 'absolute' }}
