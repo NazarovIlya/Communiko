@@ -2,12 +2,14 @@ import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import { Icon, Item, Label, List, Segment } from "semantic-ui-react";
 import { UserProfile } from "../../model/UserProfile";
+import { Activeness } from "../../model/Activeness";
 
 interface Props {
-  participants: UserProfile[] | undefined;
+  activeness: Activeness
 }
 
-export default observer(function ActivenessDetailsSidebar({ participants }: Props) {
+export default observer(function ActivenessDetailsSidebar(
+  { activeness: { users: participants, author } }: Props) {
   return (
     <>
       <Segment
@@ -24,13 +26,16 @@ export default observer(function ActivenessDetailsSidebar({ participants }: Prop
         <List relaxed divided>
           {participants?.map((item) => (
             <Item style={{ position: 'relative' }} key={item.userName}>
-              <Label
-                style={{ position: 'absolute' }}
-                color='green'
-                ribbon='right'
-              >
-                <Icon name='user secret' />
-              </Label>
+              {
+                item.userName === author?.userName &&
+                <Label
+                  style={{ position: 'absolute' }}
+                  color='green'
+                  ribbon='right'
+                >
+                  <Icon name='user secret' />
+                </Label>
+              }
               <Item.Content verticalAlign='middle'>
                 <Item.Header as='h3'>
                   <Link to={`#`}>{`${item.fullName}`}</Link>

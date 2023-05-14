@@ -37,19 +37,18 @@ export default observer(function ActivenessDetailsHeader({ item }: PropsActivene
           </Segment>
         </Segment>
         <Segment clearing attached='bottom'>
-          <Button color='green' content='Join' />
+          {item.isAuthor ? (<Button
+            basic
+            color='orange'
+            floated='right'
+            as={Link} to={`/updateActiveness/${item.id}`} content='Update' />)
+            : !item.isGoing
+              ? (<Button color='green' content='Join' />)
+              : (<></>)}
           <Button basic color='green'
             content='Close'
             as={Link} to='/activenessItems'
           />
-          <Button
-            basic
-            color='orange'
-            floated='right'
-            as={Link} to={`/updateActiveness/${item.id}`}
-          >
-            Update
-          </Button>
         </Segment>
       </Segment.Group >
     </>
