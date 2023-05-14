@@ -15,6 +15,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Application.Interface;
+using Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -57,7 +59,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     ValidateAudience = false
   };
 });
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(op =>
+{
+  op.AddPolicy("IsActivenessAuthor", policy =>
+  {
+    policy.Requirements.Add(new IsHostRequirement());
+  });
+});
+
+builder.Services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler>();
+
 builder.Services.AddScoped<JwtTokenService>();
 
 builder.Services.AddIdentityCore<AppUser>(op =>
@@ -66,6 +77,9 @@ builder.Services.AddIdentityCore<AppUser>(op =>
   // op.Password.RequireUppercase = false;
   op.User.RequireUniqueEmail = true;
 }).AddEntityFrameworkStores<DataContext>();
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IAppUserAccessor, AppUserAccessor>();
 
 
 var app = builder.Build();

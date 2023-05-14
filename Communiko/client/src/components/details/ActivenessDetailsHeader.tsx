@@ -1,5 +1,5 @@
 import { Activeness } from "../../model/Activeness";
-import React from "react";
+import { useRepository } from "../../repository/Repository";
 import { observer } from 'mobx-react-lite'
 import { Button, Header, Item, Segment } from "semantic-ui-react";
 import { Link } from "react-router-dom";
@@ -15,6 +15,7 @@ interface PropsActivenessItem {
 }
 
 export default observer(function ActivenessDetailsHeader({ item }: PropsActivenessItem) {
+  const { repo: { joinActivities, loading } } = useRepository();
   return (
     <>
       <Segment.Group>
@@ -29,7 +30,7 @@ export default observer(function ActivenessDetailsHeader({ item }: PropsActivene
                   />
                   <p>{item.pointTime}</p>
                   <p>
-                    Author <strong>Name</strong>
+                    {item.author?.fullName}
                   </p>
                 </Item.Content>
               </Item>
@@ -37,19 +38,28 @@ export default observer(function ActivenessDetailsHeader({ item }: PropsActivene
           </Segment>
         </Segment>
         <Segment clearing attached='bottom'>
-          <Button color='green' content='Join' />
+          {item.isAuthor ? (<Button
+            basic
+            color='orange'
+            floated='right'
+            as={Link} to={`/updateActiveness/${item.id}`} content='Update' />)
+            : !item.isGoing
+              ? (<Button
+                color='green'
+                loading={loading}
+                content='Join'
+                onClick={() => { joinActivities(); }}
+              />)
+              : (<Button
+                color='red'
+                loading={loading}
+                content='Refusal'
+                onClick={() => { joinActivities(); }}
+              />)}
           <Button basic color='green'
             content='Close'
             as={Link} to='/activenessItems'
           />
-          <Button
-            basic
-            color='orange'
-            floated='right'
-            as={Link} to={`/updateActiveness/${item.id}`}
-          >
-            Update
-          </Button>
         </Segment>
       </Segment.Group >
     </>

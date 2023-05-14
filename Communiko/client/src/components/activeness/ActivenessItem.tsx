@@ -2,6 +2,7 @@ import { Button, Icon, Item, Label, Segment } from "semantic-ui-react";
 import { Activeness } from "../../model/Activeness";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
+import ActivenessListParticipants from "./ActivenessListParticipants";
 
 interface PropsActivenessItem {
   activenessItem: Activeness
@@ -21,7 +22,7 @@ export default observer(function ActivenessItem(
                 to={`/activenessItems/${activenessItem.id}`}>
                 {activity.title}
               </Item.Header>
-              <Item.Description>Author</Item.Description>
+              <Item.Description>{activity?.authorName}</Item.Description>
             </Item.Content>
           </Item>
         </Item.Group>
@@ -37,7 +38,7 @@ export default observer(function ActivenessItem(
         </Label>
       </Segment>
       <Segment secondary>
-        List
+        <ActivenessListParticipants participants={activity.users!} />
       </Segment>
       <Segment clearing>
         <Label style={{ marginBottom: '10px' }}>

@@ -3,6 +3,9 @@ import { Activeness } from "../model/Activeness";
 import client from "../api/requestClient";
 import { v4 as uuidv4 } from 'uuid';
 import { SyntheticEvent } from "react";
+import { repository } from "./Repository";
+import { UserProfile } from "../model/UserProfile";
+
 
 export default class CurrentRepository {
   selectedActiveness: Activeness | undefined = undefined;
@@ -16,6 +19,20 @@ export default class CurrentRepository {
     makeAutoObservable(this);
   }
 
+  private setActiveness = (activeness: Activeness) => {
+    const user = repository.userRepo.user;
+    if (user) {
+      activeness.isGoing = activeness.users!.some(
+        e => e.userName === user.username
+      );
+      activeness.isAuthor = activeness.authorName === user.username;
+      activeness.author = activeness.users?.find(
+        e => e.userName === activeness.authorName
+      );
+    }
+    this.mapActivities.set(activeness.id, activeness);
+  }
+
   private setLoadingInit = (value: boolean) => {
     runInAction(() => { this.loadingInit = value; });
   }
@@ -26,7 +43,7 @@ export default class CurrentRepository {
       const activities = await client.Activities.items();
       runInAction(() => {
         activities.forEach((e) => {
-          this.mapActivities.set(e.id, e);
+          this.setActiveness(e);
         });
         this.setLoadingInit(!true);
       });
@@ -67,7 +84,7 @@ export default class CurrentRepository {
     try {
       await client.Activities.create(item);
       runInAction(() => {
-        this.mapActivities.set(item.id, item);
+        this.setActiveness(item);
         this.selectedActiveness = item;
         this.editMode = false;
         this.loading = false;
@@ -85,7 +102,7 @@ export default class CurrentRepository {
     try {
       await client.Activities.update(item);
       runInAction(() => {
-        this.mapActivities.set(item.id, item);
+        this.setActiveness(item);
         this.selectedActiveness = item;
         this.editMode = false;
         this.loading = false;
@@ -129,5 +146,30 @@ export default class CurrentRepository {
       this.mapActivities
         .values())
       .sort(this.sortByTitle);
+  }
+
+  joinActivities = async () => {
+    const user = repository.userRepo.user;
+    this.loading = true;
+    try {
+      await client.Activities.join(this.selectedActiveness!.id);
+      runInAction(() => {
+        if (this.selectedActiveness?.isGoing) {
+          this.selectedActiveness.users =
+            this.selectedActiveness.users?.filter(e => e.userName !== user?.username);
+          this.selectedActiveness.isGoing = false;
+        } else {
+          const participant = new UserProfile(user!);
+          this.selectedActiveness?.users?.push(participant);
+          this.selectedActiveness!.isGoing = true;
+          this.selectedActiveness!.authorName = user?.nickName;
+        }
+        this.mapActivities.set(this.selectedActiveness!.id, this.selectedActiveness!);
+      })
+    } catch (error) {
+      console.log(error);
+    } finally {
+      runInAction(() => this.loading = false);
+    }
   }
 }

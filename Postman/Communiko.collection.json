@@ -482,12 +482,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXJfMyIsIm5hbWVpZCI6IjQ1ZDFhZjE4LWNhYzEtNDRlOS1hZjY1LTU5ZDQwYWU1ZDNkZSIsImVtYWlsIjoidXNlcl8zQGtzZXJnZWkudGVjaCIsIm5iZiI6MTY4MzYwOTc3NywiZXhwIjoxNjgzNjEwOTc3LCJpYXQiOjE2ODM2MDk3Nzd9.TXTldkzsivhTgfAQKV1vSLCfOluyY3Jg_Q9df7EBG9oa3B2YbLSJp7bJACOA-mOcYA0546T8S-OQiwIczWu6zQ",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXJfMyIsIm5hbWVpZCI6IjQ1ZDFhZjE4LWNhYzEtNDRlOS1hZjY1LTU5ZDQwYWU1ZDNkZSIsImVtYWlsIjoidXNlcl8zQGtzZXJnZWkudGVjaCIsIm5iZiI6MTY4MzYzMjg4MywiZXhwIjoxNjgzNjM0MDgzLCJpYXQiOjE2ODM2MzI4ODN9.lHbGCu_vukWvJzyGo4IN_Cw8O6iNdiztPXsTH_kz4T5OOPSOnH122BY2flBSxij3_hUc7oDfdySSQjxoPWeNvg",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:11222/api/Activeness/0aed99b4-1a4f-4a65-a53d-bdc1566a338d",
+							"raw": "http://localhost:11222/api/Activeness/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -496,7 +496,7 @@
 							"path": [
 								"api",
 								"Activeness",
-								"0aed99b4-1a4f-4a65-a53d-bdc1566a338d"
+								""
 							]
 						}
 					},
@@ -515,7 +515,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"email\": \"i@ksergei.tech\",\n  \"password\": \"QwEr!2#4\",\n  \"nickName\": \"ksergei3\",\n  \"username\": \"iksergei3\"\n}"
+							"raw": "{\n  \"email\": \"\",\n  \"password\": \"QwEr!2#4\",\n  \"nickName\": \"\",\n  \"username\": \"\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:11222/api/Account/registration",
@@ -555,6 +555,228 @@
 								"api",
 								"Account",
 								"current"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AppUserActiveness Test",
+			"item": [
+				{
+					"name": "Get token user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"user_0@ksergei.tech\",\n  \"password\": \"QWErt%^&$0!\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:11222/api/Account/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Account",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get activeness auth user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXJfMCIsIm5hbWVpZCI6ImE4ZmVhNjEwLWQ3MjAtNDE0MC04ZmIyLWE3MTI5NzhhZTViZSIsImVtYWlsIjoidXNlcl8wQGtzZXJnZWkudGVjaCIsIm5iZiI6MTY4MzgwOTM1NiwiZXhwIjoxNjgzODEwNTU2LCJpYXQiOjE2ODM4MDkzNTZ9.aYOc1hq3GgegXiu5sy4uF3h8TAa8jQpuZ7X55N2ThfS8SaERqdNshz7a-nPriGNXPneVLUyKKvFd13SpNpmISQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:11222/api/Activeness/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Activeness",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get activeness by id auth user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXJfMSIsIm5hbWVpZCI6ImMzNGM5MWJjLTJjOWUtNDQzYS1hYWFiLWJmNDBiOTMxOTQwMiIsImVtYWlsIjoidXNlcl8xQGtzZXJnZWkudGVjaCIsIm5iZiI6MTY4MzgwOTU1NCwiZXhwIjoxNjgzODEwNzU0LCJpYXQiOjE2ODM4MDk1NTR9.7UrBNSMC_bY7ly8Z-fMIxdw76tqB5fU_Net5OO-Tb5N-UOTqT8b-vX4uRVnJccPYgXt2VViwFbjTp7cNlBjmyQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:11222/api/Activeness/1c8c6caf-bf22-4761-aeff-3adc59e659a3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Activeness",
+								"1c8c6caf-bf22-4761-aeff-3adc59e659a3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update activeness",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXJfNCIsIm5hbWVpZCI6IjUxZWFkNGUzLWRlMzMtNGFmOC1hZjdlLWM4MDcxOWIzZjdiYiIsImVtYWlsIjoidXNlcl80QGtzZXJnZWkudGVjaCIsIm5iZiI6MTY4MzgwNzQwOCwiZXhwIjoxNjgzODA4NjA4LCJpYXQiOjE2ODM4MDc0MDh9.Aol5KrJVisds3gmyS6AAPYWVw43hkVBGJcBKvx3-8uJVgAofdjxr0oJh3FCmatcLkCD3gfRTeR5UVZ4fUsk-3A",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:11222/api/Activeness/2dfa138e-2e7b-40ea-8b47-98cb94421d8a/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Activeness",
+								"2dfa138e-2e7b-40ea-8b47-98cb94421d8a",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create activeness",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require(\"moment\");",
+									"",
+									"pm.environment.set(",
+									"    'activenessDate', ",
+									"    moment().format('YYYY-MM-DD')",
+									"            );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXJfMCIsIm5hbWVpZCI6ImE4ZmVhNjEwLWQ3MjAtNDE0MC04ZmIyLWE3MTI5NzhhZTViZSIsImVtYWlsIjoidXNlcl8wQGtzZXJnZWkudGVjaCIsIm5iZiI6MTY4MzgwOTM1NiwiZXhwIjoxNjgzODEwNTU2LCJpYXQiOjE2ODM4MDkzNTZ9.aYOc1hq3GgegXiu5sy4uF3h8TAa8jQpuZ7X55N2ThfS8SaERqdNshz7a-nPriGNXPneVLUyKKvFd13SpNpmISQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{$guid}}\",\n\t\"title\": \"!!!!!!!!!!!!!!! ####\",\n    \"category\": \"Новый год\",\n    \"description\": \"Новый год\",\n    \"city\": \"Новый год\",\n    \"pointTime\": \"{{activenessDate}}\",\n    \"location\": \"Новый год\",\n    \"isActual\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:11222/api/Activeness/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Activeness",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Обновление записи полное Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require(\"moment\");",
+									"",
+									"pm.environment.set(",
+									"    'activenessDate', ",
+									"    moment().format('YYYY-MM-DD')",
+									"            );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXJfMCIsIm5hbWVpZCI6ImE4ZmVhNjEwLWQ3MjAtNDE0MC04ZmIyLWE3MTI5NzhhZTViZSIsImVtYWlsIjoidXNlcl8wQGtzZXJnZWkudGVjaCIsIm5iZiI6MTY4MzgwOTgxOSwiZXhwIjoxNjgzODExMDE5LCJpYXQiOjE2ODM4MDk4MTl9.PX05WdgiTB5XPQQvPkAUfc4Ct1q1q0tUFH3Bpjs1SH_HmKWSYZNqY73vpKG0LO2RSPIMt-MZoMC6o2-Bpzi5JA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    //\"id\": \"361eafa9-b860-4bdb-94cc-97b3d09c1e15\",\n    \"title\": \"ЙЦУКЕНГШЩ  ОБНОВА \",\n    \"category\": \"Категория #777й11йй\",\n    \"description\": \"Описание #777\",\n    \"city\": \"Город #777\",\n    \"pointTime\": \"{{activenessDate}}\",\n    \"location\": \"Место проведения #123\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:11222/api/Activeness/1c8c6caf-bf22-4761-aeff-3adc59e659a3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "11222",
+							"path": [
+								"api",
+								"Activeness",
+								"1c8c6caf-bf22-4761-aeff-3adc59e659a3"
 							]
 						}
 					},

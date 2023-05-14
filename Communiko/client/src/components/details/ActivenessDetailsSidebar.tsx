@@ -1,8 +1,15 @@
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import { Icon, Item, Label, List, Segment } from "semantic-ui-react";
+import { UserProfile } from "../../model/UserProfile";
+import { Activeness } from "../../model/Activeness";
 
-export default observer(function ActivenessDetailsSidebar() {
+interface Props {
+  activeness: Activeness
+}
+
+export default observer(function ActivenessDetailsSidebar(
+  { activeness: { users: participants, author } }: Props) {
   return (
     <>
       <Segment
@@ -13,34 +20,30 @@ export default observer(function ActivenessDetailsSidebar() {
         inverted
         color='grey'
       >
-        2 involved
+        {participants?.length} involved
       </Segment>
       <Segment attached>
         <List relaxed divided>
-          <Item style={{ position: 'relative' }}>
-            <Label
-              style={{ position: 'absolute' }}
-              color='green'
-              ribbon='right'
-            >
-              <Icon name='user secret' />
-            </Label>
-            <Item.Content verticalAlign='middle'>
-              <Item.Header as='h3'>
-                <Link to={`#`}>User Name</Link>
-              </Item.Header>
-              <Item.Extra style={{ color: 'grey' }}>Text</Item.Extra>
-            </Item.Content>
-          </Item>
-
-          <Item style={{ position: 'relative' }}>
-            <Item.Content>
-              <Item.Header as='h3' >
-                <Link to={`#`}>User Name</Link>
-              </Item.Header>
-              <Item.Extra style={{ color: 'grey' }}>Text</Item.Extra>
-            </Item.Content>
-          </Item>
+          {participants?.map((item) => (
+            <Item style={{ position: 'relative' }} key={item.userName}>
+              {
+                item.userName === author?.userName &&
+                <Label
+                  style={{ position: 'absolute' }}
+                  color='green'
+                  ribbon='right'
+                >
+                  <Icon name='user secret' />
+                </Label>
+              }
+              <Item.Content verticalAlign='middle'>
+                <Item.Header as='h3'>
+                  <Link to={`#`}>{`${item.nickName}`}</Link>
+                </Item.Header>
+                <Item.Extra style={{ color: 'grey' }}>Text</Item.Extra>
+              </Item.Content>
+            </Item>
+          ))}
         </List>
       </Segment>
     </>

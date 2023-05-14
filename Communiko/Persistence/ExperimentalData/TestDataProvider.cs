@@ -7,6 +7,8 @@ namespace Persistence.ExperimentalData
   {
     public static async Task Provide(DataContext context, UserManager<AppUser> um, int count = 30)
     {
+      // перед обновлением удалить бд
+      List<AppUser> users = new();
       if (!um.Users.Any())
       {
         for (int i = 0; i < 5; i++)
@@ -19,6 +21,7 @@ namespace Persistence.ExperimentalData
             FullName = $"Full Name {i}"
           };
           var r = await um.CreateAsync(user, $"QWErt%^&${i}!");
+          users.Add(user);
         }
       }
 
@@ -34,6 +37,22 @@ namespace Persistence.ExperimentalData
         int location = Random.Shared.Next(1, 10);
         DateOnly date = DateOnly.FromDateTime(DateTime.Now).AddMonths(month);
 
+        int indexUser1 = Random.Shared.Next(3);
+        int indexUser2 = indexUser1 + Random.Shared.Next(3);
+
+        var list = new List<AppUserActiveness>()
+        {
+          new AppUserActiveness()
+          {
+              AppUser =users[indexUser1],
+              IsAuthor = true
+          },
+          new AppUserActiveness()
+          {
+              AppUser =users[indexUser2],
+              IsAuthor = false
+          }
+        };
         activities.Add(
             new Activeness
             {
@@ -43,6 +62,8 @@ namespace Persistence.ExperimentalData
               Category = $"Категория #{category}",
               City = $"Город #{city}",
               Location = $"Место проведения #{location}",
+              IsActual = true,
+              Participants = list
             }
         );
       }
