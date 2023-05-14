@@ -3,7 +3,7 @@ import { Activeness } from '../model/Activeness';
 import { toast } from 'react-toastify';
 import { router } from '../router/Router';
 import { User } from '../model/user';
-import { UserForm } from "../model/UserForm";
+import { UserForm } from '../model/UserForm';
 import { repository } from '../repository/Repository';
 
 axios.defaults.baseURL = 'http://localhost:11222/api';
@@ -22,7 +22,7 @@ axios.interceptors.request.use(config => {
 
 axios.interceptors.response.use(async response => {
   await sleep(0);
-  toast.info('Сообщение');
+  // toast.info('Сообщение');
   return response;
 }, (error) => {
   const { status } = error.response;
