@@ -4,6 +4,8 @@ import client from "../api/requestClient";
 import { v4 as uuidv4 } from 'uuid';
 import { SyntheticEvent } from "react";
 import { repository } from "./Repository";
+import { UserProfile } from "../model/UserProfile";
+
 
 export default class CurrentRepository {
   selectedActiveness: Activeness | undefined = undefined;
@@ -144,5 +146,30 @@ export default class CurrentRepository {
       this.mapActivities
         .values())
       .sort(this.sortByTitle);
+  }
+
+  joinActivities = async () => {
+    const user = repository.userRepo.user;
+    this.loading = true;
+    try {
+      await client.Activities.join(this.selectedActiveness!.id);
+      runInAction(() => {
+        if (this.selectedActiveness?.isGoing) {
+          this.selectedActiveness.users =
+            this.selectedActiveness.users?.filter(e => e.userName !== user?.username);
+          this.selectedActiveness.isGoing = false;
+        } else {
+          const participant = new UserProfile(user!);
+          this.selectedActiveness?.users?.push(participant);
+          this.selectedActiveness!.isGoing = true;
+          this.selectedActiveness!.authorName = user?.nickName;
+        }
+        this.mapActivities.set(this.selectedActiveness!.id, this.selectedActiveness!);
+      })
+    } catch (error) {
+      console.log(error);
+    } finally {
+      runInAction(() => this.loading = false);
+    }
   }
 }
