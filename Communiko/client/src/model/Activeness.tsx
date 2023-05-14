@@ -9,6 +9,9 @@ export interface Activeness {
   pointTime: string;
   location: string;
   authorName?: string;
+  isAuthor?: boolean;
+  author?: UserProfile;
+  isGoing?: boolean;
   isActual?: boolean;
   users?: UserProfile[]
 }
