@@ -102,7 +102,8 @@ using (var serviceScope = app.Services.CreateScope())
     var context = serviceProvider.GetRequiredService<DataContext>();
     var um = serviceProvider.GetRequiredService<UserManager<AppUser>>();
     await context.Database.MigrateAsync();
-    await TestDataProvider.Provide(context, um, 5);
+    // await TestDataProvider.Provide(context, um, 5);
+    // Починить заполнение тестовыми данными
   }
   catch (Exception e)
   {
