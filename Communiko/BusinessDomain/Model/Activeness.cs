@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using BusinessDomain.Commenting;
 
 namespace BusinessDomain.Model
 {
@@ -16,6 +13,11 @@ namespace BusinessDomain.Model
     public string Location { get; set; }
     public bool IsActual { get; set; }
     public ICollection<AppUserActiveness> Participants { get; set; }
-    public Activeness() => Participants = new List<AppUserActiveness>();
+    public ICollection<Comment> Comments { get; set; }
+    public Activeness()
+    {
+      Participants = new List<AppUserActiveness>();
+      Comments = new List<Comment>();
+    }
   }
 }
