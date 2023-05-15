@@ -1,4 +1,4 @@
-namespace BusinessDomain.Model
+namespace Application.ModelDto
 {
   public class ActivenessDto
   {

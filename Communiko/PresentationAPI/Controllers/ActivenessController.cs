@@ -1,4 +1,5 @@
 using Application.Activities;
+using Application.ModelDto;
 using BusinessDomain.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

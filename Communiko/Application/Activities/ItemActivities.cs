@@ -1,7 +1,7 @@
 using Application.AppConfig;
+using Application.ModelDto;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using BusinessDomain.Model;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;

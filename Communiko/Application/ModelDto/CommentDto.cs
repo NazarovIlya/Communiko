@@ -1,5 +1,3 @@
-using BusinessDomain.Model;
-
 namespace Application.ModelDto
 {
   public class CommentDto
