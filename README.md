@@ -228,3 +228,6 @@ Identity
 
 ## Загрузка связанных сущностей
 [Loading Related Entities](https://learn.microsoft.com/en-us/ef/ef6/querying/related-data)
+
+На этом этапе требуется миграция 
+- `dotnet ef migrations add add-props-comments -s PresentationAPI -p Persistence`
