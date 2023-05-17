@@ -10,8 +10,8 @@ export default observer(function ActivenessListParticipants({ participants }: Pr
   return (
     <List horizontal>
       {
-        participants?.map(item => (
-          <List.Item key={item.fullName}>
+        participants?.map((item, idx) => (
+          <List.Item key={item.fullName + `${idx}`}>
             <Popup
               trigger={
                 <List.Item >
