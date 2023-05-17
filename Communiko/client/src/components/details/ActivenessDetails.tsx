@@ -30,7 +30,7 @@ export default observer(function ActivenessDetails() {
       <Grid.Column width={10}>
         <ActivenessDetailsHeader item={item} />
         <ActivenessDetailsInfo item={item} />
-        <ActivenessDetailsChat />
+        <ActivenessDetailsChat activitiesId={item.id} />
       </Grid.Column>
       <Grid.Column width={6}>
         <ActivenessDetailsSidebar activeness={selectedActiveness} />
