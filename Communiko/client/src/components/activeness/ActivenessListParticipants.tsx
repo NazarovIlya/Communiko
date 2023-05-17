@@ -15,10 +15,8 @@ export default observer(function ActivenessListParticipants({ participants }: Pr
             <Popup
               trigger={
                 <List.Item >
-                  <a onClick={() => { alert('user 1'); }}>
-                    <Icon name='user' />
-                    <strong>{`${item.nickName}`}</strong>
-                  </a>
+                  <Icon name='user' />
+                  <strong>{`${item.nickName}`}</strong>
                 </List.Item>
               }
             >
