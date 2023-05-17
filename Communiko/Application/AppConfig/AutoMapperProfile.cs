@@ -1,4 +1,6 @@
+using Application.ModelDto;
 using AutoMapper;
+using BusinessDomain.Commenting;
 using BusinessDomain.Model;
 
 namespace Application.AppConfig
@@ -20,6 +22,12 @@ namespace Application.AppConfig
           .ForMember(d => d.FullName, o => o.MapFrom(s => s.AppUser.FullName))
           .ForMember(d => d.UserName, o => o.MapFrom(s => s.AppUser.UserName))
           .ForMember(d => d.NickName, o => o.MapFrom(s => s.AppUser.NickName))
+          ;
+
+      CreateMap<Comment, CommentDto>()
+          .ForMember(d => d.FullName, o => o.MapFrom(s => s.Author.FullName))
+          .ForMember(d => d.UserName, o => o.MapFrom(s => s.Author.UserName))
+          .ForMember(d => d.NickName, o => o.MapFrom(s => s.Author.NickName))
           ;
     }
   }

@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { SyntheticEvent } from "react";
 import { repository } from "./Repository";
 import { UserProfile } from "../model/UserProfile";
+import { FilterMode } from "../model/FilterMode";
 
 
 export default class CurrentRepository {
@@ -14,6 +15,8 @@ export default class CurrentRepository {
   loadingInit: boolean = false;
   loading: boolean = false;
   btnId: string = '';
+  filterMode: FilterMode = FilterMode.All;
+  selectedDate: Date | undefined;
 
   constructor() {
     makeAutoObservable(this);
@@ -142,11 +145,40 @@ export default class CurrentRepository {
   }
 
   get activities() {
-    return Array.from(
-      this.mapActivities
-        .values())
-      .sort(this.sortByTitle);
+
+    switch (this.filterMode) {
+      case FilterMode.All:
+        return Array.from(
+          this.mapActivities
+            .values())
+          .sort(this.sortByTitle);
+
+      case FilterMode.Join:
+        return Array.from(
+          this.mapActivities
+            .values())
+          .filter(e => e.isGoing);
+
+      case FilterMode.Author:
+        return Array.from(
+          this.mapActivities
+            .values())
+          .filter(e => e.isAuthor);
+
+      case FilterMode.AfterDate:
+        return Array.from(
+          this.mapActivities
+            .values())
+          .filter(e => new Date(e.pointTime) > this.selectedDate!);
+
+      default:
+        return Array.from(
+          this.mapActivities
+            .values());
+    }
   }
+
+  setFilterMode = (mode: number) => { this.filterMode = mode; }
 
   joinActivities = async () => {
     const user = repository.userRepo.user;

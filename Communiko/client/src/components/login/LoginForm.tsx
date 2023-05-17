@@ -2,7 +2,6 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { observer } from "mobx-react-lite";
 import { Button, Header, Label } from "semantic-ui-react";
 import { useRepository } from "../../repository/Repository";
-import { error } from "console";
 
 export default observer(function LoginForm() {
   const { userRepo } = useRepository();

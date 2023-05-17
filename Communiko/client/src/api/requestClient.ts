@@ -21,21 +21,21 @@ axios.interceptors.request.use(config => {
 })
 
 axios.interceptors.response.use(async response => {
-  await sleep(0);
+  await sleep(800);
   // toast.info('Сообщение');
   return response;
 }, (error) => {
   const { status } = error.response;
   switch (status) {
     case 404:
-      toast.error('Ошибка 404');
+      // toast.error('Ошибка 404');
       router.navigate('/not-found');
       break;
     case 401:
       toast.error('401 Пользователь не авторизован');
       break;
     default:
-      toast.info('Другая ошибка');
+      // toast.info('Другая ошибка');
       break;
   }
   return Promise.reject(error);

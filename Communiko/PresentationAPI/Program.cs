@@ -2,7 +2,6 @@ using Application.AppConfig;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
-using Persistence.ExperimentalData;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Application.Activities;
@@ -17,6 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Application.Interface;
 using Infrastructure;
+using PresentationAPI.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +40,7 @@ builder.Services.AddCors(options =>
   {
     policy.AllowAnyMethod()
           .AllowAnyHeader()
+          .AllowCredentials()
           .WithOrigins(builder.Configuration["Client-host"]);
   });
 });
@@ -57,6 +58,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
       Encoding.UTF8.GetBytes(builder.Configuration["Secret-key"])),
     ValidateIssuer = false,
     ValidateAudience = false
+  };
+  op.Events = new JwtBearerEvents
+  {
+    OnMessageReceived = context =>
+    {
+      var accessToken = context.Request.Query["access_token"];
+      var path = context.HttpContext.Request.Path;
+      if (!string.IsNullOrEmpty(accessToken) && (path.StartsWithSegments("/comment")))
+      {
+        context.Token = accessToken;
+      }
+      return Task.CompletedTask;
+    }
   };
 });
 builder.Services.AddAuthorization(op =>
@@ -81,6 +95,7 @@ builder.Services.AddIdentityCore<AppUser>(op =>
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IAppUserAccessor, AppUserAccessor>();
 
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -102,7 +117,8 @@ using (var serviceScope = app.Services.CreateScope())
     var context = serviceProvider.GetRequiredService<DataContext>();
     var um = serviceProvider.GetRequiredService<UserManager<AppUser>>();
     await context.Database.MigrateAsync();
-    await TestDataProvider.Provide(context, um, 5);
+    // await TestDataProvider.Provide(context, um, 5);
+    // Починить заполнение тестовыми данными
   }
   catch (Exception e)
   {
@@ -112,4 +128,5 @@ using (var serviceScope = app.Services.CreateScope())
 }
 
 app.MapControllers();
+app.MapHub<CommentHub>("/comment");
 app.Run();

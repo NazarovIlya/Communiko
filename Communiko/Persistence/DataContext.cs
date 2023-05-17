@@ -1,3 +1,4 @@
+using BusinessDomain.Commenting;
 using BusinessDomain.Model;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,7 @@ namespace Persistence
     }
     public DbSet<Activeness> Activities { get; set; }
     public DbSet<AppUserActiveness> AUParticipants { get; set; }
-
+    public DbSet<Comment> Comments { get; set; }
     public DbSet<AppUserActiveness> AppUserActivities { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -34,6 +35,11 @@ namespace Persistence
           .HasOne(userActiveness => userActiveness.Activity)
           .WithMany(activeness => activeness.Participants)
           .HasForeignKey(userActiveness => userActiveness.ActivenessId);
+
+      builder.Entity<Comment>()
+      .HasOne(e => e.Activity)
+      .WithMany(e => e.Comments)
+      .OnDelete(DeleteBehavior.Cascade);
     }
   }
 }

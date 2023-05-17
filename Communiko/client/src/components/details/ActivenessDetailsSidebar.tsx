@@ -1,7 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import { Icon, Item, Label, List, Segment } from "semantic-ui-react";
-import { UserProfile } from "../../model/UserProfile";
 import { Activeness } from "../../model/Activeness";
 
 interface Props {

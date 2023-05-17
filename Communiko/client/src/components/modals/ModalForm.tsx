@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { Button, Modal } from "semantic-ui-react";
+import { Modal } from "semantic-ui-react";
 import { repository } from "../../repository/Repository";
 
 export default observer(function ModalContainer() {
