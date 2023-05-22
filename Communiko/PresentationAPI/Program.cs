@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Application.Interface;
 using Infrastructure;
 using PresentationAPI.SignalR;
+using Persistence.ExperimentalData;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -117,8 +118,7 @@ using (var serviceScope = app.Services.CreateScope())
     var context = serviceProvider.GetRequiredService<DataContext>();
     var um = serviceProvider.GetRequiredService<UserManager<AppUser>>();
     await context.Database.MigrateAsync();
-    // await TestDataProvider.Provide(context, um, 5);
-    // Починить заполнение тестовыми данными
+    await TestDataProvider.Provide(context, um);
   }
   catch (Exception e)
   {
