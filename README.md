@@ -246,15 +246,13 @@ Identity
 - [@microsoft/signalr](https://www.npmjs.com/package/@microsoft/signalr)
 - `npm i @microsoft/signalr`
 
-```
 
 <details><summary>Пример конфигурации</summary>
   
 ```
-
 {
   "ConnectionStrings": {
-    "PostgreSQLConnection": "Host=10.0.0.1:1234; Username=admin; Password=password;Database=test"
+    "PostgreSQLConnection": "Host=10.0.0.0:1234; Username=admin; Password=password; Database=test"
   },
   "Secret-key": "A1FCF778S2809K377517D2A1FDE4B2A1FCF75EE1D744",
   "Client-host": "http://127.0.0.1:80",
@@ -267,5 +265,5 @@ Identity
   "AllowedHosts": "*"
 }
 ```
-  
+
 </details>
