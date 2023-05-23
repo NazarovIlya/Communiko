@@ -5,9 +5,10 @@ namespace Persistence.ExperimentalData
 {
   public class TestDataProvider
   {
-    public static async Task Provide(DataContext context, UserManager<AppUser> um, int count = 30)
+    public static async Task Provide(DataContext context, UserManager<AppUser> um)
     {
-      // перед обновлением удалить бд
+      if (um.Users.Any() && context.Activities.Any()) return;
+
       List<AppUser> users = new();
       if (!um.Users.Any())
       {
@@ -20,55 +21,143 @@ namespace Persistence.ExperimentalData
             Email = $"user_{i}@ksergei.tech",
             FullName = $"Full Name {i}"
           };
-          var r = await um.CreateAsync(user, $"QWErt%^&${i}!");
           users.Add(user);
         }
       }
 
-      if (context.Activities.Any()) return;
-
-      List<Activeness> activities = new List<Activeness>();
-
-      for (int i = 1; i <= count; i++)
+      foreach (var user in users)
       {
-        int month = Random.Shared.Next(1, 6);
-        int category = Random.Shared.Next(1, 10);
-        int city = Random.Shared.Next(1, 10);
-        int location = Random.Shared.Next(1, 10);
-        DateOnly date = DateOnly.FromDateTime(DateTime.Now).AddMonths(month);
-
-        int indexUser1 = Random.Shared.Next(3);
-        int indexUser2 = indexUser1 + Random.Shared.Next(3);
-
-        var list = new List<AppUserActiveness>()
-        {
-          new AppUserActiveness()
-          {
-              AppUser =users[indexUser1],
-              IsAuthor = true
-          },
-          new AppUserActiveness()
-          {
-              AppUser =users[indexUser2],
-              IsAuthor = false
-          }
-        };
-        activities.Add(
-            new Activeness
-            {
-              Title = $"Тестовая активность #{i}",
-              PointTime = date,
-              Description = $"Описание #{month}",
-              Category = $"Категория #{category}",
-              City = $"Город #{city}",
-              Location = $"Место проведения #{location}",
-              IsActual = true,
-              Participants = list
-            }
-        );
+        await um.CreateAsync(user, $"QWEqwe123$!");
       }
 
-      await context.Activities.AddRangeAsync(activities);
+      List<Activeness> activities = new List<Activeness>()
+      {
+        new Activeness
+        {
+          Title = $"Тестовая активность #{1}",
+          PointTime = DateOnly.FromDateTime(DateTime.Now).AddMonths(1),
+          Description = $"Описание #{1}",
+          Category = $"Категория #{1}",
+          City = $"Город #{1}",
+          Location = $"Место проведения #{1}",
+          IsActual = true,
+          Participants = new List<AppUserActiveness>()
+          {
+            new AppUserActiveness()
+            {
+                AppUser =users[0],
+                IsAuthor = true
+            },
+            new AppUserActiveness()
+            {
+                AppUser =users[1],
+                IsAuthor = false
+            }
+          }
+        },
+
+        new Activeness
+        {
+          Title = $"Тестовая активность #{2}",
+          PointTime = DateOnly.FromDateTime(DateTime.Now).AddMonths(2),
+          Description = $"Описание #{2}",
+          Category = $"Категория #{2}",
+          City = $"Город #{2}",
+          Location = $"Место проведения #{2}",
+          IsActual = true,
+          Participants = new List<AppUserActiveness>()
+          {
+            new AppUserActiveness()
+            {
+                AppUser =users[1],
+                IsAuthor = true
+            },
+            new AppUserActiveness()
+            {
+                AppUser =users[2],
+                IsAuthor = false
+            }
+          }
+        },
+
+        new Activeness
+        {
+          Title = $"Тестовая активность #{3}",
+          PointTime = DateOnly.FromDateTime(DateTime.Now).AddMonths(3),
+          Description = $"Описание #{3}",
+          Category = $"Категория #{3}",
+          City = $"Город #{1}",
+          Location = $"Место проведения #{3}",
+          IsActual = true,
+          Participants = new List<AppUserActiveness>()
+          {
+            new AppUserActiveness()
+            {
+                AppUser =users[2],
+                IsAuthor = true
+            },
+            new AppUserActiveness()
+            {
+                AppUser =users[3],
+                IsAuthor = false
+            }
+          }
+        },
+
+        new Activeness
+        {
+          Title = $"Тестовая активность #{4}",
+          PointTime = DateOnly.FromDateTime(DateTime.Now).AddMonths(4),
+          Description = $"Описание #{4}",
+          Category = $"Категория #{4}",
+          City = $"Город #{4}",
+          Location = $"Место проведения #{4}",
+          IsActual = true,
+          Participants = new List<AppUserActiveness>()
+          {
+            new AppUserActiveness()
+            {
+                AppUser =users[3],
+                IsAuthor = true
+            },
+            new AppUserActiveness()
+            {
+                AppUser =users[4],
+                IsAuthor = false
+            }
+          }
+        },
+
+        new Activeness
+        {
+          Title = $"Тестовая активность #{5}",
+          PointTime = DateOnly.FromDateTime(DateTime.Now).AddMonths(5),
+          Description = $"Описание #{5}",
+          Category = $"Категория #{5}",
+          City = $"Город #{5}",
+          Location = $"Место проведения #{5}",
+          IsActual = true,
+          Participants = new List<AppUserActiveness>()
+          {
+            new AppUserActiveness()
+            {
+                AppUser =users[4],
+                IsAuthor = true
+            },
+            new AppUserActiveness()
+            {
+                AppUser =users[0],
+                IsAuthor = false
+            }
+          }
+        },
+      };
+
+      foreach (var activity in activities)
+      {
+        await context.Activities.AddAsync(activity);
+      }
+
       await context.SaveChangesAsync();
     }
   }
